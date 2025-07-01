@@ -96,43 +96,63 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor = backgroundColor ?? 
+    final effectiveBackgroundColor =
+        backgroundColor ??
         (isSecondary ? Colors.transparent : AppColors.buttonPrimary);
-    final effectiveTextColor = textColor ?? 
-        (isSecondary ? AppColors.buttonSecondary : Colors.white);
+    final effectiveTextColor =
+        textColor ?? (isSecondary ? AppColors.buttonSecondary : Colors.white);
     final isEnabled = onPressed != null && !isLoading;
 
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 56, // Accessibility - minimum touch target
-      child: isSecondary
-          ? _buildOutlinedButton(context, effectiveTextColor, isEnabled)
-          : _buildElevatedButton(context, effectiveBackgroundColor, effectiveTextColor, isEnabled),
+      child:
+          isSecondary
+              ? _buildOutlinedButton(context, effectiveTextColor, isEnabled)
+              : _buildElevatedButton(
+                context,
+                effectiveBackgroundColor,
+                effectiveTextColor,
+                isEnabled,
+              ),
     );
   }
 
-  /// Build elevated button for primary actions
+  /// Build elevated button with gradient background for primary actions
   Widget _buildElevatedButton(
     BuildContext context,
     Color backgroundColor,
     Color textColor,
     bool isEnabled,
   ) {
-    return ElevatedButton(
-      onPressed: isEnabled ? onPressed : null,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        foregroundColor: textColor,
-        disabledBackgroundColor: AppColors.buttonDisabled,
-        disabledForegroundColor: AppColors.mediumGray,
-        elevation: isEnabled ? 2 : 0,
-        shadowColor: backgroundColor.withOpacity(0.3),
-        padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? BorderRadius.circular(12),
-        ),
+    return Ink(
+      decoration: BoxDecoration(
+        gradient:
+            isEnabled
+                ? const LinearGradient(
+                  colors: [Color(0xFF0092DF), Color(0xFF00C853)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                )
+                : null,
+        color: isEnabled ? null : AppColors.buttonDisabled,
+        borderRadius: borderRadius ?? BorderRadius.circular(12),
       ),
-      child: _buildButtonContent(context, textColor),
+      child: ElevatedButton(
+        onPressed: isEnabled ? onPressed : null,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent, // Keep it transparent
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: borderRadius ?? BorderRadius.circular(12),
+          ),
+        ),
+        child: _buildButtonContent(context, textColor),
+      ),
     );
   }
 
@@ -151,7 +171,8 @@ class CustomButton extends StatelessWidget {
           color: isEnabled ? borderColor : AppColors.buttonDisabled,
           width: 2,
         ),
-        padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding:
+            padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? BorderRadius.circular(12),
         ),
@@ -180,11 +201,7 @@ class CustomButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 20,
-            color: contentColor,
-          ),
+          Icon(icon, size: 20, color: contentColor),
           const SizedBox(width: 8),
           Text(
             text,
