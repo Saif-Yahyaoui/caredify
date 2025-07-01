@@ -1,0 +1,286 @@
+{
+  "@@locale": "en",
+  "appTitle": "CAREDIFY",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "welcomeMessage": "Welcome to your health space",
+  "@welcomeMessage": {
+    "description": "Welcome message on login screen"
+  },
+  
+  "joinHealthSpace": "Join your health space",
+  "@joinHealthSpace": {
+    "description": "Welcome message on register screen"
+  },
+  
+  "phoneNumber": "Phone number",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  
+  "phoneNumberHint": "Enter your phone number",
+  "@phoneNumberHint": {
+    "description": "Phone number field hint"
+  },
+  
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Password field hint"
+  },
+  
+  "confirmPassword": "Confirm password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  
+  "confirmPasswordHint": "Confirm your password",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  
+  "emailHint": "Enter your email address",
+  "@emailHint": {
+    "description": "Email field hint"
+  },
+  
+  "fullName": "Full name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  
+  "fullNameHint": "Enter your full name",
+  "@fullNameHint": {
+    "description": "Full name field hint"
+  },
+  
+  "login": "Sign in",
+  "@login": {
+    "description": "Login button text"
+  },
+  
+  "register": "Create account",
+  "@register": {
+    "description": "Register button text"
+  },
+  
+  "alreadyHaveAccount": "Already have an account? Sign in",
+  "@alreadyHaveAccount": {
+    "description": "Link to login from register screen"
+  },
+  
+  "forgotPassword": "Forgot password?",
+  "@forgotPassword": {
+    "description": "Forgot password link"
+  },
+  
+  "forgotPasswordTitle": "Forgot password",
+  "@forgotPasswordTitle": {
+    "description": "Forgot password screen title"
+  },
+  
+  "forgotPasswordMessage": "Enter your email or phone number to reset your password.",
+  "@forgotPasswordMessage": {
+    "description": "Forgot password screen message"
+  },
+  
+  "emailOrPhone": "Email or phone",
+  "@emailOrPhone": {
+    "description": "Email or phone field label"
+  },
+  
+  "send": "Send",
+  "@send": {
+    "description": "Send button text"
+  },
+  
+  "resetLinkSent": "A reset link has been sent.",
+  "@resetLinkSent": {
+    "description": "Success message for password reset"
+  },
+  
+  "createAccount": "Create account",
+  "@createAccount": {
+    "description": "Create account screen title"
+  },
+  
+  "loginSuccess": "Login successful!",
+  "@loginSuccess": {
+    "description": "Success message for login"
+  },
+  
+  "accountCreated": "Account created successfully!",
+  "@accountCreated": {
+    "description": "Success message for account creation"
+  },
+  
+  "loginError": "Login error. Please check your credentials.",
+  "@loginError": {
+    "description": "Error message for login"
+  },
+  
+  "registrationError": "Error creating account. Please try again.",
+  "@registrationError": {
+    "description": "Error message for registration"
+  },
+  
+  "fillAllFields": "Please fill all fields correctly",
+  "@fillAllFields": {
+    "description": "Error message for incomplete fields"
+  },
+  
+  "fieldRequired": "This field is required",
+  "@fieldRequired": {
+    "description": "Error message for required field"
+  },
+  
+  "invalidCredentials": "Invalid credentials",
+  "@invalidCredentials": {
+    "description": "Error message for invalid credentials"
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language control label"
+  },
+  
+  "fontSize": "Text size",
+  "@fontSize": {
+    "description": "Font size control label"
+  },
+  
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme control label"
+  },
+  
+  "chooseLanguage": "Choose language",
+  "@chooseLanguage": {
+    "description": "Language selection dialog title"
+  },
+  
+  "termsOfService": "Terms of service",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  
+  "privacyPolicy": "Privacy policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  
+  "termsOfServiceDescription": "By creating an account, you agree to our terms of service and privacy policy.",
+  "@termsOfServiceDescription": {
+    "description": "Terms of service description"
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords do not match message"
+  },
+  
+  "fieldRequired": "This field is required",
+  "@fieldRequired": {
+    "description": "Generic field required message"
+  },
+  
+  "phoneRequired": "Phone number is required",
+  "@phoneRequired": {
+    "description": "Phone number required message"
+  },
+  
+  "phoneMinLength": "Phone number must contain at least 8 digits",
+  "@phoneMinLength": {
+    "description": "Phone number minimum length message"
+  },
+  
+  "phoneMaxLength": "Phone number cannot exceed 15 digits",
+  "@phoneMaxLength": {
+    "description": "Phone number maximum length message"
+  },
+  
+  "passwordRequired": "Password is required",
+  "@passwordRequired": {
+    "description": "Password required message"
+  },
+  
+  "passwordMinLength": "Password must contain at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Password minimum length message"
+  },
+  
+  "emailRequired": "Email is required",
+  "@emailRequired": {
+    "description": "Email required message"
+  },
+  
+  "emailInvalid": "Please enter a valid email",
+  "@emailInvalid": {
+    "description": "Invalid email message"
+  },
+  
+  "nameRequired": "Name is required",
+  "@nameRequired": {
+    "description": "Name required message"
+  },
+  
+  "nameMinLength": "Name must contain at least 2 characters",
+  "@nameMinLength": {
+    "description": "Name minimum length message"
+  },
+  
+  "nameInvalid": "Name can only contain letters and spaces",
+  "@nameInvalid": {
+    "description": "Invalid name message"
+  },
+  
+  "termsInDevelopment": "Terms of service - Under development",
+  "@termsInDevelopment": {
+    "description": "Terms of service development message"
+  },
+  
+  "privacyInDevelopment": "Privacy policy - Under development",
+  "@privacyInDevelopment": {
+    "description": "Privacy policy development message"
+  },
+  
+  "normal": "Normal",
+  "@normal": {
+    "description": "Normal font size option"
+  },
+  
+  "large": "Large",
+  "@large": {
+    "description": "Large font size option"
+  },
+  
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading message"
+  }
+} 

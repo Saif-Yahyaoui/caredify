@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
 import 'providers/theme_provider.dart';
+import 'providers/language_provider.dart';
 import 'screens/splash/splash_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
+import 'screens/auth/forgot_password_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: CaredifyApp()));
@@ -20,13 +23,15 @@ class CaredifyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     final fontSize = ref.watch(fontSizeProvider);
+    final language = ref.watch(languageProvider);
 
     return MaterialApp.router(
       title: 'CAREDIFY',
       debugShowCheckedModeBanner: false,
-      
+
       // Localization setup
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -36,13 +41,13 @@ class CaredifyApp extends ConsumerWidget {
         Locale('en', 'US'),
         Locale('ar', 'TN'),
       ],
-      locale: const Locale('fr', 'FR'),
-      
+      locale: language,
+
       // Theme configuration
       theme: AppTheme.lightTheme(fontSize),
       darkTheme: AppTheme.darkTheme(fontSize),
       themeMode: themeMode,
-      
+
       // Router configuration
       routerConfig: _router,
     );
@@ -58,7 +63,7 @@ final GoRouter _router = GoRouter(
       name: 'splash',
       builder: (context, state) => const SplashScreen(),
     ),
-   /* GoRoute(
+    GoRoute(
       path: '/login',
       name: 'login',
       builder: (context, state) => const LoginScreen(),
@@ -67,7 +72,12 @@ final GoRouter _router = GoRouter(
       path: '/register',
       name: 'register',
       builder: (context, state) => const RegisterScreen(),
-    ),*/
+    ),
+    GoRoute(
+      path: '/forgot-password',
+      name: 'forgot-password',
+      builder: (context, state) => const ForgotPasswordScreen(),
+    ),
     // Future routes for main app screens
     // GoRoute(
     //   path: '/dashboard',

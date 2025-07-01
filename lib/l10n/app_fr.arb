@@ -1,0 +1,287 @@
+{
+  "@@locale": "fr",
+  "appTitle": "CAREDIFY",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "welcomeMessage": "Bienvenue sur votre espace santé",
+  "@welcomeMessage": {
+    "description": "Welcome message on login screen"
+  },
+  
+  "joinHealthSpace": "Rejoignez votre espace santé",
+  "@joinHealthSpace": {
+    "description": "Welcome message on register screen"
+  },
+  
+  "phoneNumber": "Numéro de téléphone",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  
+  "phoneNumberHint": "Entrez votre numéro de téléphone",  
+  "@phoneNumberHint": {
+    "description": "Phone number field hint"
+  },
+  
+  "password": "Mot de passe",
+  "@password": {
+    "description": "Password field label"
+  },
+  
+  "passwordHint": "Entrez votre mot de passe",
+  "@passwordHint": {
+    "description": "Password field hint"
+  },
+  
+  "confirmPassword": "Confirmer le mot de passe",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  
+  "confirmPasswordHint": "Confirmez votre mot de passe",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  
+  "emailHint": "Entrez votre adresse email",
+  "@emailHint": {
+    "description": "Email field hint"
+  },
+  
+  "fullName": "Nom complet",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  
+  "fullNameHint": "Entrez votre nom complet",
+  "@fullNameHint": {
+    "description": "Full name field hint"
+  },
+  
+  "login": "Se connecter",
+  "@login": {
+    "description": "Login button text"
+  },
+  
+  "register": "Créer un compte",
+  "@register": {
+    "description": "Register button text"
+  },
+  
+  "alreadyHaveAccount": "Déjà un compte? Se connecter",
+  "@alreadyHaveAccount": {
+    "description": "Link to login from register screen"
+  },
+  
+  "forgotPassword": "Mot de passe oublié?",
+  "@forgotPassword": {
+    "description": "Forgot password link"
+  },
+  
+  "forgotPasswordTitle": "Mot de passe oublié",
+  "@forgotPasswordTitle": {
+    "description": "Forgot password screen title"
+  },
+  
+  "forgotPasswordMessage": "Entrez votre email ou numéro de téléphone pour réinitialiser votre mot de passe.",
+  "@forgotPasswordMessage": {
+    "description": "Forgot password screen message"
+  },
+  
+  "emailOrPhone": "Email ou téléphone",
+  "@emailOrPhone": {
+    "description": "Email or phone field label"
+  },
+  
+  "send": "Envoyer",
+  "@send": {
+    "description": "Send button text"
+  },
+  
+  "resetLinkSent": "Un lien de réinitialisation a été envoyé.",
+  "@resetLinkSent": {
+    "description": "Success message for password reset"
+  },
+  
+  "createAccount": "Créer un compte",
+  "@createAccount": {
+    "description": "Create account screen title"
+  },
+  
+  "loginSuccess": "Connexion réussie!",
+  "@loginSuccess": {
+    "description": "Success message for login"
+  },
+  
+  "accountCreated": "Compte créé avec succès!",
+  "@accountCreated": {
+    "description": "Success message for account creation"
+  },
+  
+  "loginError": "Erreur de connexion. Vérifiez vos identifiants.",
+  "@loginError": {
+    "description": "Error message for login"
+  },
+  
+  "registrationError": "Erreur lors de la création du compte. Veuillez réessayer.",
+  "@registrationError": {
+    "description": "Error message for registration"
+  },
+  
+  "fillAllFields": "Veuillez remplir tous les champs correctement",
+  "@fillAllFields": {
+    "description": "Error message for incomplete fields"
+  },
+  
+  "fieldRequired": "Ce champ est requis",
+  "@fieldRequired": {
+    "description": "Error message for required field"
+  },
+  
+  "invalidCredentials": "Identifiants invalides",
+  "@invalidCredentials": {
+    "description": "Error message for invalid credentials"
+  },
+  
+  "language": "Langue",
+  "@language": {
+    "description": "Language control label"
+  },
+  
+  "fontSize": "Taille du texte",
+  "@fontSize": {
+    "description": "Font size control label"
+  },
+  
+  "theme": "Thème",
+  "@theme": {
+    "description": "Theme control label"
+  },
+  
+  "chooseLanguage": "Choisir la langue",
+  "@chooseLanguage": {
+    "description": "Language selection dialog title"
+  },
+  
+  "termsOfService": "Conditions d'utilisation",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  
+  "privacyPolicy": "Confidentialité",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  
+  "termsOfServiceDescription": "En créant un compte, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.",
+  "@termsOfServiceDescription": {
+    "description": "Terms of service description"
+  },
+  
+  "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords do not match message"
+  },
+  
+  "fieldRequired": "Ce champ est requis",
+  "@fieldRequired": {
+    "description": "Generic field required message"
+  },
+  
+  "phoneRequired": "Le numéro de téléphone est requis",
+  "@phoneRequired": {
+    "description": "Phone number required message"
+  },
+  
+  "phoneMinLength": "Le numéro de téléphone doit contenir au moins 8 chiffres",
+  "@phoneMinLength": {
+    "description": "Phone number minimum length message"
+  },
+  
+  "phoneMaxLength": "Le numéro de téléphone ne peut pas dépasser 15 chiffres",
+  "@phoneMaxLength": {
+    "description": "Phone number maximum length message"
+  },
+  
+  "passwordRequired": "Le mot de passe est requis",
+  "@passwordRequired": {
+    "description": "Password required message"
+  },
+  
+  "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+  "@passwordMinLength": {
+    "description": "Password minimum length message"
+  },
+  
+  "emailRequired": "L'email est requis",
+  "@emailRequired": {
+    "description": "Email required message"
+  },
+  
+  "emailInvalid": "Veuillez entrer un email valide",
+  "@emailInvalid": {
+    "description": "Invalid email message"
+  },
+  
+  "nameRequired": "Le nom est requis",
+  "@nameRequired": {
+    "description": "Name required message"
+  },
+  
+  "nameMinLength": "Le nom doit contenir au moins 2 caractères",
+  "@nameMinLength": {
+    "description": "Name minimum length message"
+  },
+  
+  "nameInvalid": "Le nom ne peut contenir que des lettres et espaces",
+  "@nameInvalid": {
+    "description": "Invalid name message"
+  },
+  
+  "termsInDevelopment": "Conditions d'utilisation - En cours de développement",
+  "@termsInDevelopment": {
+    "description": "Terms of service development message"
+  },
+  
+  "privacyInDevelopment": "Politique de confidentialité - En cours de développement",
+  "@privacyInDevelopment": {
+    "description": "Privacy policy development message"
+  },
+  
+  "normal": "Normal",
+  "@normal": {
+    "description": "Normal font size option"
+  },
+  
+  "large": "Grande",
+  "@large": {
+    "description": "Large font size option"
+  },
+  
+  "light": "Clair",
+  "@light": {
+    "description": "Light theme option"
+  },
+  
+  "dark": "Sombre",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  
+  "system": "Système",
+  "@system": {
+    "description": "System theme option"
+  },
+  
+  "loading": "Chargement...",
+  "@loading": {
+    "description": "Loading message"
+  }
+} 

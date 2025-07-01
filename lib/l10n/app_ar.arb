@@ -1,0 +1,286 @@
+{
+  "@@locale": "ar",
+  "appTitle": "CAREDIFY",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "welcomeMessage": "مرحباً بك في مساحة صحتك",
+  "@welcomeMessage": {
+    "description": "Welcome message on login screen"
+  },
+  
+  "joinHealthSpace": "انضم إلى مساحة صحتك",
+  "@joinHealthSpace": {
+    "description": "Welcome message on register screen"
+  },
+  
+  "phoneNumber": "رقم الهاتف",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  
+  "phoneNumberHint": "أدخل رقم هاتفك",
+  "@phoneNumberHint": {
+    "description": "Phone number field hint"
+  },
+  
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "Password field label"
+  },
+  
+  "passwordHint": "أدخل كلمة المرور",
+  "@passwordHint": {
+    "description": "Password field hint"
+  },
+  
+  "confirmPassword": "تأكيد كلمة المرور",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  
+  "confirmPasswordHint": "أكد كلمة المرور",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  
+  "email": "البريد الإلكتروني",
+  "@email": {
+    "description": "Email field label"
+  },
+  
+  "emailHint": "أدخل بريدك الإلكتروني",
+  "@emailHint": {
+    "description": "Email field hint"
+  },
+  
+  "fullName": "الاسم الكامل",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  
+  "fullNameHint": "أدخل اسمك الكامل",
+  "@fullNameHint": {
+    "description": "Full name field hint"
+  },
+  
+  "login": "تسجيل الدخول",
+  "@login": {
+    "description": "Login button text"
+  },
+  
+  "register": "إنشاء حساب",
+  "@register": {
+    "description": "Register button text"
+  },
+  
+  "alreadyHaveAccount": "لديك حساب بالفعل؟ تسجيل الدخول",
+  "@alreadyHaveAccount": {
+    "description": "Link to login from register screen"
+  },
+  
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "@forgotPassword": {
+    "description": "Forgot password link"
+  },
+  
+  "forgotPasswordTitle": "نسيت كلمة المرور",
+  "@forgotPasswordTitle": {
+    "description": "Forgot password screen title"
+  },
+  
+  "forgotPasswordMessage": "أدخل بريدك الإلكتروني أو رقم هاتفك لإعادة تعيين كلمة المرور.",
+  "@forgotPasswordMessage": {
+    "description": "Forgot password screen message"
+  },
+  
+  "emailOrPhone": "البريد الإلكتروني أو الهاتف",
+  "@emailOrPhone": {
+    "description": "Email or phone field label"
+  },
+  
+  "send": "إرسال",
+  "@send": {
+    "description": "Send button text"
+  },
+  
+  "resetLinkSent": "تم إرسال رابط إعادة التعيين.",
+  "@resetLinkSent": {
+    "description": "Success message for password reset"
+  },
+  
+  "createAccount": "إنشاء حساب",
+  "@createAccount": {
+    "description": "Create account screen title"
+  },
+  
+  "loginSuccess": "تم تسجيل الدخول بنجاح!",
+  "@loginSuccess": {
+    "description": "Success message for login"
+  },
+  
+  "accountCreated": "تم إنشاء الحساب بنجاح!",
+  "@accountCreated": {
+    "description": "Success message for account creation"
+  },
+  
+  "loginError": "خطأ في تسجيل الدخول. يرجى التحقق من بياناتك.",
+  "@loginError": {
+    "description": "Error message for login"
+  },
+  
+  "registrationError": "خطأ في إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+  "@registrationError": {
+    "description": "Error message for registration"
+  },
+  
+  "fillAllFields": "يرجى ملء جميع الحقول بشكل صحيح",
+  "@fillAllFields": {
+    "description": "Error message for incomplete fields"
+  },
+  
+  "fieldRequired": "هذا الحقل مطلوب",
+  "@fieldRequired": {
+    "description": "Error message for required field"
+  },
+  
+  "invalidCredentials": "بيانات غير صحيحة",
+  "@invalidCredentials": {
+    "description": "Error message for invalid credentials"
+  },
+  
+  "language": "اللغة",
+  "@language": {
+    "description": "Language control label"
+  },
+  
+  "fontSize": "حجم النص",
+  "@fontSize": {
+    "description": "Font size control label"
+  },
+  
+  "theme": "المظهر",
+  "@theme": {
+    "description": "Theme control label"
+  },
+  
+  "chooseLanguage": "اختر اللغة",
+  "@chooseLanguage": {
+    "description": "Language selection dialog title"
+  },
+  
+  "termsOfService": "شروط الخدمة",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  
+  "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  
+  "termsOfServiceDescription": "بإنشاء حساب، توافق على شروط الخدمة وسياسة الخصوصية.",
+  "@termsOfServiceDescription": {
+    "description": "Terms of service description"
+  },
+  "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords do not match message"
+  },
+  
+  "fieldRequired": "هذا الحقل مطلوب",
+  "@fieldRequired": {
+    "description": "Generic field required message"
+  },
+  
+  "phoneRequired": "رقم الهاتف مطلوب",
+  "@phoneRequired": {
+    "description": "Phone number required message"
+  },
+  
+  "phoneMinLength": "رقم الهاتف يجب أن يحتوي على 8 أرقام على الأقل",
+  "@phoneMinLength": {
+    "description": "Phone number minimum length message"
+  },
+  
+  "phoneMaxLength": "رقم الهاتف لا يمكن أن يتجاوز 15 رقم",
+  "@phoneMaxLength": {
+    "description": "Phone number maximum length message"
+  },
+  
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "@passwordRequired": {
+    "description": "Password required message"
+  },
+  
+  "passwordMinLength": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل",
+  "@passwordMinLength": {
+    "description": "Password minimum length message"
+  },
+  
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "@emailRequired": {
+    "description": "Email required message"
+  },
+  
+  "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+  "@emailInvalid": {
+    "description": "Invalid email message"
+  },
+  
+  "nameRequired": "الاسم مطلوب",
+  "@nameRequired": {
+    "description": "Name required message"
+  },
+  
+  "nameMinLength": "الاسم يجب أن يحتوي على حرفين على الأقل",
+  "@nameMinLength": {
+    "description": "Name minimum length message"
+  },
+  
+  "nameInvalid": "الاسم يمكن أن يحتوي على أحرف ومسافات فقط",
+  "@nameInvalid": {
+    "description": "Invalid name message"
+  },
+  
+  "termsInDevelopment": "شروط الخدمة - قيد التطوير",
+  "@termsInDevelopment": {
+    "description": "Terms of service development message"
+  },
+  
+  "privacyInDevelopment": "سياسة الخصوصية - قيد التطوير",
+  "@privacyInDevelopment": {
+    "description": "Privacy policy development message"
+  },
+  
+  "normal": "عادي",
+  "@normal": {
+    "description": "Normal font size option"
+  },
+  
+  "large": "كبير",
+  "@large": {
+    "description": "Large font size option"
+  },
+  
+  "light": "فاتح",
+  "@light": {
+    "description": "Light theme option"
+  },
+  
+  "dark": "داكن",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  
+  "system": "النظام",
+  "@system": {
+    "description": "System theme option"
+  },
+  
+  "loading": "جاري التحميل...",
+  "@loading": {
+    "description": "Loading message"
+  }
+} 
