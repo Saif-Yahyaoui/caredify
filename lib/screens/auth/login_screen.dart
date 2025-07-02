@@ -8,6 +8,9 @@ import '../../widgets/custom_text_field.dart';
 import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:local_auth/local_auth.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {
@@ -26,6 +29,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
+  final FlutterTts _tts = FlutterTts();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  final LocalAuthentication _localAuth = LocalAuthentication();
 
   @override
   void dispose() {
@@ -33,6 +39,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _passwordController.dispose();
     _phoneFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _tts.stop();
     super.dispose();
   }
 
@@ -51,21 +58,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
 
-      // TODO: Implement actual authentication logic
       final phone = _phoneController.text.trim();
       final password = _passwordController.text;
 
-      // Simulate authentication
       if (phone.isNotEmpty && password.isNotEmpty) {
-        // Success - navigate to dashboard
+        // Simulate token
+        await _secureStorage.write(key: 'auth_token', value: 'demo_token');
+        // Biometric authentication
+        final didAuth = await _authenticateWithBiometrics();
+        if (!didAuth) {
+          setState(() {
+            _isLoading = false;
+            _errorMessage = 'Biometric authentication failed.';
+          });
+          return;
+        }
         if (mounted) {
-          // TODO: Navigate to dashboard when implemented
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context)!.loginSuccess),
-              backgroundColor: AppColors.healthGreen,
-            ),
-          );
+          if (AccessibilityControls.voiceFeedbackEnabled) {
+            await _tts.speak(AppLocalizations.of(context)!.loginSuccess);
+          }
+          context.pushReplacement('/dashboard');
         }
       } else {
         throw Exception(AppLocalizations.of(context)!.invalidCredentials);
@@ -74,6 +86,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       setState(() {
         _errorMessage = AppLocalizations.of(context)!.loginError;
       });
+      if (AccessibilityControls.voiceFeedbackEnabled) {
+        await _tts.speak(AppLocalizations.of(context)!.loginError);
+      }
     } finally {
       if (mounted) {
         setState(() {
@@ -91,6 +106,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   /// Navigate to registration screen
   void _handleRegister() {
     context.push('/register');
+  }
+
+  Future<bool> _authenticateWithBiometrics() async {
+    try {
+      final isDeviceSupported = await _localAuth.isDeviceSupported();
+      final canCheckBiometrics = await _localAuth.canCheckBiometrics;
+      if (!isDeviceSupported || !canCheckBiometrics) {
+        setState(() {
+          _errorMessage =
+              'Biometric authentication is not available on this device.';
+        });
+        return false;
+      }
+      final didAuthenticate = await _localAuth.authenticate(
+        localizedReason: 'Please authenticate to access your dashboard',
+        options: const AuthenticationOptions(biometricOnly: true),
+      );
+      return didAuthenticate;
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Biometric authentication failed.';
+      });
+      return false;
+    }
   }
 
   @override
@@ -139,23 +178,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         // Clean Logo
         Image.asset(
           'assets/images/logo.png',
-          width: 130,
-          height: 120,
+          width: 200,
+          height: 170,
           fit: BoxFit.fill,
         ),
         const SizedBox(height: 24),
 
         // App name
-        Text(
-          AppLocalizations.of(context)!.appTitle,
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: AppColors.primaryBlue,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
+        // Text(
+        //   AppLocalizations.of(context)!.appTitle,
+        //   style: Theme.of(context).textTheme.displaySmall?.copyWith(
+        //     color: AppColors.primaryBlue,
+        //     fontWeight: FontWeight.bold,
+        //     letterSpacing: 1.2,
+        //   ),
+        // ),
 
-        const SizedBox(height: 8),
+        // const SizedBox(height: 8),
 
         // Welcome message
         Text(
@@ -374,15 +413,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           children: [
             TextButton(
               onPressed: () {
-                // TODO: Navigate to terms of service
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      AppLocalizations.of(context)!.termsInDevelopment,
-                    ),
-                    backgroundColor: AppColors.mediumGray,
-                  ),
-                );
+                context.push('/terms');
               },
               child: Text(
                 AppLocalizations.of(context)!.termsOfService,
@@ -399,15 +430,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
             TextButton(
               onPressed: () {
-                // TODO: Navigate to privacy policy
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      AppLocalizations.of(context)!.privacyInDevelopment,
-                    ),
-                    backgroundColor: AppColors.mediumGray,
-                  ),
-                );
+                context.push('/privacy');
               },
               child: Text(
                 AppLocalizations.of(context)!.privacyPolicy,

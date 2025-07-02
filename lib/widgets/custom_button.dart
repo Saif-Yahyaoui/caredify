@@ -103,18 +103,23 @@ class CustomButton extends StatelessWidget {
         textColor ?? (isSecondary ? AppColors.buttonSecondary : Colors.white);
     final isEnabled = onPressed != null && !isLoading;
 
-    return SizedBox(
-      width: width ?? double.infinity,
-      height: height ?? 56, // Accessibility - minimum touch target
-      child:
-          isSecondary
-              ? _buildOutlinedButton(context, effectiveTextColor, isEnabled)
-              : _buildElevatedButton(
-                context,
-                effectiveBackgroundColor,
-                effectiveTextColor,
-                isEnabled,
-              ),
+    return Semantics(
+      button: true,
+      enabled: isEnabled,
+      label: text,
+      child: SizedBox(
+        width: width ?? double.infinity,
+        height: height ?? 56, // Accessibility - minimum touch target
+        child:
+            isSecondary
+                ? _buildOutlinedButton(context, effectiveTextColor, isEnabled)
+                : _buildElevatedButton(
+                  context,
+                  effectiveBackgroundColor,
+                  effectiveTextColor,
+                  isEnabled,
+                ),
+      ),
     );
   }
 

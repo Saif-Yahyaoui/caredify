@@ -7,6 +7,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Registration screen with user information and account creation
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -32,6 +33,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
   @override
   void dispose() {
@@ -60,23 +62,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     });
 
     try {
-      // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
-
-      // TODO: Implement actual registration logic
       final name = _nameController.text.trim();
       final phone = _phoneController.text.trim();
       final email = _emailController.text.trim();
       final password = _passwordController.text;
       final confirmPassword = _confirmPasswordController.text;
-
-      // Simulate validation
       if (name.isNotEmpty &&
           phone.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
           password == confirmPassword) {
-        // Success - navigate to login
+        // Simulate token
+        await _secureStorage.write(key: 'auth_token', value: 'demo_token');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -166,24 +164,24 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         // Logo
         Image.asset(
           'assets/images/logo.png',
-          width: 130,
-          height: 120,
+          width: 200,
+          height: 170,
           fit: BoxFit.fill,
         ),
 
         const SizedBox(height: 24),
 
         // App name
-        Text(
-          AppLocalizations.of(context)!.appTitle,
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: AppColors.primaryBlue,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
+        // Text(
+        //   AppLocalizations.of(context)!.appTitle,
+        //   style: Theme.of(context).textTheme.displaySmall?.copyWith(
+        //     color: AppColors.primaryBlue,
+        //     fontWeight: FontWeight.bold,
+        //     letterSpacing: 1.2,
+        //   ),
+        // ),
 
-        const SizedBox(height: 8),
+        // const SizedBox(height: 8),
 
         // Welcome message
         Text(
@@ -380,15 +378,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           children: [
             TextButton(
               onPressed: () {
-                // TODO: Navigate to terms of service
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      AppLocalizations.of(context)!.termsInDevelopment,
-                    ),
-                    backgroundColor: AppColors.mediumGray,
-                  ),
-                );
+                context.push('/terms');
               },
               child: Text(
                 AppLocalizations.of(context)!.termsOfService,
@@ -405,15 +395,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
             TextButton(
               onPressed: () {
-                // TODO: Navigate to privacy policy
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      AppLocalizations.of(context)!.privacyInDevelopment,
-                    ),
-                    backgroundColor: AppColors.mediumGray,
-                  ),
-                );
+                context.push('/privacy');
               },
               child: Text(
                 AppLocalizations.of(context)!.privacyPolicy,

@@ -93,25 +93,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                           // CAREDIFY Logo
                           Image.asset(
                             'assets/images/logo.png',
-                            width: 120,
-                            height: 120,
+                            width: 220,
+                            height: 180,
                             fit: BoxFit.fill,
                           ),
 
                           const SizedBox(height: 24),
 
                           // App name
-                          Text(
-                            AppLocalizations.of(context)!.appTitle,
-                            style: Theme.of(
-                              context,
-                            ).textTheme.displayMedium?.copyWith(
-                              color: AppColors.primaryBlue,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-
+                          // Text(
+                          //   AppLocalizations.of(context)!.appTitle,
+                          //   style: Theme.of(
+                          //     context,
+                          //   ).textTheme.displayMedium?.copyWith(
+                          //     color: AppColors.primaryBlue,
+                          //     fontWeight: FontWeight.bold,
+                          //     letterSpacing: 1.5,
+                          //   ),
+                          // ),
                           const SizedBox(height: 8),
 
                           // Tagline

@@ -11,6 +11,9 @@ import 'screens/splash/splash_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/auth/forgot_password_screen.dart';
+import 'screens/dashboard/dashboard_screen.dart';
+import 'screens/legal/privacy_policy_screen.dart';
+import 'screens/legal/terms_of_service_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: CaredifyApp()));
@@ -78,11 +81,21 @@ final GoRouter _router = GoRouter(
       name: 'forgot-password',
       builder: (context, state) => const ForgotPasswordScreen(),
     ),
-    // Future routes for main app screens
-    // GoRoute(
-    //   path: '/dashboard',
-    //   name: 'dashboard',
-    //   builder: (context, state) => const DashboardScreen(),
-    // ),
+    GoRoute(
+      path: '/dashboard',
+      name: 'dashboard',
+      builder: (context, state) => const DashboardScreen(),
+    ),
+    GoRoute(
+      path: '/terms',
+      name: 'terms',
+      builder: (context, state) => const TermsOfServiceScreen(),
+    ),
+    GoRoute(
+      path: '/privacy',
+      name: 'privacy',
+      builder: (context, state) => const PrivacyPolicyScreen(),
+    ),
+  
   ],
 );

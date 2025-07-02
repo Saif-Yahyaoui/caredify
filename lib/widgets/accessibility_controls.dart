@@ -5,9 +5,11 @@ import '../core/theme/app_colors.dart';
 import '../core/theme/app_theme.dart';
 import '../providers/theme_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/voice_feedback_provider.dart';
 
 /// Accessibility controls widget with language, font size, and theme toggles
 class AccessibilityControls extends ConsumerWidget {
+  static bool voiceFeedbackEnabled = true;
   const AccessibilityControls({super.key});
 
   @override
@@ -33,6 +35,8 @@ class AccessibilityControls extends ConsumerWidget {
             Expanded(child: _buildFontSizeToggle(context, ref, fontSize)),
             const VerticalDivider(width: 0.1, color: AppColors.inputBorder),
             Expanded(child: _buildThemeToggle(context, ref, themeMode)),
+            const VerticalDivider(width: 0.1, color: AppColors.inputBorder),
+            Expanded(child: _buildVoiceFeedbackToggle(context, ref)),
           ],
         ),
       ),
@@ -147,6 +151,34 @@ class AccessibilityControls extends ConsumerWidget {
               color: colorScheme.primary,
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVoiceFeedbackToggle(BuildContext context, WidgetRef ref) {
+    final isVoiceEnabled = ref.watch(voiceFeedbackProvider);
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Voice',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            color: colorScheme.onSurface,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        Switch(
+          value: isVoiceEnabled,
+          onChanged: (val) {
+            ref.read(voiceFeedbackProvider.notifier).state = val;
+            // You can also trigger a voice-related side effect here
+          },
+          activeColor: colorScheme.primary,
         ),
       ],
     );

@@ -110,11 +110,15 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       },
                     ),
                     const SizedBox(height: 24),
-                    CustomButton.primary(
-                      text: AppLocalizations.of(context)!.send,
-                      onPressed: _isLoading ? null : _handleSubmit,
-                      isLoading: _isLoading,
-                      icon: Icons.send,
+                    Semantics(
+                      button: true,
+                      label: AppLocalizations.of(context)!.send,
+                      child: CustomButton.primary(
+                        text: AppLocalizations.of(context)!.send,
+                        onPressed: _isLoading ? null : _handleSubmit,
+                        isLoading: _isLoading,
+                        icon: Icons.send,
+                      ),
                     ),
                   ],
                 ),
