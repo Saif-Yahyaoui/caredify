@@ -282,5 +282,50 @@
   "loading": "Loading...",
   "@loading": {
     "description": "Loading message"
+  },
+  
+  "dangerHealthScore": "DANGER\nHealth Score",
+  "@dangerHealthScore": {
+    "description": "Label for danger health score at the top of the dashboard"
+  },
+  "average": "Average",
+  "@average": {
+    "description": "Label for average value (e.g., ECG)"
+  },
+  "low": "Low",
+  "@low": {
+    "description": "Label for low value (e.g., BPM)"
+  },
+  "high": "High",
+  "@high": {
+    "description": "Label for high value (e.g., SPO2)"
+  },
+  "temperature": "Temperature",
+  "@temperature": {
+    "description": "Label for temperature vital sign"
+  },
+  "medium": "Medium",
+  "@medium": {
+    "description": "Label for medium value (e.g., temperature)"
+  },
+  "chatTab": "Chat",
+  "@chatTab": {
+    "description": "Label for chat tab in bottom navigation"
+  },
+
+  
+  "appointmentsTab": "Appointments",
+  "@appointmentsTab": {
+    "description": "Label for appointments tab in bottom navigation"
+  },
+
+  "profileTab": "Profile",
+  "@profileTab": {
+    "description": "Label for profile tab in bottom navigation"
+  },
+  "homeTab": "Home",
+  "@homeTab": {
+    "description": "Label for home tab in bottom navigation"
   }
+
 } 

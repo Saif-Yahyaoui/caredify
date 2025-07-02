@@ -282,5 +282,50 @@
   "loading": "جاري التحميل...",
   "@loading": {
     "description": "Loading message"
+  },
+  
+  "dangerHealthScore": "خطر\nمؤشر الصحة",
+  "@dangerHealthScore": {
+    "description": "تسمية مؤشر الصحة الخطر أعلى لوحة القيادة"
+  },
+  "average": "متوسط",
+  "@average": {
+    "description": "تسمية للقيمة المتوسطة (مثل: تخطيط القلب)"
+  },
+  "low": "منخفض",
+  "@low": {
+    "description": "تسمية للقيمة المنخفضة (مثل: معدل ضربات القلب)"
+  },
+  "high": "مرتفع",
+  "@high": {
+    "description": "تسمية للقيمة المرتفعة (مثل: نسبة الأكسجين)"
+  },
+  "temperature": "درجة الحرارة",
+  "@temperature": {
+    "description": "تسمية لعلامة درجة الحرارة الحيوية"
+  },
+  "medium": "متوسط",
+  "@medium": {
+    "description": "تسمية للقيمة المتوسطة (مثل: درجة الحرارة)"
+  },
+  "chatTab": "المحادثة",
+  "@chatTab": {
+    "description": "Label for chat tab in bottom navigation"
+  },
+ 
+
+  "appointmentsTab": "المواعيد",
+  "@appointmentsTab": {
+    "description": "Label for appointments tab in bottom navigation"
+  },
+
+  "profileTab": "الملف ",
+  "@profileTab": {
+    "description": "Label for profile tab in bottom navigation"
+  },
+  "homeTab": "الرئيسية",
+  "@homeTab": {
+    "description": "تسمية لعلامة التبويب الرئيسية في أسفل التنقل"
   }
+  
 } 

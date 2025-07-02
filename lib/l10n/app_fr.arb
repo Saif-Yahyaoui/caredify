@@ -283,5 +283,48 @@
   "loading": "Chargement...",
   "@loading": {
     "description": "Loading message"
+  },
+  
+  "dangerHealthScore": "DANGER\nScore Santé",
+  "@dangerHealthScore": {
+    "description": "Label du score santé danger en haut du tableau de bord"
+  },
+  "average": "Moyenne",
+  "@average": {
+    "description": "Label pour valeur moyenne (ex: ECG)"
+  },
+  "low": "Faible",
+  "@low": {
+    "description": "Label pour valeur faible (ex: BPM)"
+  },
+  "high": "Élevé",
+  "@high": {
+    "description": "Label pour valeur élevée (ex: SPO2)"
+  },
+  "temperature": "Température",
+  "@temperature": {
+    "description": "Label pour le signe vital température"
+  },
+  "medium": "Moyen",
+  "@medium": {
+    "description": "Label pour valeur moyenne (ex: température)"
+  },
+  "chatTab": "Discussion",
+  "@chatTab": {
+    "description": "Label pour l'onglet discussion dans la navigation inférieure"
+  },
+  
+  "appointmentsTab": "Rendez-vous",
+  "@appointmentsTab": {
+    "description": "Label pour l'onglet des rendez-vous dans la navigation inférieure"
+  },
+
+  "profileTab": "Profil",
+  "@profileTab": {
+    "description": "Label pour l'onglet profil dans la navigation inférieure"
+  },
+  "homeTab": "Accueil",
+  "@homeTab": {
+    "description": "Label pour l'onglet accueil dans la navigation inférieure"
   }
 } 
