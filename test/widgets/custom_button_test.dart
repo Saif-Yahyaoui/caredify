@@ -1,21 +1,32 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:caredify/widgets/custom_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('CustomButton calls onPressed', (tester) async {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
+  testWidgets('CustomButton calls onPressed', (WidgetTester tester) async {
     bool pressed = false;
     await tester.pumpWidget(
       MaterialApp(
-        home: CustomButton.primary(
-          text: 'Test',
-          onPressed: () => pressed = true,
+        home: Scaffold(
+          body: CustomButton(
+            text: 'Test',
+            onPressed: () {
+              pressed = true;
+            },
+          ),
         ),
       ),
     );
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Test'));
-    await tester.pumpAndSettle();
-    expect(pressed, true);
+
+    final buttonFinder = find.text('Test');
+    await tester.ensureVisible(buttonFinder);
+    await tester.tap(buttonFinder);
+    await tester.pump();
+    expect(pressed, isTrue);
   });
 }

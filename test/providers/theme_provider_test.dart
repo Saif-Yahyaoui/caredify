@@ -1,12 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:caredify/providers/theme_provider.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  test('ThemeModeProvider toggles theme', () async {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
+  test('ThemeModeNotifier toggles theme', () async {
     final notifier = ThemeModeNotifier();
-    final initial = notifier.state;
+    final initialTheme = notifier.state;
     await notifier.toggleTheme();
-    expect(notifier.state, isNot(initial));
+    expect(notifier.state != initialTheme, true);
   });
 }

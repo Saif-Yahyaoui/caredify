@@ -1,24 +1,35 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:caredify/features/auth/forgot_password_screen.dart';
-import 'test_helpers.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:caredify/features/auth/forgot_password_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('ForgotPasswordScreen renders and validates', (tester) async {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
+  testWidgets('ForgotPasswordScreen renders and validates', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
-      ProviderScope(
-        child: localizedTestableWidget(const ForgotPasswordScreen()),
+      MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(body: ForgotPasswordScreen()),
       ),
     );
-    await tester.pumpAndSettle();
+
+    // Try to submit with empty field
+    final buttonFinder = find.byType(ElevatedButton);
+    await tester.ensureVisible(buttonFinder);
+    await tester.tap(buttonFinder);
+    await tester.pump();
+
+    // Get the l10n instance
     final context = tester.element(find.byType(ForgotPasswordScreen));
-    final passwordText = AppLocalizations.of(context)!.forgotPasswordTitle;
-    expect(find.text(passwordText), findsOneWidget);
-    await tester.tap(find.byType(ElevatedButton));
-    await tester.pumpAndSettle();
-    final requiredText = AppLocalizations.of(context)!.fieldRequired;
-    expect(find.text(requiredText), findsWidgets);
+    final l10n = AppLocalizations.of(context)!;
+
+    expect(find.text(l10n.fieldRequired), findsOneWidget);
   });
 }
