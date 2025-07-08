@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:caredify/widgets/floating_bottom_nav_bar.dart';
+import 'test_helpers.dart';
 
 void main() {
   testWidgets('FloatingBottomNavBar renders and responds to taps', (
@@ -8,8 +9,8 @@ void main() {
   ) async {
     int selectedIndex = 0;
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
+      localizedTestableWidget(
+        Scaffold(
           bottomNavigationBar: FloatingBottomNavBar(
             selectedIndex: selectedIndex,
             onTabSelected: (index) {

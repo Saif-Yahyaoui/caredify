@@ -3,13 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:caredify/features/auth/login_screen.dart';
+import 'test_helpers.dart';
 
 void main() {
   testWidgets('Shows error if fields are empty', (WidgetTester tester) async {
     await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(home: LoginScreen()),
-      ),
+      ProviderScope(child: localizedTestableWidget(LoginScreen())),
     );
 
     // Tap login button without entering anything
@@ -23,9 +22,7 @@ void main() {
 
   testWidgets('Shows error for invalid phone', (WidgetTester tester) async {
     await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(home: LoginScreen()),
-      ),
+      ProviderScope(child: localizedTestableWidget(LoginScreen())),
     );
 
     // Enter invalid phone
