@@ -8,114 +8,119 @@
 
 ---
 
-## 🌍 Multilingual & Voice-Accessible
-
-- **Full UI & Voice Feedback in English, French, and Arabic**
-- **All app text and TTS (Text-to-Speech) are fully localized and translated**
-- **Dynamic TTS language:** Voice feedback automatically matches the selected app language
-- **Easy language switching:** Change language anytime from the accessibility controls
-- **Contribute translations:** See [Contributing](#contributing-translations)
-
----
-
-## 🔍 Overview
+## 🚀 Overview
 
 CAREDIFY is an innovative telehealth app for patients at risk of heart failure. It pairs with a smart ECG belt to provide real-time cardiac monitoring, AI-driven health tips, and secure communication with healthcare professionals. Designed for seniors, CAREDIFY features a soft, reassuring interface and robust accessibility.
 
 ---
 
-## 🧠 Key Features
+## 🧩 Key Features
 
-- **BLE ECG Sensor Pairing**: Connects securely to Movesense Medical ECG belts.
-- **Real-Time ECG Visualization**: Live display of ECG, BPM, SpO2, temperature, and more.
-- **AI Health Tips**: Personalized recommendations based on your data.
-- **Chat with Doctors**: Secure, multilingual messaging with healthcare professionals.
-- **Offline Sync**: Data is stored locally and synced when online.
-- **Multilingual Support**: French, English, Arabic (UI & TTS)
-- **Accessibility**: Large text, high contrast, dark mode, voice feedback (TTS), screen reader support.
-- **Critical Alerts**: Immediate notifications for dangerous anomalies.
+- **Authentication:** Email/password login, onboarding, registration, forgot password. (Google/Facebook login planned)
+- **Dashboard:** Real-time vitals, ECG card, heart tracker, water intake, sleep rating, workout tracker, health index, healthy habits, weekly charts.
+- **Accessibility:** Font size toggle, dark/light/system theme, TTS (voice feedback), RTL support, large tap zones, screen reader labels.
+- **Internationalization:** Full support for English, French, Arabic via `.arb` files; instant language switching.
+- **Voice Feedback:** TTS for all major actions and alerts, toggleable in accessibility controls.
+- **Legal & Compliance:** Privacy Policy, Terms of Service screens.
+- **Profile:** User profile management.
+- **Planned/Upcoming:** Chat with doctors, AI health recommendations, BLE device pairing, Google/Facebook login.
 
 ---
 
-## 📱 Design Principles
+## 🏗️ Architecture
 
-- **Soft Emotional Palette**: Calming blue (#0092DF) and green (#00C853).
-- **Rounded, Touch-Friendly Components**: Large tap zones, minimum 18–20px font.
-- **Brand Compliance**: Logo color is never altered.
-- **Senior-Optimized Layout**: Critical info at the top, clear hierarchy, visual and voice feedback.
+- **Feature-first modular structure:**
+  - `lib/features/` – Auth, dashboard, profile, legal, recommendations, chat
+  - `lib/core/` – Theme, utils, constants
+  - `lib/widgets/` – Reusable UI components
+  - `lib/providers/` – State management (Riverpod)
+  - `lib/models/` – Data models
+  - `lib/l10n/` – Localization files (`.arb`)
+- **Routing:** GoRouter
+- **State Management:** Riverpod
 
 ---
 
 ## ♿ Accessibility
 
-- **Screen Reader Support**: All interactive elements are labeled for screen readers.
-- **Voice Feedback (TTS)**: Key actions and alerts are announced aloud in the selected language.
-- **Large Fonts**: All text is at least 18–20px for readability.
-- **High Contrast**: Color palette and contrast ratios are optimized for visibility.
-- **Accessible Navigation**: Floating bottom navigation bar with large tap zones, fully localized.
-- **User Toggle**: Voice feedback can be enabled/disabled in accessibility controls.
+- Font size toggle (normal/large)
+- Theme toggle (light/dark/system)
+- Voice feedback (TTS) toggle
+- Language selector (EN/FR/AR)
+- RTL support
+- Large, touch-friendly UI
+- Screen reader labels
 
 ---
 
-## 🌐 Switching Languages
+## 🌐 Internationalization
 
-- Go to **Accessibility Controls** in the app
-- Select your preferred language (English, Français, العربية)
-- All UI and voice feedback will instantly update to your chosen language
-
----
-
-## 🔠 Contributing Translations
-
-- All app text is managed in ARB files: `lib/l10n/app_en.arb`, `app_fr.arb`, `app_ar.arb`
-- To add or update translations, edit these files and run:
-  ```bash
-  flutter pub get
-  flutter gen-l10n
-  ```
-- Please keep ARB files up to date when adding new features
-- See Flutter's [internationalization guide](https://docs.flutter.dev/accessibility-and-localization/internationalization)
+- `.arb` files for EN, FR, AR in `lib/l10n/`
+- All UI and TTS fully localized
+- Language switching in-app
 
 ---
 
 ## 🔐 Security & Compliance
 
-- **AES-256 Encryption**: All sensitive data is encrypted.
-- **Two-Factor Authentication**: Optional 2FA for enhanced security.
-- **GDPR & HIPAA Ready**: Data privacy and compliance by design.
-- **Secure Storage**: Tokens and health data stored securely on device.
-- **HTTPS Only**: All network traffic is encrypted.
-- **Privacy Policy & Terms**: Accessible from the app.
+- GDPR & HIPAA-ready design
+- Privacy Policy & Terms screens
+- (Planned) AES-256 encryption, secure storage, HTTPS-only, offline sync
 
 ---
 
-## 🚀 Getting Started
+## 📊 Dashboard & UI Components
 
-### Prerequisites
-
-- [Flutter](https://flutter.dev/) 3.10+
-- Dart 3.0+
-- Android Studio or Xcode (for iOS)
-- Movesense Medical ECG device (for full functionality)
-
-### Installation
-
-```bash
-git clone https://github.com/Saif-Yahyaoui/caredify.git
-cd caredify
-flutter pub get
-flutter run
-```
+- Floating bottom navigation bar
+- Cards for ECG, heart, water, sleep, workouts, health index
+- Weekly charts, metrics row, circular step counter
 
 ---
 
-## 🔗 Screenshots
+## 📡 BLE Connection & Pairing
 
-<p align="center">
-  <img src="assets/images/dashboard_light.png" width="200"/>
-  <img src="assets/images/dashboard_dark.png" width="200"/>
-  <img src="assets/images/login.png" width="200"/>
-</p>
+- UI placeholders for BLE/ECG device connection (Movesense planned)
+- BLE logic not yet implemented, but navigation and UI are ready
+
+---
+
+## 🚧 Planned Features
+
+- Chat with doctors (feature folder present, not yet implemented)
+- AI health recommendations (feature folder present, not yet implemented)
+- BLE device pairing (UI present, logic planned)
+- Google/Facebook login (UI present, logic TODO)
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech                   | Usage                        |
+|------------------------|-----------------------------|
+| Flutter                | UI, cross-platform           |
+| Dart                   | Main language                |
+| Riverpod               | State management             |
+| GoRouter               | Navigation                   |
+| flutter_tts            | Voice feedback (TTS)         |
+| flutter_localizations  | i18n/l10n                    |
+| .arb                   | Localization files           |
+| Material Design        | UI/UX                        |
+
+---
+
+## ▶️ How to Run
+
+1. **Prerequisites:**
+   - [Flutter](https://flutter.dev/) 3.10+
+   - Dart 3.0+
+   - Android Studio or Xcode (for iOS)
+   - (Optional) Movesense ECG device for full functionality
+
+2. **Setup:**
+   ```bash
+   flutter pub get
+   flutter run
+   ```
 
 ---
 
@@ -125,12 +130,22 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 
 ---
 
-## 🙌 Credits / Supervision
+## 🙌 Credits
 
-- **Lead Developer**: Saif Yahyaoui
-- **Supervision**: [Supervisor Name]
-- **Design**: [Figma UI Team]
-- **Special Thanks**: All contributors and testers
+- **Lead Developer:** Saif Yahyaoui
+- **Supervision:** [Supervisor Name]
+- **Design:** [Figma UI Team]
+- **Special Thanks:** All contributors and testers
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="assets/images/dashboard_light.png" width="200"/>
+  <img src="assets/images/dashboard_dark.png" width="200"/>
+  <img src="assets/images/login.png" width="200"/>
+</p>
 
 ---
 
@@ -141,3 +156,9 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 - [API Documentation](#)
 
 ---
+
+**For more details, see the codebase and comments in each folder.**
+
+---
+
+**This version is now clean, professional, and focused—ready for users, developers, and stakeholders.**
