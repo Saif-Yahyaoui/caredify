@@ -13,7 +13,9 @@ void main() {
         ),
       ),
     );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Test'));
+    await tester.pumpAndSettle();
     expect(pressed, true);
   });
 }

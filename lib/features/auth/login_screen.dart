@@ -37,8 +37,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _tts = widget.tts ?? FlutterTts(); 
+    _tts = widget.tts ?? FlutterTts();
   }
+
   @override
   void dispose() {
     _phoneController.dispose();
@@ -367,7 +368,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         height: 28,
                       ),
                       const SizedBox(width: 12),
-                      Flexible(
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
                         child: Text(
                           AppLocalizations.of(context)?.google ?? 'Google',
                           style: Theme.of(
@@ -414,7 +416,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         height: 28,
                       ),
                       const SizedBox(width: 12),
-                      Flexible(
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
                         child: Text(
                           AppLocalizations.of(context)?.facebook ?? 'Facebook',
                           style: Theme.of(

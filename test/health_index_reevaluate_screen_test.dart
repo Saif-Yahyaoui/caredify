@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:caredify/features/dashboard/health_index_reevaluate_screen.dart';
 import 'test_helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   testWidgets('HealthIndexReevaluateScreen renders', (tester) async {
@@ -11,6 +12,9 @@ void main() {
         child: localizedTestableWidget(const HealthIndexReevaluateScreen()),
       ),
     );
-    expect(find.textContaining('REEVALUATE'), findsWidgets);
+    await tester.pumpAndSettle();
+    final context = tester.element(find.byType(HealthIndexReevaluateScreen));
+    final reevaluate = AppLocalizations.of(context)!.reevaluate;
+    expect(find.text(reevaluate), findsWidgets);
   });
 }

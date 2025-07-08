@@ -6,6 +6,7 @@ import 'package:caredify/main.dart';
 void main() {
   testWidgets('CaredifyApp renders without crashing', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: CaredifyApp()));
+    await tester.pumpAndSettle();
     expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

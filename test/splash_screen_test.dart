@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(child: localizedTestableWidget(const SplashScreen())),
     );
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 3));
     expect(find.byType(Image), findsWidgets);
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });

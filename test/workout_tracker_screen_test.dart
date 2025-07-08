@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:caredify/features/dashboard/workout_tracker_screen.dart';
 import 'test_helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   testWidgets('WorkoutTrackerScreen renders and shows steps', (tester) async {
@@ -11,6 +12,9 @@ void main() {
         child: localizedTestableWidget(const WorkoutTrackerScreen()),
       ),
     );
-    expect(find.textContaining('steps', findRichText: true), findsWidgets);
+    await tester.pumpAndSettle();
+    final context = tester.element(find.byType(WorkoutTrackerScreen));
+    final steps = AppLocalizations.of(context)!.workoutTrackerTitle;
+    expect(find.textContaining(steps, findRichText: true), findsWidgets);
   });
 }

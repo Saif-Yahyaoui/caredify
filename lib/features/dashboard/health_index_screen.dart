@@ -284,14 +284,15 @@ class _LegendRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Expanded(
+          Flexible(
             child: Text(
               label,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: theme.colorScheme.onBackground,
-
                 fontSize: 13,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],
