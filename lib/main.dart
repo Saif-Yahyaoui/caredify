@@ -7,13 +7,22 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/theme/app_theme.dart';
 import 'providers/theme_provider.dart';
 import 'providers/language_provider.dart';
-import 'screens/splash/splash_screen.dart';
-import 'screens/auth/login_screen.dart';
-import 'screens/auth/register_screen.dart';
-import 'screens/auth/forgot_password_screen.dart';
-import 'screens/dashboard/dashboard_screen.dart';
-import 'screens/legal/privacy_policy_screen.dart';
-import 'screens/legal/terms_of_service_screen.dart';
+import 'features/auth/splash_screen.dart';
+import 'features/auth/login_screen.dart';
+import 'features/auth/register_screen.dart';
+import 'features/auth/forgot_password_screen.dart';
+import 'features/dashboard/dashboard_screen.dart';
+import 'features/legal/privacy_policy_screen.dart';
+import 'features/legal/terms_of_service_screen.dart';
+import 'features/dashboard/workout_tracker_screen.dart';
+import 'features/dashboard/sleep_rating_screen.dart';
+import 'features/dashboard/water_intake_screen.dart';
+import 'features/dashboard/heart_tracker_screen.dart';
+import 'features/auth/onboarding_screen.dart';
+
+import 'features/dashboard/healthy_habits_screen.dart';
+import 'features/dashboard/health_index_screen.dart';
+import 'features/dashboard/health_index_reevaluate_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: CaredifyApp()));
@@ -62,6 +71,11 @@ final GoRouter _router = GoRouter(
   initialLocation: '/splash',
   routes: [
     GoRoute(
+      path: '/onboarding',
+      name: 'onboarding',
+      builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
       path: '/splash',
       name: 'splash',
       builder: (context, state) => const SplashScreen(),
@@ -96,6 +110,41 @@ final GoRouter _router = GoRouter(
       name: 'privacy',
       builder: (context, state) => const PrivacyPolicyScreen(),
     ),
-  
+    GoRoute(
+      path: '/workout',
+      name: 'workout',
+      builder: (context, state) => const WorkoutTrackerScreen(),
+    ),
+    GoRoute(
+      path: '/sleep',
+      name: 'sleep',
+      builder: (context, state) => const SleepRatingScreen(),
+    ),
+    GoRoute(
+      path: '/water',
+      name: 'water',
+      builder: (context, state) => const WaterIntakeScreen(),
+    ),
+    GoRoute(
+      path: '/heart',
+      name: 'heart',
+      builder: (context, state) => const HeartTrackerScreen(),
+    ),
+
+    GoRoute(
+      path: '/habits',
+      name: 'habits',
+      builder: (context, state) => const HealthyHabitsScreen(),
+    ),
+    GoRoute(
+      path: '/health-index',
+      name: 'health-index',
+      builder: (context, state) => const HealthIndexScreen(),
+    ),
+    GoRoute(
+      path: '/health-index-reevaluate',
+      name: 'health-index-reevaluate',
+      builder: (context, state) => const HealthIndexReevaluateScreen(),
+    ),
   ],
 );
