@@ -1,3 +1,7 @@
 {
-    "cmake.ignoreCMakeListsMissing": true
+    "cmake.ignoreCMakeListsMissing": true,
+    "sonarlint.connectedMode.project": {
+        "connectionId": "saif-yahyaoui",
+        "projectKey": "Saif-Yahyaoui_caredify"
+    }
 }
