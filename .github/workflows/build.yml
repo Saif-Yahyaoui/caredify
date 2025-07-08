@@ -20,6 +20,8 @@ jobs:
           flutter-version: '3.29.3'
       - name: Install dependencies
         run: flutter pub get
+      - name: Generate localization files
+        run: flutter gen-l10n
       - name: Run tests
         run: flutter test
       - name: SonarQube Scan
