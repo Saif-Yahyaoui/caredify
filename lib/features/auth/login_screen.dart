@@ -15,7 +15,8 @@ import '../../providers/voice_feedback_provider.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+  final FlutterTts? tts;
+  const LoginScreen({super.key, this.tts});
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -30,10 +31,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
-  final FlutterTts _tts = FlutterTts();
+  late final FlutterTts _tts;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   final LocalAuthentication _localAuth = LocalAuthentication();
-
+  @override
+  void initState() {
+    super.initState();
+    _tts = widget.tts ?? FlutterTts(); 
+  }
   @override
   void dispose() {
     _phoneController.dispose();
