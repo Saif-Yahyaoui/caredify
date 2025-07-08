@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_colors.dart';
+import 'package:intl/intl.dart' as intl;
 
 /// Custom button widget with CAREDIFY styling and accessibility features
 class CustomButton extends StatelessWidget {
@@ -188,6 +189,8 @@ class CustomButton extends StatelessWidget {
 
   /// Build button content with loading state and icon support
   Widget _buildButtonContent(BuildContext context, Color contentColor) {
+    final locale = Localizations.localeOf(context);
+    final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     if (isLoading) {
       return SizedBox(
         width: 20,
@@ -202,30 +205,74 @@ class CustomButton extends StatelessWidget {
     }
 
     if (icon != null) {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 20, color: contentColor),
-          const SizedBox(width: 8),
-          Text(
+      return Directionality(
+        textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:
+              isRtl
+                  ? [
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          text,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge?.copyWith(
+                            color: contentColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Icon(icon, size: 20, color: contentColor),
+                  ]
+                  : [
+                    Icon(icon, size: 20, color: contentColor),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          text,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge?.copyWith(
+                            color: contentColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+        ),
+      );
+    }
+
+    return Directionality(
+      textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+      child: Flexible(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
             text,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: contentColor,
               fontWeight: FontWeight.w600,
             ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-        ],
-      );
-    }
-
-    return Text(
-      text,
-      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-        color: contentColor,
-        fontWeight: FontWeight.w600,
+        ),
       ),
-      textAlign: TextAlign.center,
     );
   }
 }
