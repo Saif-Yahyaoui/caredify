@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../core/theme/app_colors.dart';
+import 'package:intl/intl.dart' as intl;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Custom text field widget with CAREDIFY styling and validation
 class CustomTextField extends StatefulWidget {
@@ -55,8 +57,8 @@ class CustomTextField extends StatefulWidget {
 
   /// Phone number field factory
   factory CustomTextField.phone({
-    String? label,
-    String? hint,
+    required String label,
+    required String hint,
     TextEditingController? controller,
     String? Function(String?)? validator,
     void Function(String)? onChanged,
@@ -66,8 +68,8 @@ class CustomTextField extends StatefulWidget {
   }) {
     return CustomTextField(
       key: key,
-      label: label ?? 'Numéro de téléphone',
-      hint: hint ?? 'Entrez votre numéro de téléphone',
+      label: label,
+      hint: hint,
       controller: controller,
       keyboardType: TextInputType.phone,
       prefixIcon: Icons.phone,
@@ -84,8 +86,8 @@ class CustomTextField extends StatefulWidget {
 
   /// Password field factory
   factory CustomTextField.password({
-    String? label,
-    String? hint,
+    required String label,
+    required String hint,
     TextEditingController? controller,
     String? Function(String?)? validator,
     void Function(String)? onChanged,
@@ -97,8 +99,8 @@ class CustomTextField extends StatefulWidget {
   }) {
     return _PasswordTextField(
       key: key,
-      label: label ?? 'Mot de passe',
-      hint: hint ?? 'Entrez votre mot de passe',
+      label: label,
+      hint: hint,
       controller: controller,
       validator: validator,
       onChanged: onChanged,
@@ -111,8 +113,8 @@ class CustomTextField extends StatefulWidget {
 
   /// Email field factory
   factory CustomTextField.email({
-    String? label,
-    String? hint,
+    required String label,
+    required String hint,
     TextEditingController? controller,
     String? Function(String?)? validator,
     void Function(String)? onChanged,
@@ -122,8 +124,8 @@ class CustomTextField extends StatefulWidget {
   }) {
     return CustomTextField(
       key: key,
-      label: label ?? 'Email',
-      hint: hint ?? 'Entrez votre adresse email',
+      label: label,
+      hint: hint,
       controller: controller,
       keyboardType: TextInputType.emailAddress,
       prefixIcon: Icons.email,
@@ -137,8 +139,8 @@ class CustomTextField extends StatefulWidget {
 
   /// Name field factory
   factory CustomTextField.name({
-    String? label,
-    String? hint,
+    required String label,
+    required String hint,
     TextEditingController? controller,
     String? Function(String?)? validator,
     void Function(String)? onChanged,
@@ -148,8 +150,8 @@ class CustomTextField extends StatefulWidget {
   }) {
     return CustomTextField(
       key: key,
-      label: label ?? 'Nom complet',
-      hint: hint ?? 'Entrez votre nom complet',
+      label: label,
+      hint: hint,
       controller: controller,
       keyboardType: TextInputType.name,
       prefixIcon: Icons.person,
@@ -190,116 +192,131 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final hasError = widget.errorText != null;
+    final locale = Localizations.localeOf(context);
+    final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (widget.label != null) ...[
-          Text(
-            widget.label!,
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: hasError ? AppColors.alertRed : AppColors.textSecondary,
-              fontWeight: FontWeight.w500,
+    return Directionality(
+      textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.label != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.label!,
+                  style: theme.textTheme.labelLarge,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+
+          TextFormField(
+            controller: _controller,
+            keyboardType: widget.keyboardType,
+            obscureText: widget.obscureText,
+            enabled: widget.enabled,
+            readOnly: widget.readOnly,
+            maxLines: widget.maxLines,
+            maxLength: widget.maxLength,
+            validator: widget.validator,
+            onChanged: widget.onChanged,
+            onTap: widget.onTap,
+            onFieldSubmitted: widget.onSubmitted,
+            inputFormatters: widget.inputFormatters,
+            textCapitalization: widget.textCapitalization,
+            focusNode: widget.focusNode,
+            autofocus: widget.autofocus,
+
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: widget.enabled ? null : AppColors.mediumGray,
+            ),
+
+            decoration: InputDecoration(
+              hintText: widget.hint,
+              prefixIcon:
+                  widget.prefixIcon != null
+                      ? Icon(
+                        widget.prefixIcon,
+                        color:
+                            hasError
+                                ? AppColors.alertRed
+                                : AppColors.mediumGray,
+                        size: 20,
+                      )
+                      : null,
+              suffixIcon: widget.suffixIcon,
+              errorText: widget.errorText,
+              helperText: widget.helperText,
+
+              // Custom styling
+              filled: true,
+              fillColor:
+                  widget.enabled
+                      ? (hasError
+                          ? AppColors.alertBackground
+                          : AppColors.surfaceLight)
+                      : AppColors.lightGray,
+
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: hasError ? AppColors.alertRed : AppColors.inputBorder,
+                  width: 1,
+                ),
+              ),
+
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: hasError ? AppColors.alertRed : AppColors.inputBorder,
+                  width: 1,
+                ),
+              ),
+
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: hasError ? AppColors.alertRed : AppColors.inputFocused,
+                  width: 2,
+                ),
+              ),
+
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: AppColors.alertRed,
+                  width: 1,
+                ),
+              ),
+
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: AppColors.alertRed,
+                  width: 2,
+                ),
+              ),
+
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: AppColors.lightGray,
+                  width: 1,
+                ),
+              ),
+
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
             ),
           ),
-          const SizedBox(height: 8),
         ],
-        
-        TextFormField(
-          controller: _controller,
-          keyboardType: widget.keyboardType,
-          obscureText: widget.obscureText,
-          enabled: widget.enabled,
-          readOnly: widget.readOnly,
-          maxLines: widget.maxLines,
-          maxLength: widget.maxLength,
-          validator: widget.validator,
-          onChanged: widget.onChanged,
-          onTap: widget.onTap,
-          onFieldSubmitted: widget.onSubmitted,
-          inputFormatters: widget.inputFormatters,
-          textCapitalization: widget.textCapitalization,
-          focusNode: widget.focusNode,
-          autofocus: widget.autofocus,
-          
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: widget.enabled ? null : AppColors.mediumGray,
-          ),
-          
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            prefixIcon: widget.prefixIcon != null
-                ? Icon(
-                    widget.prefixIcon,
-                    color: hasError ? AppColors.alertRed : AppColors.mediumGray,
-                    size: 20,
-                  )
-                : null,
-            suffixIcon: widget.suffixIcon,
-            errorText: widget.errorText,
-            helperText: widget.helperText,
-            
-            // Custom styling
-            filled: true,
-            fillColor: widget.enabled
-                ? (hasError ? AppColors.alertBackground : AppColors.surfaceLight)
-                : AppColors.lightGray,
-            
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: hasError ? AppColors.alertRed : AppColors.inputBorder,
-                width: 1,
-              ),
-            ),
-            
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: hasError ? AppColors.alertRed : AppColors.inputBorder,
-                width: 1,
-              ),
-            ),
-            
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: hasError ? AppColors.alertRed : AppColors.inputFocused,
-                width: 2,
-              ),
-            ),
-            
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.alertRed,
-                width: 1,
-              ),
-            ),
-            
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.alertRed,
-                width: 2,
-              ),
-            ),
-            
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.lightGray,
-                width: 1,
-              ),
-            ),
-            
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -320,19 +337,19 @@ class _PasswordTextField extends CustomTextField {
     String? errorText,
     this.showVisibilityToggle = true,
   }) : super(
-          key: key,
-          label: label,
-          hint: hint,
-          controller: controller,
-          keyboardType: TextInputType.visiblePassword,
-          obscureText: true,
-          prefixIcon: Icons.lock,
-          validator: validator,
-          onChanged: onChanged,
-          onSubmitted: onSubmitted,
-          focusNode: focusNode,
-          errorText: errorText,
-        );
+         key: key,
+         label: label,
+         hint: hint,
+         controller: controller,
+         keyboardType: TextInputType.visiblePassword,
+         obscureText: true,
+         prefixIcon: Icons.lock,
+         validator: validator,
+         onChanged: onChanged,
+         onSubmitted: onSubmitted,
+         focusNode: focusNode,
+         errorText: errorText,
+       );
 
   @override
   State<_PasswordTextField> createState() => _PasswordTextFieldState();
@@ -356,17 +373,21 @@ class _PasswordTextFieldState extends State<_PasswordTextField> {
       keyboardType: TextInputType.visiblePassword,
       obscureText: _obscureText,
       prefixIcon: Icons.lock,
-      suffixIcon: widget.showVisibilityToggle
-          ? IconButton(
-              icon: Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off,
-                color: AppColors.mediumGray,
-                size: 20,
-              ),
-              onPressed: _toggleVisibility,
-              tooltip: _obscureText ? 'Afficher le mot de passe' : 'Masquer le mot de passe',
-            )
-          : null,
+      suffixIcon:
+          widget.showVisibilityToggle
+              ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: AppColors.mediumGray,
+                  size: 20,
+                ),
+                onPressed: _toggleVisibility,
+                tooltip:
+                    widget.showVisibilityToggle
+                        ? AppLocalizations.of(context)!.showPassword
+                        : AppLocalizations.of(context)!.hidePassword,
+              )
+              : null,
       validator: widget.validator,
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
