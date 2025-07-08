@@ -11,6 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
+import '../../providers/voice_feedback_provider.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {
@@ -64,30 +65,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (phone.isNotEmpty && password.isNotEmpty) {
         // Simulate token
         await _secureStorage.write(key: 'auth_token', value: 'demo_token');
+
         // Biometric authentication
         final didAuth = await _authenticateWithBiometrics();
         if (!didAuth) {
           setState(() {
             _isLoading = false;
-            _errorMessage = 'Biometric authentication failed.';
+            _errorMessage =
+                AppLocalizations.of(context)?.biometricFailed ??
+                'Biometric authentication failed.';
           });
           return;
         }
+
         if (mounted) {
-          if (AccessibilityControls.voiceFeedbackEnabled) {
-            await _tts.speak(AppLocalizations.of(context)!.loginSuccess);
+          final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
+          if (voiceFeedbackEnabled) {
+            await _tts.speak(
+              AppLocalizations.of(context)?.loginSuccess ?? 'Login successful.',
+            );
           }
           context.pushReplacement('/dashboard');
         }
       } else {
-        throw Exception(AppLocalizations.of(context)!.invalidCredentials);
+        throw Exception(
+          AppLocalizations.of(context)?.invalidCredentials ??
+              'Invalid credentials.',
+        );
       }
     } catch (e) {
       setState(() {
-        _errorMessage = AppLocalizations.of(context)!.loginError;
+        _errorMessage =
+            AppLocalizations.of(context)?.loginError ?? 'Login error.';
       });
-      if (AccessibilityControls.voiceFeedbackEnabled) {
-        await _tts.speak(AppLocalizations.of(context)!.loginError);
+      final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
+      if (voiceFeedbackEnabled) {
+        await _tts.speak(
+          AppLocalizations.of(context)?.loginError ?? 'Login error.',
+        );
       }
     } finally {
       if (mounted) {
@@ -115,18 +130,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (!isDeviceSupported || !canCheckBiometrics) {
         setState(() {
           _errorMessage =
+              AppLocalizations.of(context)?.biometricUnavailable ??
               'Biometric authentication is not available on this device.';
         });
         return false;
       }
       final didAuthenticate = await _localAuth.authenticate(
-        localizedReason: 'Please authenticate to access your dashboard',
+        localizedReason:
+            AppLocalizations.of(context)?.biometricPrompt ??
+            'Please authenticate to access your dashboard',
         options: const AuthenticationOptions(biometricOnly: true),
       );
       return didAuthenticate;
     } catch (e) {
       setState(() {
-        _errorMessage = 'Biometric authentication failed.';
+        _errorMessage =
+            AppLocalizations.of(context)?.biometricFailed ??
+            'Biometric authentication failed.';
       });
       return false;
     }
@@ -177,28 +197,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       children: [
         // Clean Logo
         Image.asset(
-          'assets/images/logo.png',
-          width: 200,
+          Theme.of(context).brightness == Brightness.dark
+              ? 'assets/images/logo_dark.png'
+              : 'assets/images/logo.png',
+          width: 250,
           height: 170,
           fit: BoxFit.fill,
         ),
         const SizedBox(height: 24),
 
-        // App name
-        // Text(
-        //   AppLocalizations.of(context)!.appTitle,
-        //   style: Theme.of(context).textTheme.displaySmall?.copyWith(
-        //     color: AppColors.primaryBlue,
-        //     fontWeight: FontWeight.bold,
-        //     letterSpacing: 1.2,
-        //   ),
-        // ),
-
-        // const SizedBox(height: 8),
-
         // Welcome message
         Text(
-          AppLocalizations.of(context)!.welcomeMessage,
+          AppLocalizations.of(context)?.welcomeMessage ?? 'Welcome Message',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: AppColors.textSecondary,
             fontWeight: FontWeight.w400,
@@ -250,23 +260,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
           // Phone number field
           CustomTextField.phone(
+            label: AppLocalizations.of(context)!.phoneNumber,
+            hint: AppLocalizations.of(context)!.phoneNumberHint,
             controller: _phoneController,
             focusNode: _phoneFocusNode,
             validator: (value) => Validators.validatePhone(value, context),
-            label: AppLocalizations.of(context)!.phoneNumber,
-            hint: AppLocalizations.of(context)!.phoneNumberHint,
           ),
 
           const SizedBox(height: 16),
 
           // Password field
           CustomTextField.password(
+            label: AppLocalizations.of(context)!.password,
+            hint: AppLocalizations.of(context)!.passwordHint,
             controller: _passwordController,
             focusNode: _passwordFocusNode,
             validator: (value) => Validators.validatePassword(value, context),
             onSubmitted: (_) => _handleLogin(),
-            label: AppLocalizations.of(context)!.password,
-            hint: AppLocalizations.of(context)!.passwordHint,
           ),
 
           const SizedBox(height: 12),
@@ -277,7 +287,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: TextButton(
               onPressed: _handleForgotPassword,
               child: Text(
-                AppLocalizations.of(context)!.forgotPassword,
+                AppLocalizations.of(context)?.forgotPassword ??
+                    'Forgot Password',
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: AppColors.primaryBlue),
@@ -295,7 +306,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       children: [
         // Login button
         CustomButton.primary(
-          text: AppLocalizations.of(context)!.login,
+          text: AppLocalizations.of(context)?.login ?? 'Login',
           onPressed: _isLoading ? null : _handleLogin,
           isLoading: _isLoading,
           icon: Icons.login,
@@ -305,7 +316,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
         // Register button
         CustomButton.secondary(
-          text: AppLocalizations.of(context)!.register,
+          text: AppLocalizations.of(context)?.register ?? 'Register',
           onPressed: _handleRegister,
           icon: Icons.person_add,
         ),
@@ -351,11 +362,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         height: 28,
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        'Google',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.googleText,
-                          fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context)?.google ?? 'Google',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge?.copyWith(
+                            color: AppColors.googleText,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -392,11 +409,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         height: 28,
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        'Facebook',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context)?.facebook ?? 'Facebook',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge?.copyWith(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -408,18 +431,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
         const SizedBox(height: 24),
         // Terms and privacy links
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Wrap(
+          alignment: WrapAlignment.center,
           children: [
             TextButton(
               onPressed: () {
                 context.push('/terms');
               },
               child: Text(
-                AppLocalizations.of(context)!.termsOfService,
+                AppLocalizations.of(context)?.termsOfService ??
+                    'Terms of Service',
                 style: Theme.of(
                   context,
                 ).textTheme.bodySmall?.copyWith(color: AppColors.primaryBlue),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Text(
@@ -433,10 +459,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 context.push('/privacy');
               },
               child: Text(
-                AppLocalizations.of(context)!.privacyPolicy,
+                AppLocalizations.of(context)?.privacyPolicy ?? 'Privacy Policy',
                 style: Theme.of(
                   context,
                 ).textTheme.bodySmall?.copyWith(color: AppColors.primaryBlue),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Splash screen with CAREDIFY logo and smooth transition
 class SplashScreen extends ConsumerStatefulWidget {
@@ -56,11 +57,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 300));
     _scaleController.forward();
 
-    // Navigate to login after splash duration
+    // Wait for splash duration
     await Future.delayed(const Duration(milliseconds: 2500));
 
-    if (mounted) {
+    // Check onboarding completion
+    final prefs = await SharedPreferences.getInstance();
+    final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+
+    if (!mounted) return;
+    if (onboardingComplete) {
       context.pushReplacement('/login');
+    } else {
+      context.pushReplacement('/onboarding');
     }
   }
 
@@ -92,7 +100,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         children: [
                           // CAREDIFY Logo
                           Image.asset(
-                            'assets/images/logo.png',
+                            Theme.of(context).brightness == Brightness.dark
+                                ? 'assets/images/logo_dark.png'
+                                : 'assets/images/logo.png',
                             width: 220,
                             height: 180,
                             fit: BoxFit.fill,

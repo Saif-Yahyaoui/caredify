@@ -8,6 +8,8 @@ import '../../widgets/custom_text_field.dart';
 import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import '../../providers/voice_feedback_provider.dart';
 
 /// Registration screen with user information and account creation
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -34,6 +36,35 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   bool _isLoading = false;
   String? _errorMessage;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  final FlutterTts _tts = FlutterTts();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
+      if (voiceFeedbackEnabled) {
+        final t = AppLocalizations.of(context)!;
+        try {
+          var result = await _tts.setLanguage(
+            Localizations.localeOf(context).languageCode == 'ar'
+                ? 'ar-SA'
+                : Localizations.localeOf(context).languageCode == 'fr'
+                ? 'fr-FR'
+                : 'en-US',
+          );
+          if (result != 1) {
+            await _tts.setLanguage('en-US');
+          }
+        } catch (e) {
+          await _tts.setLanguage('en-US');
+        }
+        try {
+          await _tts.speak(t.createAccount + '. ' + t.joinHealthSpace);
+        } catch (e) {}
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -47,6 +78,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
+    _tts.stop();
     super.dispose();
   }
 
@@ -163,25 +195,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       children: [
         // Logo
         Image.asset(
-          'assets/images/logo.png',
-          width: 200,
+          Theme.of(context).brightness == Brightness.dark
+              ? 'assets/images/logo_dark.png'
+              : 'assets/images/logo.png',
+          width: 250,
           height: 170,
           fit: BoxFit.fill,
         ),
 
         const SizedBox(height: 24),
-
-        // App name
-        // Text(
-        //   AppLocalizations.of(context)!.appTitle,
-        //   style: Theme.of(context).textTheme.displaySmall?.copyWith(
-        //     color: AppColors.primaryBlue,
-        //     fontWeight: FontWeight.bold,
-        //     letterSpacing: 1.2,
-        //   ),
-        // ),
-
-        // const SizedBox(height: 8),
 
         // Welcome message
         Text(
@@ -237,54 +259,54 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
           // Name field
           CustomTextField.name(
+            label: AppLocalizations.of(context)!.fullName,
+            hint: AppLocalizations.of(context)!.fullNameHint,
             controller: _nameController,
             focusNode: _nameFocusNode,
             validator: (value) => Validators.validateName(value, context),
-            label: AppLocalizations.of(context)!.fullName,
-            hint: AppLocalizations.of(context)!.fullNameHint,
           ),
 
           const SizedBox(height: 16),
 
           // Phone number field
           CustomTextField.phone(
+            label: AppLocalizations.of(context)!.phoneNumber,
+            hint: AppLocalizations.of(context)!.phoneNumberHint,
             controller: _phoneController,
             focusNode: _phoneFocusNode,
             validator: (value) => Validators.validatePhone(value, context),
-            label: AppLocalizations.of(context)!.phoneNumber,
-            hint: AppLocalizations.of(context)!.phoneNumberHint,
           ),
 
           const SizedBox(height: 16),
 
           // Email field
           CustomTextField.email(
+            label: AppLocalizations.of(context)!.email,
+            hint: AppLocalizations.of(context)!.emailHint,
             controller: _emailController,
             focusNode: _emailFocusNode,
             validator: (value) => Validators.validateEmail(value, context),
-            label: AppLocalizations.of(context)!.email,
-            hint: AppLocalizations.of(context)!.emailHint,
           ),
 
           const SizedBox(height: 16),
 
           // Password field
           CustomTextField.password(
+            label: AppLocalizations.of(context)!.password,
+            hint: AppLocalizations.of(context)!.passwordHint,
             controller: _passwordController,
             focusNode: _passwordFocusNode,
             validator: (value) => Validators.validatePassword(value, context),
-            label: AppLocalizations.of(context)!.password,
-            hint: AppLocalizations.of(context)!.passwordHint,
           ),
 
           const SizedBox(height: 16),
 
           // Confirm password field
           CustomTextField.password(
-            controller: _confirmPasswordController,
-            focusNode: _confirmPasswordFocusNode,
             label: AppLocalizations.of(context)!.confirmPassword,
             hint: AppLocalizations.of(context)!.confirmPasswordHint,
+            controller: _confirmPasswordController,
+            focusNode: _confirmPasswordFocusNode,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppLocalizations.of(context)!.fieldRequired;
