@@ -38,8 +38,8 @@ void main() {
     final loginText = AppLocalizations.of(context)!.login;
     final phoneErrorText = AppLocalizations.of(context)!.phoneMinLength;
 
-    // Enter invalid phone
-    await tester.enterText(find.byType(TextFormField).first, 'abc');
+    // Use a short numeric string to trigger the min length error
+    await tester.enterText(find.byType(TextFormField).first, '123');
     final loginButton = find.widgetWithText(ElevatedButton, loginText);
     expect(loginButton, findsOneWidget);
 
