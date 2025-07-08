@@ -24,7 +24,11 @@ jobs:
         run: flutter gen-l10n
       - name: Run tests
         run: flutter test
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.organization=YOUR_ORG_KEY
+            -Dsonar.projectKey=YOUR_PROJECT_KEY
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
