@@ -16,6 +16,7 @@ void main() {
 
     final context = tester.element(find.byType(RegisterScreen));
     final registerText = AppLocalizations.of(context)!.register;
+    final doNotMatchText = AppLocalizations.of(context)!.passwordsDoNotMatch;
 
     // Fill all fields except confirm password
     final fields = find.byType(TextFormField);
@@ -27,12 +28,11 @@ void main() {
 
     final registerButton = find.widgetWithText(ElevatedButton, registerText);
     expect(registerButton, findsOneWidget);
+
+    await tester.ensureVisible(registerButton);
     await tester.tap(registerButton);
     await tester.pumpAndSettle();
 
-    expect(
-      find.textContaining('do not match', findRichText: true),
-      findsWidgets,
-    );
+    expect(find.text(doNotMatchText), findsWidgets);
   });
 }

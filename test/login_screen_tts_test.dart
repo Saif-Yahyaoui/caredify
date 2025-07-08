@@ -15,13 +15,17 @@ void main() {
 
     final context = tester.element(find.byType(LoginScreen));
     final loginText = AppLocalizations.of(context)!.login;
+    final requiredText = AppLocalizations.of(context)!.fieldRequired;
 
     final loginButton = find.widgetWithText(ElevatedButton, loginText);
     expect(loginButton, findsOneWidget);
+
+    // Ensure the button is visible before tapping
+    await tester.ensureVisible(loginButton);
     await tester.tap(loginButton);
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('required', findRichText: true), findsWidgets);
+    expect(find.text(requiredText), findsWidgets);
   });
 
   testWidgets('Shows error for invalid phone', (WidgetTester tester) async {
@@ -32,13 +36,17 @@ void main() {
 
     final context = tester.element(find.byType(LoginScreen));
     final loginText = AppLocalizations.of(context)!.login;
+    final phoneErrorText = AppLocalizations.of(context)!.phoneMinLength;
 
+    // Enter invalid phone
     await tester.enterText(find.byType(TextFormField).first, 'abc');
     final loginButton = find.widgetWithText(ElevatedButton, loginText);
     expect(loginButton, findsOneWidget);
+
+    await tester.ensureVisible(loginButton);
     await tester.tap(loginButton);
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('phone', findRichText: true), findsWidgets);
+    expect(find.text(phoneErrorText), findsWidgets);
   });
 }
