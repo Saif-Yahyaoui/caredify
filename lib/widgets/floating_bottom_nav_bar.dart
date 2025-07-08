@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart' as intl;
 
 class FloatingBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -13,11 +14,30 @@ class FloatingBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+    final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     final items = [
-      _NavBarItem(icon: Icons.home, label: AppLocalizations.of(context)!.homeTab),
-      _NavBarItem(icon: Icons.chat_bubble_outline, label: AppLocalizations.of(context)!.chatTab),
-      _NavBarItem(icon: Icons.bookmark_border, label: AppLocalizations.of(context)!.appointmentsTab),
-      _NavBarItem(icon: Icons.person_outline, label: AppLocalizations.of(context)!.profileTab),
+      _NavBarItem(
+        icon: Icons.home,
+        label: AppLocalizations.of(context)!.homeTab,
+      ),
+      _NavBarItem(
+        icon: Icons.watch,
+        label: AppLocalizations.of(context)!.watchTab,
+      ),
+
+      _NavBarItem(
+        icon: Icons.chat_bubble_outline,
+        label: AppLocalizations.of(context)!.chatTab,
+      ),
+      _NavBarItem(
+        icon: Icons.bookmark_border,
+        label: AppLocalizations.of(context)!.appointmentsTab,
+      ),
+      _NavBarItem(
+        icon: Icons.person_outline,
+        label: AppLocalizations.of(context)!.profileTab,
+      ),
     ];
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final navBarColor =
@@ -27,97 +47,117 @@ class FloatingBottomNavBar extends StatelessWidget {
     final shadowColor =
         isDark ? Colors.grey.withOpacity(0.15) : Colors.grey.withOpacity(0.15);
 
-    return Material(
-      color: Colors.transparent,
-      elevation: 8,
-      borderRadius: BorderRadius.circular(35),
-      child: Container(
-        height: 72,
-        decoration: BoxDecoration(
-          color: navBarColor,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(color: shadowColor, blurRadius: 16, offset: Offset(0, 4)),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(items.length, (index) {
-            final isActive = index == selectedIndex;
-            return Expanded(
-              child: Semantics(
-                button: true,
-                selected: isActive,
-                label: items[index].label + (isActive ? ', selected' : ''),
-                child: GestureDetector(
-                  onTap: () => onTabSelected(index),
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 250),
-                    curve: Curves.easeInOut,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 8,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 6,
-                      horizontal: 0,
-                    ),
-                    decoration:
-                        isActive
-                            ? BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF0092DF), Color(0xFF00C853)],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(22),
-                            )
-                            : null,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 250),
-                          curve: Curves.easeInOut,
-                          child: Icon(
-                            items[index].icon,
-                            color:
-                                isActive
-                                    ? Colors.white
-                                    : isDark
-                                    ? Colors.grey[400]
-                                    : Colors.grey[900],
-                            size: isActive ? 30 : 24,
+    return Directionality(
+      textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+      child: Material(
+        color: Colors.transparent,
+        elevation: 8,
+        borderRadius: BorderRadius.circular(35),
+        child: Container(
+          height: 72,
+          decoration: BoxDecoration(
+            color: navBarColor,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: shadowColor,
+                blurRadius: 16,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(items.length, (index) {
+              final isActive = index == selectedIndex;
+              return Expanded(
+                child: Semantics(
+                  button: true,
+                  selected: isActive,
+                  label: items[index].label + (isActive ? ', selected' : ''),
+                  child: GestureDetector(
+                    onTap: () => onTabSelected(index),
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 9,
+                        horizontal: 4,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 6,
+                        horizontal: 0,
+                      ),
+                      decoration:
+                          isActive
+                              ? BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF0092DF),
+                                    Color(0xFF00C853),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                              )
+                              : null,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedContainer(
+                            duration: Duration(milliseconds: 250),
+                            curve: Curves.easeInOut,
+                            child: Icon(
+                              items[index].icon,
+                              color:
+                                  isActive
+                                      ? Colors.white
+                                      : isDark
+                                      ? Colors.grey[400]
+                                      : Colors.grey[900],
+                              size: isActive ? 25 : 25,
+                            ),
                           ),
-                        ),
-                        //   const SizedBox(height: 2),
-                        AnimatedSwitcher(
-                          duration: Duration(milliseconds: 250),
-                          child:
-                              isActive
-                                  ? Text(
-                                    items[index].label,
-                                    key: ValueKey(items[index].label),
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                          AnimatedSwitcher(
+                            duration: Duration(milliseconds: 250),
+                            child:
+                                isActive
+                                    ? SizedBox(
+                                      height: 16,
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          items[index].label,
+                                          key: ValueKey(items[index].label),
+                                          style: Theme.of(
+                                            context,
+                                          ).textTheme.labelSmall?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: false,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    )
+                                    : SizedBox(
+                                      key: ValueKey(
+                                        'empty_${items[index].label}',
+                                      ),
+                                      height: 0,
                                     ),
-                                  )
-                                  : SizedBox(
-                                    key: ValueKey(
-                                      'empty_${items[index].label}',
-                                    ),
-                                    height: 0,
-                                  ),
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
       ),
     );
