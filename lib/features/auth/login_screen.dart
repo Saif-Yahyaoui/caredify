@@ -84,14 +84,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           return;
         }
 
-        if (!mounted) return;
-        final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
-        if (voiceFeedbackEnabled) {
-          await _tts.speak(
-            AppLocalizations.of(context)?.loginSuccess ?? 'Login successful.',
-          );
+        if (context.mounted) {
+          final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
+          if (voiceFeedbackEnabled) {
+            await _tts.speak(
+              AppLocalizations.of(context)?.loginSuccess ?? 'Login successful.',
+            );
+          }
+          context.pushReplacement('/dashboard');
         }
-        context.pushReplacement('/dashboard');
       } else {
         throw Exception(
           AppLocalizations.of(context)?.invalidCredentials ??

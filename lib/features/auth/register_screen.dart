@@ -107,14 +107,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           password == confirmPassword) {
         // Simulate token
         await _secureStorage.write(key: 'auth_token', value: 'demo_token');
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.accountCreated),
-            backgroundColor: AppColors.healthGreen,
-          ),
-        );
-        context.pushReplacement('/login');
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.accountCreated),
+              backgroundColor: AppColors.healthGreen,
+            ),
+          );
+          context.pushReplacement('/login');
+        }
       } else {
         throw Exception(AppLocalizations.of(context)!.fillAllFields);
       }

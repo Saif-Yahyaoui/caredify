@@ -48,8 +48,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       // Set onboarding complete
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('onboarding_complete', true);
-      if (!mounted) return;
-      context.go('/login');
+      if (context.mounted) {
+        context.go('/login');
+      }
     }
   }
 
@@ -74,8 +75,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onSkip: () async {
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.setBool('onboarding_complete', true);
-                        if (!mounted) return;
-                        context.go('/login');
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
                       },
                     ),
               ),
