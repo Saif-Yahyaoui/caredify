@@ -54,6 +54,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Check Dart version
+        run: dart --version
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
