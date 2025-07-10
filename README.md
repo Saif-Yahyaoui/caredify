@@ -4,6 +4,29 @@
 
 # CAREDIFY
 
+<!-- SonarCloud Badges -->
+<p align="center">
+  <a href="https://sonarcloud.io/summary/new_code?id=Saif-Yahyaoui_caredify">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=Saif-Yahyaoui_caredify&metric=alert_status" alt="Quality Gate Status"/>
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=Saif-Yahyaoui_caredify">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=Saif-Yahyaoui_caredify&metric=coverage" alt="Coverage"/>
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=Saif-Yahyaoui_caredify">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=Saif-Yahyaoui_caredify&metric=bugs" alt="Bugs"/>
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=Saif-Yahyaoui_caredify">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=Saif-Yahyaoui_caredify&metric=vulnerabilities" alt="Vulnerabilities"/>
+  </a>
+  <a href="https://sonarcloud.io/summary/new_code?id=Saif-Yahyaoui_caredify">
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=Saif-Yahyaoui_caredify&metric=sqale_rating" alt="Maintainability Rating"/>
+  </a>
+</p>
+
+<p align="center">
+  <em>Automated code quality, coverage, and maintainability analysis powered by SonarCloud.</em>
+</p>
+
 **Smart ECG Monitoring & AI Health Companion**
 
 ---
