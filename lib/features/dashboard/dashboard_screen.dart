@@ -9,7 +9,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/floating_bottom_nav_bar.dart';
-import '../../widgets/accessibility_controls.dart';
 
 import '../../providers/health_metrics_provider.dart';
 import '../profile/profile_screen.dart';

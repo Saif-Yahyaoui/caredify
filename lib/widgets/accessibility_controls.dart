@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../core/theme/app_colors.dart';
-import '../core/theme/app_theme.dart';
+
 import '../providers/theme_provider.dart';
 import '../providers/language_provider.dart';
 import '../providers/voice_feedback_provider.dart';
