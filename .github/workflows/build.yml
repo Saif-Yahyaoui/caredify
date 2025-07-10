@@ -17,7 +17,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.6'
+          flutter-version: '3.29.3'
       - name: Install dependencies
         run: flutter pub get
       - name: Generate localization files
@@ -57,7 +57,7 @@ jobs:
       - name: Check Dart version
         run: dart --version
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_PROJECT_KEY: Saif-Yahyaoui_caredify
