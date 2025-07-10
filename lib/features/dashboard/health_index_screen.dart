@@ -140,8 +140,9 @@ class _MainHealthIndexCard extends StatelessWidget {
                       // Grade and label
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 16),
                           Text(
                             'B',
                             style: theme.textTheme.headlineLarge?.copyWith(
@@ -195,7 +196,7 @@ class _MainHealthIndexCard extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             // Legend
-            Expanded(
+            Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

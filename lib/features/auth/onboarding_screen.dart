@@ -124,48 +124,57 @@ class _OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 60),
-              if (showSkip)
-                TextButton(
-                  onPressed: onSkip,
-                  child: Text(AppLocalizations.of(context)!.skip),
-                ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Image.asset(data.image, height: 400, fit: BoxFit.contain),
-          const SizedBox(height: 24),
-          Text(
-            data.title,
-            style: theme.textTheme.headlineLarge?.copyWith(
-              color: theme.primaryColor,
-              fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(width: 60),
+                      if (showSkip)
+                        TextButton(
+                          onPressed: onSkip,
+                          child: Text(AppLocalizations.of(context)!.skip),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Image.asset(data.image, height: 400, fit: BoxFit.contain),
+                  const SizedBox(height: 24),
+                  Text(
+                    data.title,
+                    style: theme.textTheme.headlineLarge?.copyWith(
+                      color: theme.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    data.description,
+                    style: theme.textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 48),
+                  _GradientButton(text: data.buttonText, onPressed: onContinue),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 16),
-          Text(
-            data.description,
-            style: theme.textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const Spacer(),
-          _GradientButton(text: data.buttonText, onPressed: onContinue),
-          const SizedBox(height: 24),
-        ],
-      ),
+        );
+      },
     );
   }
 }

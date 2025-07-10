@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:caredify/widgets/accessibility_controls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../test_helpers.dart';
 
 void main() {
   setUp(() {
@@ -13,10 +15,8 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(
-      MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(body: AccessibilityControls()),
+      ProviderScope(
+        child: localizedTestableWidget(Scaffold(body: AccessibilityControls())),
       ),
     );
 

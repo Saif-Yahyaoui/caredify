@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:caredify/features/auth/forgot_password_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'test_helpers.dart';
 
 void main() {
   setUp(() {
@@ -13,11 +15,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(
-      MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(body: ForgotPasswordScreen()),
-      ),
+      ProviderScope(child: localizedTestableWidget(ForgotPasswordScreen())),
     );
 
     // Try to submit with empty field
