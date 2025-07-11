@@ -9,6 +9,7 @@ import '../../core/utils/validators.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_auth/local_auth.dart';
 import '../../services/auth_service.dart';
+import 'package:caredify/providers/auth_provider.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {
@@ -29,11 +30,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   String? _errorMessage;
   //final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   //final LocalAuthentication _localAuth = LocalAuthentication();
-  final AuthService _authService = AuthService();
+  late final IAuthService _authService;
 
   @override
   void initState() {
     super.initState();
+    _authService = ref.read(authServiceProvider);
   }
 
   @override

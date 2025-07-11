@@ -22,11 +22,10 @@ jobs:
         run: flutter pub get
       - name: Generate localization files
         run: flutter gen-l10n
-      - name: Set up Firebase (emulator only)
+      - name: Set up Firebase for tests
         run: |
           dart pub global activate flutterfire_cli
           flutterfire configure --yes || true
-
       - name: Run tests with coverage
         run: flutter test --coverage
       - name: Upload coverage report

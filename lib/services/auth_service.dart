@@ -3,7 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
 
-class AuthService {
+// Abstract interface for easier testing
+abstract class IAuthService {
+  Future<UserCredential?> signInWithGoogle();
+  Future<bool> loginWithBiometrics(BiometricType type, BuildContext context);
+  Future<bool> loginWithCredentials(String phone, String password);
+  bool get isLoggedIn;
+  Future<void> signOut();
+}
+
+class AuthService implements IAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final LocalAuthentication _localAuth = LocalAuthentication();
