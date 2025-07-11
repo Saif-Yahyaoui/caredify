@@ -216,17 +216,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     }
 
                     setState(() => _isLoading = true);
+
                     try {
                       final success = await _authService.loginWithCredentials(
                         _phoneController.text.trim(),
                         _passwordController.text,
                       );
+
+                      if (!mounted) return;
+
                       if (success) {
                         // Navigate to dashboard on success
-                        if (!mounted) return;
                         context.pushReplacement('/dashboard');
                       } else {
-                        if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(

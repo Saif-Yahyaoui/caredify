@@ -16,7 +16,7 @@ class AuthService implements IAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final LocalAuthentication _localAuth = LocalAuthentication();
-
+  @override
   /// Google sign in
   Future<UserCredential?> signInWithGoogle() async {
     final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
@@ -29,6 +29,7 @@ class AuthService implements IAuthService {
     return await _firebaseAuth.signInWithCredential(credential);
   }
 
+  @override
   /// Biometric login (fingerprint or face)
   Future<bool> loginWithBiometrics(
     BiometricType type,
@@ -38,21 +39,24 @@ class AuthService implements IAuthService {
       final isDeviceSupported = await _localAuth.isDeviceSupported();
       final canCheckBiometrics = await _localAuth.canCheckBiometrics;
       if (!isDeviceSupported || !canCheckBiometrics) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Biometric not available on this device'),
-          ),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Biometric not available on this device'),
+            ),
+          );
+        }
         return false;
       }
       final available = await _localAuth.getAvailableBiometrics();
-      print('Available biometrics: $available'); // Debug
       if (available.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('No biometrics enrolled on this device.'),
-          ),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('No biometrics enrolled on this device.'),
+            ),
+          );
+        }
         return false;
       }
       // Allow any available biometric
@@ -65,13 +69,16 @@ class AuthService implements IAuthService {
       );
       return didAuthenticate;
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Biometric authentication error: $e')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Biometric authentication error: $e')),
+        );
+      }
       return false;
     }
   }
 
+  @override
   /// Simple hardcoded credential login
   Future<bool> loginWithCredentials(String phone, String password) async {
     // Hardcoded credentials for temporary use
@@ -85,9 +92,10 @@ class AuthService implements IAuthService {
     return cleanPhone == validPhone && password == validPassword;
   }
 
+  @override
   /// Get current user (simulated)
   bool get isLoggedIn => true; // Always return true for now
-
+  @override
   /// Sign out (simulated)
   Future<void> signOut() async {
     // Simulate sign out
