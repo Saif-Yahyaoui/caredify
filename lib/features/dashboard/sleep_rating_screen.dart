@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SleepRatingScreen extends ConsumerStatefulWidget {
-  const SleepRatingScreen({Key? key}) : super(key: key);
+  const SleepRatingScreen({super.key});
 
   @override
   ConsumerState<SleepRatingScreen> createState() => _SleepRatingScreenState();
@@ -52,7 +52,9 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
         }
         try {
           await _tts.speak(t.sleepRatingTitle);
-        } catch (e) {}
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -65,10 +67,9 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
-    final List<String> _tabs = [
+    final List<String> tabs = [
       AppLocalizations.of(context)!.week,
       AppLocalizations.of(context)!.month,
       AppLocalizations.of(context)!.threeMonth,
@@ -82,11 +83,11 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          foregroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
@@ -102,9 +103,12 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
                       'assets/icons/moon.svg',
                       width: 120,
                       height: 120,
-                      color: Colors.deepPurpleAccent,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.deepPurpleAccent,
+                        BlendMode.srcIn,
+                      ),
                       placeholderBuilder:
-                          (context) => Icon(
+                          (context) => const Icon(
                             Icons.bedtime,
                             size: 90,
                             color: Colors.deepPurpleAccent,
@@ -220,13 +224,13 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
               SingleChildScrollView(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(_tabs.length, (i) {
+                  children: List.generate(tabs.length, (i) {
                     final selected = i == _selectedTab;
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: ChoiceChip(
                         label: Text(
-                          _tabs[i],
+                          tabs[i],
                           style: Theme.of(context).textTheme.labelMedium,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

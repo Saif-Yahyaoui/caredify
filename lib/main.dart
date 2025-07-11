@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'core/theme/app_theme.dart';
 import 'providers/theme_provider.dart';
 import 'providers/language_provider.dart';
 import 'features/auth/splash_screen.dart';
+import 'features/auth/welcome_screen.dart';
 import 'features/auth/login_screen.dart';
 import 'features/auth/register_screen.dart';
 import 'features/auth/forgot_password_screen.dart';
@@ -19,12 +21,15 @@ import 'features/dashboard/sleep_rating_screen.dart';
 import 'features/dashboard/water_intake_screen.dart';
 import 'features/dashboard/heart_tracker_screen.dart';
 import 'features/auth/onboarding_screen.dart';
+import 'features/profile/accessibility_settings_screen.dart';
 
 import 'features/dashboard/healthy_habits_screen.dart';
 import 'features/dashboard/health_index_screen.dart';
 import 'features/dashboard/health_index_reevaluate_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const ProviderScope(child: CaredifyApp()));
 }
 
@@ -71,14 +76,19 @@ final GoRouter _router = GoRouter(
   initialLocation: '/splash',
   routes: [
     GoRoute(
+      path: '/splash',
+      name: 'splash',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
       path: '/onboarding',
       name: 'onboarding',
       builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
-      path: '/splash',
-      name: 'splash',
-      builder: (context, state) => const SplashScreen(),
+      path: '/welcome',
+      name: 'welcome',
+      builder: (context, state) => const WelcomeScreen(),
     ),
     GoRoute(
       path: '/login',
@@ -129,6 +139,11 @@ final GoRouter _router = GoRouter(
       path: '/heart',
       name: 'heart',
       builder: (context, state) => const HeartTrackerScreen(),
+    ),
+    GoRoute(
+      path: '/accessibility-settings',
+      name: 'accessibility-settings',
+      builder: (context, state) => const AccessibilitySettingsScreen(),
     ),
 
     GoRoute(

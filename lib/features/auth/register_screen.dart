@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -60,8 +59,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           await _tts.setLanguage('en-US');
         }
         try {
-          await _tts.speak(t.createAccount + '. ' + t.joinHealthSpace);
-        } catch (e) {}
+          await _tts.speak('${t.createAccount}. ${t.joinHealthSpace}');
+        } catch (e) {
+          //ignore: no TTS support
+        }
       }
     });
   }
@@ -93,33 +94,36 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       _errorMessage = null;
     });
 
+    // Gather values BEFORE async gap
+    final name = _nameController.text.trim();
+    final phone = _phoneController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      final name = _nameController.text.trim();
-      final phone = _phoneController.text.trim();
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
-      final confirmPassword = _confirmPasswordController.text;
+      // Simulate token
+      await _secureStorage.write(key: 'auth_token', value: 'demo_token');
+
+      if (!mounted) return;
+
       if (name.isNotEmpty &&
           phone.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
           password == confirmPassword) {
-        // Simulate token
-        await _secureStorage.write(key: 'auth_token', value: 'demo_token');
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context)!.accountCreated),
-              backgroundColor: AppColors.healthGreen,
-            ),
-          );
-          context.pushReplacement('/login');
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.accountCreated),
+            backgroundColor: AppColors.healthGreen,
+          ),
+        );
+        context.pushReplacement('/login');
       } else {
         throw Exception(AppLocalizations.of(context)!.fillAllFields);
       }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _errorMessage = AppLocalizations.of(context)!.registrationError;
       });
@@ -146,11 +150,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           onPressed: _handleBackToLogin,
         ),
-        foregroundColor: Theme.of(context).colorScheme.onBackground,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
@@ -160,16 +164,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Accessibility controls
-              const AccessibilityControls(),
-
-              const SizedBox(height: 32),
-
               // Header section
               _buildHeader(context),
 
-              const SizedBox(height: 32),
-
+              const SizedBox(height: 24),
               // Registration form
               _buildRegistrationForm(context),
 
@@ -202,8 +200,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           height: 170,
           fit: BoxFit.fill,
         ),
-
-        const SizedBox(height: 24),
 
         // Welcome message
         Text(
@@ -365,7 +361,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.info_outline,
                     color: AppColors.healthGreen,
                     size: 20,

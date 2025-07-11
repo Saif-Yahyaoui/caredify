@@ -13,14 +13,16 @@ void main() {
   testWidgets('OnboardingScreen renders and can swipe', (
     WidgetTester tester,
   ) async {
-    tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
-    addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-    addTearDown(tester.binding.window.clearDevicePixelRatioTestValue);
+    tester.view.physicalSize = const Size(1200, 2000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+    addTearDown(() => tester.view.resetDevicePixelRatio());
 
     await tester.pumpWidget(
       ProviderScope(
-        child: localizedTestableWidget(Scaffold(body: OnboardingScreen())),
+        child: localizedTestableWidget(
+          const Scaffold(body: OnboardingScreen()),
+        ),
       ),
     );
 

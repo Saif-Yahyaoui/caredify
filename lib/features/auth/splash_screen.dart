@@ -66,7 +66,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     if (!mounted) return;
     if (onboardingComplete) {
-      context.pushReplacement('/login');
+      context.pushReplacement('/welcome');
     } else {
       context.pushReplacement('/onboarding');
     }
@@ -103,26 +103,23 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                             Theme.of(context).brightness == Brightness.dark
                                 ? 'assets/images/logo_dark.png'
                                 : 'assets/images/logo.png',
-                            width: 220,
+                            width: 240,
                             height: 180,
                             fit: BoxFit.fill,
                           ),
-
                           const SizedBox(height: 24),
-
                           // App name
-                          // Text(
-                          //   AppLocalizations.of(context)!.appTitle,
-                          //   style: Theme.of(
-                          //     context,
-                          //   ).textTheme.displayMedium?.copyWith(
-                          //     color: AppColors.primaryBlue,
-                          //     fontWeight: FontWeight.bold,
-                          //     letterSpacing: 1.5,
-                          //   ),
-                          // ),
+                          Text(
+                            AppLocalizations.of(context)!.appTitle,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.displayMedium?.copyWith(
+                              color: AppColors.primaryBlue,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
                           const SizedBox(height: 8),
-
                           // Tagline
                           Text(
                             AppLocalizations.of(context)!.welcomeMessage,
@@ -140,9 +137,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   );
                 },
               ),
-
               const SizedBox(height: 80),
-
               // Loading indicator
               AnimatedBuilder(
                 animation: _fadeAnimation,
@@ -157,13 +152,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                           child: CircularProgressIndicator(
                             strokeWidth: 3,
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              AppColors.primaryBlue.withOpacity(0.8),
+                              AppColors.primaryBlue.withAlpha(
+                                (0.8 * 255).round(),
+                              ),
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         Text(
                           AppLocalizations.of(context)!.loading,
                           style: Theme.of(context).textTheme.bodyMedium

@@ -15,7 +15,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(
-      ProviderScope(child: localizedTestableWidget(ForgotPasswordScreen())),
+      ProviderScope(child: localizedTestableWidget(  const ForgotPasswordScreen())),
     );
 
     // Try to submit with empty field

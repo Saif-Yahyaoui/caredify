@@ -7,7 +7,7 @@ void main() {
   testWidgets('WeeklyChart renders', (tester) async {
     await tester.pumpWidget(
       localizedTestableWidget(
-        WeeklyChart(
+         const  WeeklyChart(
           data: [0.5, 0.7, 0.9, 0.6, 0.8, 0.7, 0.5],
           barColor: Colors.blue,
         ),

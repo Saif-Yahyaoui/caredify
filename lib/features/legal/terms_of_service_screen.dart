@@ -5,7 +5,7 @@ import '../../providers/voice_feedback_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TermsOfServiceScreen extends ConsumerStatefulWidget {
-  const TermsOfServiceScreen({Key? key}) : super(key: key);
+  const TermsOfServiceScreen({super.key});
 
   @override
   ConsumerState<TermsOfServiceScreen> createState() =>
@@ -22,7 +22,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
       final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
       if (voiceFeedbackEnabled) {
         final t = AppLocalizations.of(context)!;
-        await _tts.speak(t.termsOfService + '. ' + t.termsOfServiceDescription);
+        await _tts.speak('${t.termsOfService}. ${t.termsOfServiceDescription}');
       }
     });
   }
@@ -42,11 +42,11 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        foregroundColor: Theme.of(context).colorScheme.onBackground,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),

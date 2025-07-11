@@ -15,7 +15,7 @@ import '../profile/profile_screen.dart';
 import '../../providers/voice_feedback_provider.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
@@ -28,7 +28,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    // Use provider for voice feedback
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
       if (voiceFeedbackEnabled) {

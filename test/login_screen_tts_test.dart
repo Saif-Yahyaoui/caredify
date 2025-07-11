@@ -9,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
   testWidgets('Shows error if fields are empty', (WidgetTester tester) async {
     await tester.pumpWidget(
-      ProviderScope(child: localizedTestableWidget(LoginScreen())),
+      ProviderScope(child: localizedTestableWidget(  const LoginScreen())),
     );
     await tester.pumpAndSettle();
 
@@ -30,7 +30,7 @@ void main() {
 
   testWidgets('Shows error for invalid phone', (WidgetTester tester) async {
     await tester.pumpWidget(
-      ProviderScope(child: localizedTestableWidget(LoginScreen())),
+      ProviderScope(child: localizedTestableWidget(  const LoginScreen())),
     );
     await tester.pumpAndSettle();
 

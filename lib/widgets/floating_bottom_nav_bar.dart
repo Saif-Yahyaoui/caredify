@@ -7,10 +7,10 @@ class FloatingBottomNavBar extends StatelessWidget {
   final ValueChanged<int> onTabSelected;
 
   const FloatingBottomNavBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onTabSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,7 @@ class FloatingBottomNavBar extends StatelessWidget {
         isDark
             ? const Color(0xFF232325) // lighter black for dark mode
             : Colors.white;
-    final shadowColor =
-        isDark ? Colors.grey.withOpacity(0.15) : Colors.grey.withOpacity(0.15);
+    final shadowColor = Colors.grey.withAlpha((0.15 * 255).round());
 
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
@@ -62,7 +61,7 @@ class FloatingBottomNavBar extends StatelessWidget {
               BoxShadow(
                 color: shadowColor,
                 blurRadius: 16,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -78,7 +77,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => onTabSelected(index),
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 250),
+                      duration: const Duration(milliseconds: 250),
                       curve: Curves.easeInOut,
                       margin: const EdgeInsets.symmetric(
                         vertical: 9,
@@ -91,7 +90,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                       decoration:
                           isActive
                               ? BoxDecoration(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color(0xFF0092DF),
                                     Color(0xFF00C853),
@@ -106,7 +105,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             curve: Curves.easeInOut,
                             child: Icon(
                               items[index].icon,
@@ -120,7 +119,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                             ),
                           ),
                           AnimatedSwitcher(
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             child:
                                 isActive
                                     ? SizedBox(

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../core/theme/app_colors.dart';
+import '../../widgets/custom_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -14,27 +16,61 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
-  final List<_OnboardingPageData> _pages = [
-    _OnboardingPageData(
-      image: 'assets/images/onboarding_1.png',
+  final List<_OnboardingCardData> _pages = [
+    _OnboardingCardData(
+      imageAsset: 'assets/images/logo.png',
       title: 'Bienvenue sur CAREDIFY',
-      description:
-          'Prenez soin de votre santé en toute simplicité.  CAREDIFY vous accompagne chaque jour.',
-      buttonText: 'Continue',
+      subtitle: 'Votre cœur sous surveillance 24h/24',
+      features: [],
+      bottomText: 'Surveillance cardiaque intelligente',
     ),
-    _OnboardingPageData(
-      image: 'assets/images/onboarding_2.png',
-      title: 'Température, ECG, SPO2, stress…',
-      description:
-          'Surveillez vos données vitales au même endroit.\nDes outils pensés pour vous.',
-      buttonText: 'Continue',
+    _OnboardingCardData(
+      icon: Icons.flash_on,
+      iconColor: const Color(0xFFB388FF),
+      title: 'Cardio-AI',
+      subtitle: 'Une intelligence qui prend soin de votre cœur.',
+      features: [
+        'Analyse personnalisée',
+        'Prédictions selon vos habitudes',
+        'Conseils utiles, jour et nuit',
+      ],
+      featuresTitle: 'Technologie avancée',
     ),
-    _OnboardingPageData(
-      image: 'assets/images/onboarding_3.png',
-      title: 'Une application claire et accessible',
-      description:
-          'Grands textes, boutons lisibles, navigation facile. Tout est conçu pour les seniors',
-      buttonText: 'Commencer',
+    _OnboardingCardData(
+      icon: Icons.bar_chart,
+      iconColor: const Color(0xFFB388FF),
+      title: "Votre santé en un coup d'œil",
+      subtitle: 'Des infos simples, claires et rassurantes.',
+      features: [
+        'Graphiques faciles à lire',
+        'Évolution visible en un regard',
+        'Rapports personnalisés à partager',
+      ],
+      featuresTitle: 'Interface intuitive',
+    ),
+    _OnboardingCardData(
+      icon: Icons.lightbulb,
+      iconColor: const Color(0xFF60A5FA),
+      title: 'Suivi Cardiaque Intelligent',
+      subtitle: 'Votre cœur sous surveillance, en toute simplicité.',
+      features: [
+        'Analyse continue',
+        'Détection précoce',
+        'Alertes claires et rassurantes',
+      ],
+      featuresTitle: 'Comment ça marche ?',
+    ),
+    _OnboardingCardData(
+      icon: Icons.person,
+      iconColor: const Color(0xFF4ADE80),
+      title: 'Lien direct avec votre médecin',
+      subtitle: 'Vos données partagées en toute sécurité.',
+      features: [
+        'Alertes urgentes envoyées automatiquement',
+        'Échanges sécurisés avec votre médecin',
+        'Suivi médical toujours à jour',
+      ],
+      featuresTitle: 'Connexion sécurisée',
     ),
   ];
 
@@ -48,9 +84,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       // Set onboarding complete
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('onboarding_complete', true);
-      if (context.mounted) {
-        context.go('/login');
-      }
+      if (!mounted) return;
+      context.go('/welcome');
+    }
+  }
+
+  void _onPrev() {
+    if (_currentPage > 0) {
+      _controller.previousPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -61,28 +105,44 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 24),
+            // Welcome message
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Tagline
+                  Text(
+                    AppLocalizations.of(context)!.welcomeMessage,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  if (_currentPage < _pages.length - 1)
+                    TextButton(
+                      onPressed: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('onboarding_complete', true);
+                        if (!mounted) return;
+                        context.go('/welcome');
+                      },
+                      child: const Text('Passer'),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 5),
             Expanded(
               child: PageView.builder(
                 controller: _controller,
                 itemCount: _pages.length,
                 onPageChanged: (i) => setState(() => _currentPage = i),
-                itemBuilder:
-                    (context, i) => _OnboardingPage(
-                      data: _pages[i],
-                      isLast: i == _pages.length - 1,
-                      onContinue: _onContinue,
-                      showSkip: i != 0,
-                      onSkip: () async {
-                        final prefs = await SharedPreferences.getInstance();
-                        await prefs.setBool('onboarding_complete', true);
-                        if (context.mounted) {
-                          context.go('/login');
-                        }
-                      },
-                    ),
+                itemBuilder: (context, i) => _OnboardingCard(data: _pages[i]),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -90,7 +150,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 (i) => _Dot(isActive: i == _currentPage),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 12),
+            if (_currentPage == _pages.length - 1)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: CustomButton.primary(
+                  text: 'Continuer',
+                  onPressed: _onContinue,
+                  icon: Icons.arrow_forward,
+                ),
+              )
+            else
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: _currentPage > 0 ? _onPrev : null,
+                    color:
+                        _currentPage > 0
+                            ? theme.primaryColor
+                            : Colors.grey[300],
+                  ),
+                  const SizedBox(width: 16),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios),
+                    onPressed: _onContinue,
+                    color: theme.primaryColor,
+                  ),
+                ],
+              ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
@@ -98,119 +188,152 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-class _OnboardingPageData {
-  final String image;
+class _OnboardingCardData {
+  final IconData? icon;
+  final Color? iconColor;
+  final String? imageAsset;
   final String title;
-  final String description;
-  final String buttonText;
-  _OnboardingPageData({
-    required this.image,
+  final String subtitle;
+  final List<String> features;
+  final String? featuresTitle;
+  final String? bottomText;
+  _OnboardingCardData({
+    this.icon,
+    this.iconColor,
+    this.imageAsset,
     required this.title,
-    required this.description,
-    required this.buttonText,
+    required this.subtitle,
+    this.features = const [],
+    this.featuresTitle,
+    this.bottomText,
   });
 }
 
-class _OnboardingPage extends StatelessWidget {
-  final _OnboardingPageData data;
-  final bool isLast;
-  final VoidCallback onContinue;
-  final bool showSkip;
-  final VoidCallback onSkip;
-  const _OnboardingPage({
-    required this.data,
-    required this.isLast,
-    required this.onContinue,
-    required this.showSkip,
-    required this.onSkip,
-  });
+class _OnboardingCard extends StatelessWidget {
+  final _OnboardingCardData data;
+  const _OnboardingCard({required this.data});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(width: 60),
-                      if (showSkip)
-                        TextButton(
-                          onPressed: onSkip,
-                          child: Text(AppLocalizations.of(context)!.skip),
-                        ),
-                    ],
+    final cardColor = theme.cardColor;
+    final textColor = theme.colorScheme.onSurface;
+    final iconBgColor = theme.primaryColor.withAlpha((0.12 * 255).round());
+    final featureBgColor =
+        theme.brightness == Brightness.dark
+            ? Colors.grey[900]
+            : Colors.grey[100];
+    final featureTextColor = theme.colorScheme.onSurface.withAlpha(
+      (0.85 * 255).round(),
+    );
+    return Center(
+      child: Card(
+        elevation: 4,
+        color: cardColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (data.imageAsset != null)
+                Image.asset(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? 'assets/images/logo_dark.png'
+                      : data.imageAsset!,
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.contain,
+                )
+              else if (data.icon != null)
+                Container(
+                  width: 72,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    color: iconBgColor,
+                    shape: BoxShape.circle,
                   ),
-                  const SizedBox(height: 8),
-                  Image.asset(data.image, height: 400, fit: BoxFit.contain),
-                  const SizedBox(height: 24),
+                  child: Icon(data.icon, color: data.iconColor, size: 40),
+                ),
+              const SizedBox(height: 24),
+              Text(
+                data.title,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                data.subtitle,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: textColor.withAlpha((0.85 * 255).round()),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              if (data.features.isNotEmpty) ...[
+                const SizedBox(height: 24),
+                if (data.featuresTitle != null)
                   Text(
-                    data.title,
-                    style: theme.textTheme.headlineLarge?.copyWith(
-                      color: theme.primaryColor,
-                      fontWeight: FontWeight.bold,
+                    data.featuresTitle!,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: textColor,
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    data.description,
-                    style: theme.textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: featureBgColor,
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  const SizedBox(height: 48),
-                  _GradientButton(text: data.buttonText, onPressed: onContinue),
-                  const SizedBox(height: 24),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _GradientButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  const _GradientButton({required this.text, required this.onPressed});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF0092DF), Color(0xFF00C853)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                        data.features
+                            .map(
+                              (f) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      size: 8,
+                                      color: data.iconColor,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        f,
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(color: featureTextColor),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
+                  ),
+                ),
+              ],
+              if (data.bottomText != null) ...[
+                const SizedBox(height: 24),
+                Text(
+                  data.bottomText!,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: textColor.withAlpha((0.7 * 255).round()),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ],
           ),
         ),
       ),
@@ -223,16 +346,20 @@ class _Dot extends StatelessWidget {
   const _Dot({required this.isActive});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       width: 12,
       height: 12,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive ? const Color(0xFF22D3EE) : Colors.grey[300],
+        color:
+            isActive
+                ? theme.colorScheme.primary
+                : theme.dividerColor.withAlpha((0.3 * 255).round()),
         border:
             isActive
-                ? Border.all(color: const Color(0xFF4ADE80), width: 2)
+                ? Border.all(color: theme.colorScheme.secondary, width: 2)
                 : null,
       ),
     );

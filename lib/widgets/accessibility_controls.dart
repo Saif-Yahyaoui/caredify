@@ -27,7 +27,7 @@ class AccessibilityControls extends ConsumerWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withAlpha((0.1 * 255).round()),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -85,8 +85,6 @@ class _LanguageSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final t = AppLocalizations.of(context)!;
-    final currentLanguage = ref.watch(languageProvider);
     final theme = Theme.of(context);
 
     return GestureDetector(
@@ -96,7 +94,9 @@ class _LanguageSelector extends ConsumerWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+          border: Border.all(
+            color: theme.colorScheme.outline.withAlpha((0.2 * 255).round()),
+          ),
         ),
         child: Row(
           children: [
@@ -114,7 +114,7 @@ class _LanguageSelector extends ConsumerWidget {
             Icon(
               Icons.arrow_forward_ios,
               size: 16,
-              color: theme.colorScheme.onSurface.withOpacity(0.6),
+              color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
             ),
           ],
         ),
@@ -124,7 +124,6 @@ class _LanguageSelector extends ConsumerWidget {
 
   void _showLanguageDialog(BuildContext context, WidgetRef ref) {
     final t = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
 
     showDialog(
       context: context,
@@ -166,7 +165,6 @@ class _FontSizeSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = AppLocalizations.of(context)!;
     final fontSize = ref.watch(fontSizeProvider);
-    final theme = Theme.of(context);
 
     return Row(
       children: [
@@ -225,7 +223,7 @@ class _FontSizeOption extends StatelessWidget {
             color:
                 isSelected
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.outline.withOpacity(0.2),
+                    : theme.colorScheme.outline.withAlpha((0.2 * 255).round()),
           ),
         ),
         child: Center(
@@ -254,7 +252,6 @@ class _ThemeSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = AppLocalizations.of(context)!;
     final themeMode = ref.watch(themeModeProvider);
-    final theme = Theme.of(context);
 
     return Row(
       children: [
@@ -324,7 +321,7 @@ class _ThemeOption extends StatelessWidget {
             color:
                 isSelected
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.outline.withOpacity(0.2),
+                    : theme.colorScheme.outline.withAlpha((0.2 * 255).round()),
           ),
         ),
         child: Center(
@@ -361,13 +358,13 @@ class _VoiceFeedbackToggle extends ConsumerWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+        border: Border.all(color: theme.colorScheme.outline.withAlpha((0.2 * 255).round())),
       ),
       child: Row(
         children: [
           Icon(
             Icons.volume_up,
-            color: theme.colorScheme.onSurface.withOpacity(0.6),
+            color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
           ),
           const SizedBox(width: 12),
           Expanded(

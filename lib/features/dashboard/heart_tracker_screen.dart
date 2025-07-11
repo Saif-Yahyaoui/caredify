@@ -7,7 +7,7 @@ import '../../providers/voice_feedback_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HeartTrackerScreen extends ConsumerStatefulWidget {
-  const HeartTrackerScreen({Key? key}) : super(key: key);
+  const HeartTrackerScreen({super.key});
 
   @override
   ConsumerState<HeartTrackerScreen> createState() => _HeartTrackerScreenState();
@@ -38,8 +38,10 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
           await _tts.setLanguage('en-US');
         }
         try {
-          await _tts.speak(t.heartTrackerTitle + '. ' + t.startMeasuring);
-        } catch (e) {}
+          await _tts.speak('${t.heartTrackerTitle}. ${t.startMeasuring}');
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -57,7 +59,6 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     return Directionality(
@@ -68,11 +69,11 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          foregroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
@@ -88,9 +89,9 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
                       'assets/icons/heart.svg',
                       width: 80,
                       height: 80,
-                      color: Colors.redAccent,
+  colorFilter: const ColorFilter.mode(Colors.redAccent, BlendMode.srcIn),
                       placeholderBuilder:
-                          (context) => Icon(
+                          (context) => const Icon(
                             Icons.favorite,
                             size: 80,
                             color: Colors.redAccent,
@@ -111,7 +112,7 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
                         ),
                         Text(
                           AppLocalizations.of(context)!.unitBpm,
-                          style: TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ],
                     ),

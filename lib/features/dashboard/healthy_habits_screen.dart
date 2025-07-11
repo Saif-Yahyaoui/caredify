@@ -6,10 +6,11 @@ import '../../providers/voice_feedback_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HealthyHabitsScreen extends ConsumerStatefulWidget {
-  const HealthyHabitsScreen({Key? key}) : super(key: key);
+  const HealthyHabitsScreen({super.key});
 
   @override
-  ConsumerState<HealthyHabitsScreen> createState() => _HealthyHabitsScreenState();
+  ConsumerState<HealthyHabitsScreen> createState() =>
+      _HealthyHabitsScreenState();
 }
 
 class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
@@ -32,7 +33,13 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
       if (voiceFeedbackEnabled) {
         final t = AppLocalizations.of(context)!;
         try {
-          var result = await _tts.setLanguage(Localizations.localeOf(context).languageCode == 'ar' ? 'ar-SA' : Localizations.localeOf(context).languageCode == 'fr' ? 'fr-FR' : 'en-US');
+          var result = await _tts.setLanguage(
+            Localizations.localeOf(context).languageCode == 'ar'
+                ? 'ar-SA'
+                : Localizations.localeOf(context).languageCode == 'fr'
+                ? 'fr-FR'
+                : 'en-US',
+          );
           if (result != 1) {
             await _tts.setLanguage('en-US');
           }
@@ -41,7 +48,9 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
         }
         try {
           await _tts.speak(t.healthyHabitsTitle);
-        } catch (e) {}
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -67,11 +76,11 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          foregroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
@@ -100,7 +109,7 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
                               CircularProgressIndicator(
                                 value: _done.length / _habits.length,
                                 strokeWidth: 10,
-                                valueColor: AlwaysStoppedAnimation<Color>(
+                                valueColor: const AlwaysStoppedAnimation<Color>(
                                   Colors.green,
                                 ),
                                 backgroundColor: Colors.green[50],

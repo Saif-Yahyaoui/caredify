@@ -8,15 +8,14 @@ class MetricsRow extends StatelessWidget {
   final int minutes;
 
   const MetricsRow({
-    Key? key,
+    super.key,
     required this.calories,
     required this.distance,
     required this.minutes,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
@@ -75,13 +74,13 @@ class _MetricCircle extends StatelessWidget {
           percent: percent,
           animation: true,
           circularStrokeCap: CircularStrokeCap.round,
-          backgroundColor: color.withOpacity(0.15),
+          backgroundColor: color.withAlpha((0.15 * 255).round()),
           progressColor: color,
           center: SvgPicture.asset(
             iconPath,
             width: 20,
             height: 20,
-            color: color,
+            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
             placeholderBuilder:
                 (context) => Icon(Icons.help_outline, size: 20, color: color),
           ),

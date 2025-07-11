@@ -6,7 +6,7 @@ void main() {
   testWidgets('MetricsRow renders all metrics', (tester) async {
     await tester.pumpWidget(
       localizedTestableWidget(
-        MetricsRow(calories: 100, distance: 2, minutes: 30),
+         const  MetricsRow(calories: 100, distance: 2, minutes: 30),
       ),
     );
     expect(find.text('100'), findsOneWidget);

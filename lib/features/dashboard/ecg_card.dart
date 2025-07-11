@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ECGCard extends StatelessWidget {
-  const ECGCard({Key? key}) : super(key: key);
+  const ECGCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class ECGCard extends StatelessWidget {
             Container(
               width: 36,
               height: 36,
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFE5E5),
+              decoration:  const  BoxDecoration(
+                color:  Color(0xFFFFE5E5),
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -28,12 +28,12 @@ class ECGCard extends StatelessWidget {
                   'assets/icons/ecg.svg',
                   width: 20,
                   height: 20,
-                  color: const Color(0xFFFF6B81),
+  colorFilter: const ColorFilter.mode( Color(0xFFFF6B81), BlendMode.srcIn),
                   placeholderBuilder:
-                      (context) => Icon(
+                      (context) =>  const  Icon(
                         Icons.favorite,
                         size: 20,
-                        color: const Color(0xFFFF6B81),
+                        color:  Color(0xFFFF6B81),
                       ),
                 ),
               ),
@@ -64,15 +64,15 @@ class ECGCard extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
-                // TODO: Navigate to ECG details screen
-              },
-              child: Text(AppLocalizations.of(context)!.seeMore),
-              style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFFFF6B81),
-                textStyle: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+  onPressed: () {
+    // TODO: Navigate to ECG details screen
+  },
+  style: TextButton.styleFrom(
+    foregroundColor: const Color(0xFFFF6B81),
+    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+  ),
+  child: Text(AppLocalizations.of(context)!.seeMore),
+),
           ],
         ),
       ),

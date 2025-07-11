@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
 
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
@@ -53,10 +52,10 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.forgotPasswordTitle),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.onBackground),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: _handleBack,
         ),
-        foregroundColor: colorScheme.onBackground,
+        foregroundColor: colorScheme.onSurface,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
@@ -66,8 +65,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const AccessibilityControls(),
-              const SizedBox(height: 32),
               Text(
                 AppLocalizations.of(context)!.forgotPasswordMessage,
                 style: Theme.of(context).textTheme.bodyLarge,

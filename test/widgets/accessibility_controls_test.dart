@@ -15,7 +15,7 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        child: localizedTestableWidget(Scaffold(body: AccessibilityControls())),
+        child: localizedTestableWidget(  const Scaffold(body: AccessibilityControls())),
       ),
     );
 

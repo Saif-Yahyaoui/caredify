@@ -5,18 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/accessibility_controls.dart';
 import '../../core/utils/validators.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import '../../providers/voice_feedback_provider.dart';
+import '../../services/auth_service.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {
-  final FlutterTts? tts;
-  const LoginScreen({super.key, this.tts});
+  const LoginScreen({super.key});
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -31,13 +27,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
-  late final FlutterTts _tts;
-  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  final LocalAuthentication _localAuth = LocalAuthentication();
+  //final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  //final LocalAuthentication _localAuth = LocalAuthentication();
+  final AuthService _authService = AuthService();
+
   @override
   void initState() {
     super.initState();
-    _tts = widget.tts ?? FlutterTts();
   }
 
   @override
@@ -46,77 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _passwordController.dispose();
     _phoneFocusNode.dispose();
     _passwordFocusNode.dispose();
-    _tts.stop();
     super.dispose();
-  }
-
-  /// Handle login form submission
-  Future<void> _handleLogin() async {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      // Simulate API call
-      await Future.delayed(const Duration(seconds: 2));
-
-      final phone = _phoneController.text.trim();
-      final password = _passwordController.text;
-
-      if (phone.isNotEmpty && password.isNotEmpty) {
-        // Simulate token
-        await _secureStorage.write(key: 'auth_token', value: 'demo_token');
-
-        // Biometric authentication
-        final didAuth = await _authenticateWithBiometrics();
-        if (!didAuth) {
-          setState(() {
-            _isLoading = false;
-            _errorMessage =
-                AppLocalizations.of(context)?.biometricFailed ??
-                'Biometric authentication failed.';
-          });
-          return;
-        }
-
-        if (context.mounted) {
-          final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
-          if (voiceFeedbackEnabled) {
-            await _tts.speak(
-              AppLocalizations.of(context)?.loginSuccess ?? 'Login successful.',
-            );
-          }
-          context.pushReplacement('/dashboard');
-        }
-      } else {
-        throw Exception(
-          AppLocalizations.of(context)?.invalidCredentials ??
-              'Invalid credentials.',
-        );
-      }
-    } catch (e) {
-      setState(() {
-        _errorMessage =
-            AppLocalizations.of(context)?.loginError ?? 'Login error.';
-      });
-      final voiceFeedbackEnabled = ref.read(voiceFeedbackProvider);
-      if (voiceFeedbackEnabled) {
-        await _tts.speak(
-          AppLocalizations.of(context)?.loginError ?? 'Login error.',
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
   }
 
   /// Navigate to forgot password screen
@@ -129,35 +55,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     context.push('/register');
   }
 
-  Future<bool> _authenticateWithBiometrics() async {
-    try {
-      final isDeviceSupported = await _localAuth.isDeviceSupported();
-      final canCheckBiometrics = await _localAuth.canCheckBiometrics;
-      if (!isDeviceSupported || !canCheckBiometrics) {
-        setState(() {
-          _errorMessage =
-              AppLocalizations.of(context)?.biometricUnavailable ??
-              'Biometric authentication is not available on this device.';
-        });
-        return false;
-      }
-      final didAuthenticate = await _localAuth.authenticate(
-        localizedReason:
-            AppLocalizations.of(context)?.biometricPrompt ??
-            'Please authenticate to access your dashboard',
-        options: const AuthenticationOptions(biometricOnly: true),
-      );
-      return didAuthenticate;
-    } catch (e) {
-      setState(() {
-        _errorMessage =
-            AppLocalizations.of(context)?.biometricFailed ??
-            'Biometric authentication failed.';
-      });
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,20 +65,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Accessibility controls
-              const AccessibilityControls(),
-
-              const SizedBox(height: 32),
-
               // Header section
               _buildHeader(context),
 
-              const SizedBox(height: 48),
+              const SizedBox(height: 30),
 
               // Login form
               _buildLoginForm(context),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
 
               // Action buttons
               _buildActionButtons(context),
@@ -282,7 +174,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             controller: _passwordController,
             focusNode: _passwordFocusNode,
             validator: (value) => Validators.validatePassword(value, context),
-            onSubmitted: (_) => _handleLogin(),
           ),
 
           const SizedBox(height: 12),
@@ -313,7 +204,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         // Login button
         CustomButton.primary(
           text: AppLocalizations.of(context)?.login ?? 'Login',
-          onPressed: _isLoading ? null : _handleLogin,
+          onPressed:
+              _isLoading
+                  ? null
+                  : () async {
+                    // Validate form first
+                    if (!_formKey.currentState!.validate()) {
+                      return;
+                    }
+
+                    setState(() => _isLoading = true);
+                    try {
+                      final success = await _authService.loginWithCredentials(
+                        _phoneController.text.trim(),
+                        _passwordController.text,
+                      );
+                      if (success) {
+                        // Navigate to dashboard on success
+                        if (!mounted) return;
+                        context.pushReplacement('/dashboard');
+                      } else {
+                        if (!mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Invalid credentials or network error.',
+                            ),
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      if (!mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Login error: $e')),
+                      );
+                    } finally {
+                      if (mounted) setState(() => _isLoading = false);
+                    }
+                  },
           isLoading: _isLoading,
           icon: Icons.login,
         ),
@@ -326,13 +254,60 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           onPressed: _handleRegister,
           icon: Icons.person_add,
         ),
+
+        const SizedBox(height: 16),
+
+        // Biometric login buttons (always visible)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Image.asset(
+                'assets/icons/fingerprint.png',
+                width: 40,
+                height: 40,
+              ),
+              tooltip: 'Login with fingerprint',
+              onPressed: () async {
+                final success = await _authService.loginWithBiometrics(
+                  BiometricType.fingerprint,
+                  context,
+                );
+                if (success) {
+                  if (!mounted) return;
+                  context.pushReplacement('/dashboard');
+                }
+                // Error handled in AuthService
+              },
+            ),
+            const SizedBox(width: 16),
+            IconButton(
+              icon: Image.asset(
+                'assets/icons/facial.png',
+                width: 40,
+                height: 40,
+              ),
+              tooltip: 'Login with face',
+              onPressed: () async {
+                final success = await _authService.loginWithBiometrics(
+                  BiometricType.face,
+                  context,
+                );
+                if (success) {
+                  if (!mounted) return;
+                  context.pushReplacement('/dashboard');
+                }
+                // Error handled in AuthService
+              },
+            ),
+          ],
+        ),
       ],
     );
   }
 
   /// Build footer with additional information
   Widget _buildFooter(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         // Social login buttons
@@ -356,9 +331,34 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    // TODO: Implement Google login
-                  },
+                  onPressed:
+                      _isLoading
+                          ? null
+                          : () async {
+                            setState(() => _isLoading = true);
+                            try {
+                              final userCredential =
+                                  await _authService.signInWithGoogle();
+                              if (userCredential != null) {
+                                // Navigate to dashboard or show success
+                                if (!mounted) return;
+                                context.pushReplacement('/dashboard');
+                              } else {
+                                // User cancelled sign-in
+                                if (!mounted) return;
+                                setState(() {
+                                  _errorMessage = 'Google sign-in cancelled.';
+                                });
+                              }
+                            } catch (e) {
+                              if (!mounted) return;
+                              setState(() {
+                                _errorMessage = 'Google sign-in failed: $e';
+                              });
+                            } finally {
+                              if (mounted) setState(() => _isLoading = false);
+                            }
+                          },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -375,7 +375,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           style: Theme.of(
                             context,
                           ).textTheme.labelLarge?.copyWith(
-                            color: AppColors.googleText,
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontWeight: FontWeight.w600,
                           ),
                           maxLines: 1,

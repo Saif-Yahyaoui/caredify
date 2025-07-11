@@ -19,7 +19,7 @@ class HealthCardsGrid extends StatelessWidget {
   final VoidCallback? onHealthIndexTap;
 
   const HealthCardsGrid({
-    Key? key,
+    super.key,
     required this.heartRate,
     required this.heartRateMax,
     required this.waterIntake,
@@ -34,11 +34,10 @@ class HealthCardsGrid extends StatelessWidget {
     this.onWorkoutTap,
     this.onHabitsTap,
     this.onHealthIndexTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GridView.count(
@@ -168,7 +167,7 @@ class _HealthMetricCard extends StatelessWidget {
                     iconPath!,
                     width: 24,
                     height: 24,
-                    color: color,
+                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
                     placeholderBuilder:
                         (context) =>
                             Icon(Icons.help_outline, size: 24, color: color),

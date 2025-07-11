@@ -8,11 +8,11 @@ class CircularStepCounter extends StatelessWidget {
   final double size;
 
   const CircularStepCounter({
-    Key? key,
+    super.key,
     required this.steps,
     required this.goal,
     this.size = 180,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class CircularStepCounter extends StatelessWidget {
         percent: percent,
         animation: true,
         circularStrokeCap: CircularStrokeCap.round,
-        backgroundColor: theme.colorScheme.surface.withOpacity(0.15),
+        backgroundColor: theme.colorScheme.surface.withAlpha((0.15 * 255).round()),
         linearGradient: const LinearGradient(
           colors: [Color(0xFF4ADE80), Color(0xFF22D3EE)],
           begin: Alignment.topLeft,

@@ -7,7 +7,7 @@ import '../../providers/voice_feedback_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HealthIndexScreen extends ConsumerStatefulWidget {
-  const HealthIndexScreen({Key? key}) : super(key: key);
+  const HealthIndexScreen({super.key});
 
   @override
   ConsumerState<HealthIndexScreen> createState() => _HealthIndexScreenState();
@@ -39,7 +39,9 @@ class _HealthIndexScreenState extends ConsumerState<HealthIndexScreen> {
         }
         try {
           await _tts.speak(t.healthRatingTitle);
-        } catch (e) {}
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -63,11 +65,11 @@ class _HealthIndexScreenState extends ConsumerState<HealthIndexScreen> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          foregroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
@@ -127,7 +129,7 @@ class _MainHealthIndexCard extends StatelessWidget {
                         painter: _ArcPainter(),
                       ),
                       // Star at the top
-                      Positioned(
+                      const Positioned(
                         top: 18,
                         left: 0,
                         right: 0,
@@ -147,16 +149,15 @@ class _MainHealthIndexCard extends StatelessWidget {
                             'B',
                             style: theme.textTheme.headlineLarge?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: theme.colorScheme.onBackground,
-                              fontSize:
-                                  48 * MediaQuery.of(context).textScaleFactor,
+                              color: theme.colorScheme.onSurface,
+                              fontSize: MediaQuery.textScalerOf(context).scale(48),
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'My Health Index',
                             style: theme.textTheme.labelSmall?.copyWith(
-                              color: theme.colorScheme.onBackground,
+                              color: theme.colorScheme.onSurface,
                             ),
                           ),
                         ],
@@ -196,18 +197,18 @@ class _MainHealthIndexCard extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             // Legend
-            Flexible(
+            const Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _LegendRow('A', 'Level : 100 ~ 96 points', Color(0xFFFFC94D)),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5),
                   _LegendRow('B', 'Level : 95 ~ 86 points', Color(0xFF7ED6D6)),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5),
                   _LegendRow('C', 'Level : 85 ~ 76 points', Color(0xFF8B5CF6)),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5),
                   _LegendRow('D', 'Level : 75 ~ 66 points', Color(0xFFFF6B81)),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5),
                   _LegendRow('E', 'Level : 60 ~ 0 points', Color(0xFFBDBDBD)),
                 ],
               ),
@@ -223,8 +224,8 @@ class _ArcPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final startAngle = 3.5 * 3.1416 / 4; // 225 degrees
-    final sweepAngle = 2 * 3.1416 / 2.5; // About 270 degrees
+    const startAngle = 3.5 * 3.1416 / 4; // 225 degrees
+    const sweepAngle = 2 * 3.1416 / 2.5; // About 270 degrees
     final paint =
         Paint()
           ..color = const Color(0xFFFFC94D)
@@ -270,7 +271,7 @@ class _LegendRow extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withAlpha((0.15 * 255).round()),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Center(
@@ -289,7 +290,7 @@ class _LegendRow extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 fontSize: 13,
               ),
               overflow: TextOverflow.ellipsis,
@@ -321,11 +322,15 @@ class _BMICard extends StatelessWidget {
                   AppLocalizations.of(context)!.bmi,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onBackground,
+                    color: theme.colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Icon(Icons.info_outline, color: Color(0xFFBDBDBD), size: 18),
+                const Icon(
+                  Icons.info_outline,
+                  color: Color(0xFFBDBDBD),
+                  size: 18,
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -336,7 +341,7 @@ class _BMICard extends StatelessWidget {
                   AppLocalizations.of(context)!.bmiValue,
                   style: theme.textTheme.displaySmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 95, 64, 143),
+                    color: const Color.fromARGB(255, 95, 64, 143),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -344,7 +349,7 @@ class _BMICard extends StatelessWidget {
                   AppLocalizations.of(context)!.bmiHealthyLabel,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF00B8A9),
+                    color: const Color(0xFF00B8A9),
                   ),
                 ),
               ],
@@ -373,7 +378,7 @@ class _BMIScaleBar extends StatelessWidget {
             Container(
               height: 6,
               decoration: BoxDecoration(
-                color: Color(0xFFF7F3FF),
+                color: const Color(0xFFF7F3FF),
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
@@ -382,7 +387,7 @@ class _BMIScaleBar extends StatelessWidget {
               child: Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [Color(0xFF8B5CF6), Color(0xFFFF6B81)],
                   ),
                   borderRadius: BorderRadius.circular(3),
@@ -466,11 +471,15 @@ class _BodyFatRateCard extends StatelessWidget {
                   'Body Fat Rate',
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onBackground,
+                    color: theme.colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Icon(Icons.info_outline, color: Color(0xFFBDBDBD), size: 18),
+                const Icon(
+                  Icons.info_outline,
+                  color: Color(0xFFBDBDBD),
+                  size: 18,
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -481,7 +490,7 @@ class _BodyFatRateCard extends StatelessWidget {
                   '18.4%',
                   style: theme.textTheme.displaySmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 95, 64, 143),
+                    color: const Color.fromARGB(255, 95, 64, 143),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -489,7 +498,7 @@ class _BodyFatRateCard extends StatelessWidget {
                   'HEALTHY',
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF00B8A9),
+                    color: const Color(0xFF00B8A9),
                   ),
                 ),
               ],
@@ -518,7 +527,7 @@ class _BodyFatScaleBar extends StatelessWidget {
             Container(
               height: 6,
               decoration: BoxDecoration(
-                color: Color(0xFFF7F3FF),
+                color: const Color(0xFFF7F3FF),
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
@@ -527,7 +536,7 @@ class _BodyFatScaleBar extends StatelessWidget {
               child: Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [Color(0xFF8B5CF6), Color(0xFFFF6B81)],
                   ),
                   borderRadius: BorderRadius.circular(3),

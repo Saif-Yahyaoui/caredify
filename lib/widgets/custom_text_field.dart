@@ -169,7 +169,6 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   late TextEditingController _controller;
-  bool _hasError = false;
 
   @override
   void initState() {
@@ -325,31 +324,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
 class _PasswordTextField extends CustomTextField {
   final bool showVisibilityToggle;
 
-  const _PasswordTextField({
-    Key? key,
-    String? label,
-    String? hint,
-    TextEditingController? controller,
-    String? Function(String?)? validator,
-    void Function(String)? onChanged,
-    void Function(String)? onSubmitted,
-    FocusNode? focusNode,
-    String? errorText,
-    this.showVisibilityToggle = true,
-  }) : super(
-         key: key,
-         label: label,
-         hint: hint,
-         controller: controller,
-         keyboardType: TextInputType.visiblePassword,
-         obscureText: true,
-         prefixIcon: Icons.lock,
-         validator: validator,
-         onChanged: onChanged,
-         onSubmitted: onSubmitted,
-         focusNode: focusNode,
-         errorText: errorText,
-       );
+const _PasswordTextField({
+  super.key,
+  super.label,
+  super.hint,
+  super.controller,
+  super.validator,
+  super.onChanged,
+  super.onSubmitted,
+  super.focusNode,
+  super.errorText,
+  this.showVisibilityToggle = true,
+});
 
   @override
   State<_PasswordTextField> createState() => _PasswordTextFieldState();

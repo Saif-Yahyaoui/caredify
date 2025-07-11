@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../widgets/accessibility_controls.dart';
+import 'package:go_router/go_router.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_button.dart';
 import 'package:intl/intl.dart' as intl;
@@ -8,7 +8,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import '../../providers/voice_feedback_provider.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
@@ -33,8 +33,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   void dispose() {
-    _searchController.dispose();
     _tts.stop();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -53,9 +53,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Accessibility controls
-                const AccessibilityControls(),
-                const SizedBox(height: 16),
                 // Watch disconnected banner
                 Container(
                   padding: const EdgeInsets.all(16),
@@ -66,7 +63,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.watch_off, size: 40, color: Colors.white),
+                      const Icon(
+                        Icons.watch_off,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
@@ -110,17 +111,38 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 const SizedBox(height: 16),
                 // Settings list
-                _ProfileOption(icon: Icons.person, label: 'Account Settings'),
-                _ProfileOption(
+                const _ProfileOption(
+                  icon: Icons.person,
+                  label: 'Account Settings',
+                ),
+                const _ProfileOption(
                   icon: Icons.notifications,
                   label: 'Notification',
                 ),
-                _ProfileOption(icon: Icons.message, label: 'Message Push'),
-                _ProfileOption(icon: Icons.restart_alt, label: 'Reset device'),
-                _ProfileOption(icon: Icons.delete, label: 'Remove'),
-                _ProfileOption(icon: Icons.more_horiz, label: 'Other'),
-                _ProfileOption(icon: Icons.camera_alt, label: 'Remote Shutter'),
-                _ProfileOption(icon: Icons.system_update, label: 'OTA upgrade'),
+                const _ProfileOption(
+                  icon: Icons.message,
+                  label: 'Message Push',
+                ),
+                const _ProfileOption(
+                  icon: Icons.restart_alt,
+                  label: 'Reset device',
+                ),
+                const _ProfileOption(icon: Icons.delete, label: 'Remove'),
+                const _ProfileOption(icon: Icons.more_horiz, label: 'Other'),
+                const _ProfileOption(
+                  icon: Icons.camera_alt,
+                  label: 'Remote Shutter',
+                ),
+                const _ProfileOption(
+                  icon: Icons.system_update,
+                  label: 'OTA upgrade',
+                ),
+                // Accessibility option
+                _ProfileOption(
+                  icon: Icons.accessibility_new,
+                  label: 'Accessibility Controls',
+                  onTap: () => context.push('/accessibility-settings'),
+                ),
               ],
             ),
           ),
@@ -133,7 +155,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 class _ProfileOption extends StatelessWidget {
   final IconData icon;
   final String label;
-  const _ProfileOption({required this.icon, required this.label});
+  final VoidCallback? onTap;
+
+  const _ProfileOption({required this.icon, required this.label, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +168,7 @@ class _ProfileOption extends StatelessWidget {
       child: ListTile(
         leading: Icon(icon, color: theme.colorScheme.primary),
         title: Text(label, style: theme.textTheme.bodyLarge),
-        onTap: () {},
+        onTap: onTap ?? () {},
         trailing: const Icon(Icons.chevron_right),
       ),
     );

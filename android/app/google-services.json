@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1008674270054",
+    "project_id": "big-food-5b613",
+    "storage_bucket": "big-food-5b613.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008674270054:android:eccfdf019566a3507cb6a7",
+        "android_client_info": {
+          "package_name": "com.example.caredify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008674270054-55oaksem6ncr1037n0o20s6jhvg9islv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.caredify",
+            "certificate_hash": "60f703f1d48b89bedc18c2e3d283557b57311276"
+          }
+        },
+        {
+          "client_id": "1008674270054-06cjs889bsb6olv75elp5dfgbvm4qbeb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1RdtWv1RwZxwJPMSB3dUmzQygrMmtLf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008674270054-06cjs889bsb6olv75elp5dfgbvm4qbeb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

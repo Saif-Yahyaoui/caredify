@@ -8,7 +8,7 @@ import '../../providers/voice_feedback_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HealthIndexReevaluateScreen extends ConsumerStatefulWidget {
-  const HealthIndexReevaluateScreen({Key? key}) : super(key: key);
+  const HealthIndexReevaluateScreen({super.key});
 
   @override
   ConsumerState<HealthIndexReevaluateScreen> createState() =>
@@ -52,7 +52,9 @@ class _HealthIndexReevaluateScreenState
         }
         try {
           await _tts.speak(t.healthRatingTitle);
-        } catch (e) {}
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -77,11 +79,11 @@ class _HealthIndexReevaluateScreenState
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          foregroundColor: Theme.of(context).colorScheme.onBackground,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
@@ -115,7 +117,7 @@ class _HealthIndexReevaluateScreenState
                           'REEVALUATE',
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: theme.colorScheme.onBackground,
+                            color: theme.colorScheme.onSurface,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -127,7 +129,7 @@ class _HealthIndexReevaluateScreenState
                             child: Icon(
                               Icons.event_available_outlined,
                               size: 120,
-                              color: theme.colorScheme.primary.withOpacity(0.2),
+                              color: theme.colorScheme.primary.withAlpha((0.2 * 255).round()),
                             ),
                           ),
                         ),

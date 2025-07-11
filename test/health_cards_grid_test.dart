@@ -7,7 +7,7 @@ void main() {
   testWidgets('HealthCardsGrid renders all cards', (tester) async {
     await tester.pumpWidget(
       localizedTestableWidget(
-        HealthCardsGrid(
+         const  HealthCardsGrid(
           heartRate: 70,
           heartRateMax: 100,
           waterIntake: 1000,

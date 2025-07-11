@@ -6,7 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import '../../providers/voice_feedback_provider.dart';
 
 class HealthWatchScreen extends ConsumerStatefulWidget {
-  const HealthWatchScreen({Key? key}) : super(key: key);
+  const HealthWatchScreen({super.key});
 
   @override
   ConsumerState<HealthWatchScreen> createState() => _HealthWatchScreenState();
@@ -39,7 +39,9 @@ class _HealthWatchScreenState extends ConsumerState<HealthWatchScreen> {
           await _tts.speak(
             'The watch is disconnected. Please make sure to wear your watch and connect it to the app.',
           );
-        } catch (e) {}
+        } catch (e) {
+          // Ignored: TTS error is non-critical
+        }
       }
     });
   }
@@ -75,7 +77,7 @@ class _HealthWatchScreenState extends ConsumerState<HealthWatchScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.watch_off, size: 40, color: Colors.white),
+                       const  Icon(Icons.watch_off, size: 40, color: Colors.white),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(

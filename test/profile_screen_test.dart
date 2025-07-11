@@ -10,14 +10,28 @@ void main() {
       ProviderScope(child: localizedTestableWidget(const ProfileScreen())),
     );
     await tester.pumpAndSettle();
-    final context = tester.element(find.byType(ProfileScreen));
-    // Replace 'Account Settings' with the correct localization key
-    // For example, if the ARB key is 'accountSettings', use:
-    // final accountSettings = AppLocalizations.of(context)!.accountSettings;
-    // expect(find.text(accountSettings), findsWidgets);
-    // If you don't have a key, use a more robust finder:
-    // expect(find.byType(ListTile), findsWidgets);
-    // For now, let's use a generic check for ListTile as a fallback:
-    expect(find.byType(ListTile), findsWidgets);
+
+    // Check for the disconnected banner
+    expect(find.text('The watch is disconnected !'), findsOneWidget);
+    expect(
+      find.text(
+        'Please make sure to wear your watch and connect it to the app',
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('CLICK HERE TO CONNECT'), findsOneWidget);
+
+    // Check for all profile options
+    expect(find.text('Account Settings'), findsOneWidget);
+    expect(find.text('Notification'), findsOneWidget);
+    expect(find.text('Message Push'), findsOneWidget);
+    expect(find.text('Reset device'), findsOneWidget);
+    expect(find.text('Remove'), findsOneWidget);
+    expect(find.text('Other'), findsOneWidget);
+    expect(find.text('Remote Shutter'), findsOneWidget);
+    expect(find.text('OTA upgrade'), findsOneWidget);
+
+    // Check that there are 8 ListTiles (one for each option)
+    expect(find.byType(ListTile), findsNWidgets(8));
   });
 }

@@ -5,7 +5,7 @@ import 'test_helpers.dart';
 void main() {
   testWidgets('CircularStepCounter renders with steps', (tester) async {
     await tester.pumpWidget(
-      localizedTestableWidget(CircularStepCounter(steps: 5000, goal: 10000)),
+      localizedTestableWidget(  const CircularStepCounter(steps: 5000, goal: 10000)),
     );
     expect(find.text('5000'), findsOneWidget);
     expect(find.text('steps'), findsOneWidget);

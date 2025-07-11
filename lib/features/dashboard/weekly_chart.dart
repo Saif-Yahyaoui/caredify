@@ -5,8 +5,7 @@ class WeeklyChart extends StatelessWidget {
   final List<double> data;
   final Color barColor;
 
-  const WeeklyChart({Key? key, required this.data, required this.barColor})
-    : super(key: key);
+  const WeeklyChart({super.key, required this.data, required this.barColor});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,9 @@ class WeeklyChart extends StatelessWidget {
           maxY: 1.0,
           barTouchData: BarTouchData(enabled: false),
           titlesData: FlTitlesData(
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
@@ -43,7 +42,7 @@ class WeeklyChart extends StatelessWidget {
               ),
             ),
           ),
-          gridData: FlGridData(show: false),
+          gridData:  const  FlGridData(show: false),
           borderData: FlBorderData(show: false),
           barGroups: List.generate(data.length, (i) {
             return BarChartGroupData(

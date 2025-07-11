@@ -11,7 +11,7 @@ void main() {
   testWidgets('CaredifyApp renders without crashing', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(ProviderScope(child: const CaredifyApp()));
+    await tester.pumpWidget(  const ProviderScope(child: CaredifyApp()));
     await tester.pumpAndSettle(const Duration(seconds: 5));
     expect(find.byType(CaredifyApp), findsOneWidget);
   });

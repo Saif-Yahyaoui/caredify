@@ -10,7 +10,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(
-      ProviderScope(child: localizedTestableWidget(RegisterScreen())),
+      ProviderScope(child: localizedTestableWidget(  const RegisterScreen())),
     );
     await tester.pumpAndSettle();
 
