@@ -30,8 +30,9 @@ void main() {
     expect(find.text('Other'), findsOneWidget);
     expect(find.text('Remote Shutter'), findsOneWidget);
     expect(find.text('OTA upgrade'), findsOneWidget);
+    expect(find.text('Accessibility Controls'), findsOneWidget); 
 
-    // Check that there are 8 ListTiles (one for each option)
-    expect(find.byType(ListTile), findsNWidgets(8));
+    // Updated expectation from 8 to 9
+    expect(find.byType(ListTile), findsNWidgets(9));
   });
 }
