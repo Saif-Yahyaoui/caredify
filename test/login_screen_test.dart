@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:caredify/features/auth/login_screen.dart';
 import 'package:caredify/providers/auth_provider.dart';
-import 'mocks/auth_service_mock.dart';
 import 'test_helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'mocks/auth_service_mock.dart';
 
 void main() {
   setUpAll(() async {

@@ -408,9 +408,34 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    // TODO: Implement Facebook login
-                  },
+                  onPressed:
+                      _isLoading
+                          ? null
+                          : () async {
+                            setState(() => _isLoading = true);
+                            try {
+                              final userCredential =
+                                  await _authService.signInWithFacebook();
+                              if (userCredential != null) {
+                                // Navigate to dashboard or show success
+                                if (!mounted) return;
+                                context.pushReplacement('/dashboard');
+                              } else {
+                                // User cancelled sign-in
+                                if (!mounted) return;
+                                setState(() {
+                                  _errorMessage = 'Facebook sign-in cancelled.';
+                                });
+                              }
+                            } catch (e) {
+                              if (!mounted) return;
+                              setState(() {
+                                _errorMessage = 'Facebook sign-in failed: $e';
+                              });
+                            } finally {
+                              if (mounted) setState(() => _isLoading = false);
+                            }
+                          },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

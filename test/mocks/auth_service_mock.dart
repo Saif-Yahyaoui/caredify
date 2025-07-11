@@ -8,6 +8,9 @@ class MockAuthService implements IAuthService {
   Future<UserCredential?> signInWithGoogle() async => null;
 
   @override
+  Future<UserCredential?> signInWithFacebook() async => null;
+
+  @override
   Future<bool> loginWithBiometrics(
     BiometricType type,
     BuildContext context,

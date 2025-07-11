@@ -2,10 +2,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 // Abstract interface for easier testing
 abstract class IAuthService {
   Future<UserCredential?> signInWithGoogle();
+  Future<UserCredential?> signInWithFacebook();
   Future<bool> loginWithBiometrics(BiometricType type, BuildContext context);
   Future<bool> loginWithCredentials(String phone, String password);
   bool get isLoggedIn;
@@ -27,6 +29,36 @@ class AuthService implements IAuthService {
       idToken: gAuth.idToken,
     );
     return await _firebaseAuth.signInWithCredential(credential);
+  }
+
+  @override
+  /// Facebook sign in
+  Future<UserCredential?> signInWithFacebook() async {
+    try {
+      // Trigger the sign-in flow
+      final LoginResult result = await FacebookAuth.instance.login(
+        permissions: ['email', 'public_profile'],
+      );
+      print('Status: ${result.status}');
+      print('Message: ${result.message}');
+
+      if (result.status == LoginStatus.success) {
+        // Create a credential from the access token
+        final OAuthCredential credential = FacebookAuthProvider.credential(
+          result.accessToken!.tokenString,
+        );
+
+        // Sign in to Firebase with the credential
+        return await _firebaseAuth.signInWithCredential(credential);
+      } else {
+        // User cancelled or login failed
+        return null;
+      }
+    } catch (e) {
+      // Handle any errors
+      print('Facebook sign-in error: $e');
+      return null;
+    }
   }
 
   @override

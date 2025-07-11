@@ -21,6 +21,7 @@ import 'features/dashboard/water_intake_screen.dart';
 import 'features/dashboard/heart_tracker_screen.dart';
 import 'features/auth/onboarding_screen.dart';
 import 'features/profile/accessibility_settings_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'features/dashboard/healthy_habits_screen.dart';
 import 'features/dashboard/health_index_screen.dart';
@@ -28,6 +29,8 @@ import 'features/dashboard/health_index_reevaluate_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const ProviderScope(child: CaredifyApp()));
 }
 
