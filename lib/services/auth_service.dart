@@ -39,8 +39,7 @@ class AuthService implements IAuthService {
       final LoginResult result = await FacebookAuth.instance.login(
         permissions: ['email', 'public_profile'],
       );
-      print('Status: ${result.status}');
-      print('Message: ${result.message}');
+     
 
       if (result.status == LoginStatus.success) {
         // Create a credential from the access token
@@ -56,7 +55,7 @@ class AuthService implements IAuthService {
       }
     } catch (e) {
       // Handle any errors
-      print('Facebook sign-in error: $e');
+      debugPrint('Facebook sign-in error: $e');
       return null;
     }
   }
