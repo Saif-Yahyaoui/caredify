@@ -1,13 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:math';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/providers/ecg_analysis_provider.dart';
-import '../../../shared/widgets/ecg_ai_analysis_card.dart';
-import '../../../shared/models/ecg_analysis_result.dart';
 import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/premium_tabbar.dart';
+import '../../../shared/widgets/ecg_ai_analysis_card.dart';
 import '../../../shared/widgets/premium_recommendation_card.dart';
+import '../../../shared/widgets/premium_tabbar.dart';
 import '../../../shared/widgets/section_header.dart';
 
 class EcgAnalysisScreen extends ConsumerStatefulWidget {
@@ -172,7 +173,7 @@ class _EcgAnalysisScreenState extends ConsumerState<EcgAnalysisScreen>
           children: [
             Row(
               children: [
-                Icon(Icons.show_chart, color: AppColors.primaryBlue, size: 24),
+                const Icon(Icons.show_chart, color: AppColors.primaryBlue, size: 24),
                 const SizedBox(width: 8),
                 Text(
                   'ECG Signal',
@@ -308,7 +309,7 @@ class _EcgAnalysisScreenState extends ConsumerState<EcgAnalysisScreen>
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.analytics,
                         color: AppColors.primaryBlue,
                         size: 24,

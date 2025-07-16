@@ -13,7 +13,6 @@ import '../../../shared/providers/auth_provider.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/widgets/custom_button.dart';
 import '../../../shared/widgets/custom_text_field.dart';
-import '../../../shared/widgets/gradient_button.dart';
 
 /// Login screen with phone number and password authentication
 class LoginScreen extends ConsumerStatefulWidget {

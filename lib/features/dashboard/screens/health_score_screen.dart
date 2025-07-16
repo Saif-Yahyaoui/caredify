@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/role_based_access.dart';
-import '../../../shared/widgets/premium_tabbar.dart';
 import '../../../shared/widgets/premium_recommendation_card.dart';
+import '../../../shared/widgets/premium_tabbar.dart';
+import '../../../shared/widgets/role_based_access.dart';
 
 class HealthScoreScreen extends ConsumerStatefulWidget {
   const HealthScoreScreen({super.key});
@@ -855,87 +855,6 @@ class _ScoreFactorItem extends StatelessWidget {
     return Colors.red[700]!;
   }
 }
-
-class _RecommendationItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String priority;
-  final String impact;
-
-  const _RecommendationItem({
-    required this.title,
-    required this.description,
-    required this.priority,
-    required this.impact,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final priorityColor =
-        priority == 'High'
-            ? Colors.red
-            : priority == 'Medium'
-            ? Colors.orange
-            : Colors.green;
-
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: priorityColor.withAlpha((0.1 * 255).toInt()),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: priorityColor.withAlpha((0.3 * 255).toInt())),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: priorityColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  priority,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 8,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            description,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Potential impact: $impact',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: priorityColor,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _CategoryScoreItem extends StatelessWidget {
   final String category;
   final double score;

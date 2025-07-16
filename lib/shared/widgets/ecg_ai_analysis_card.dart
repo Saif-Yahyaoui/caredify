@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/ecg_analysis_result.dart';
-import '../providers/ecg_analysis_provider.dart';
+
 import '../../core/theme/app_colors.dart';
+import '../models/ecg_analysis_result.dart';
 
 /// Widget to display ECG AI analysis results
 class EcgAiAnalysisCard extends ConsumerWidget {
@@ -33,7 +33,7 @@ class EcgAiAnalysisCard extends ConsumerWidget {
             // Header
             Row(
               children: [
-                Icon(Icons.psychology, color: AppColors.primaryBlue, size: 24),
+                const Icon(Icons.psychology, color: AppColors.primaryBlue, size: 24),
                 const SizedBox(width: 8),
                 Text(
                   'AI ECG Analysis',
@@ -137,9 +137,9 @@ class EcgAiAnalysisCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: chipColor.withOpacity(0.1),
+        color: chipColor.withAlpha((0.1 * 255).toInt()),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: chipColor.withOpacity(0.3)),
+        border: Border.all(color: chipColor.withAlpha((0.3 * 255).toInt())),
       ),
       child: Text(
         label,

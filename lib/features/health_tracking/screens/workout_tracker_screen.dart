@@ -1,15 +1,12 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:fl_chart/fl_chart.dart';
 
 import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/widgets/circular_step_counter.dart';
-import '../../../shared/widgets/metrics_row.dart';
-import '../../../shared/widgets/weekly_chart.dart';
 
 class WorkoutTrackerScreen extends ConsumerStatefulWidget {
   const WorkoutTrackerScreen({super.key});
@@ -21,7 +18,6 @@ class WorkoutTrackerScreen extends ConsumerStatefulWidget {
 
 class _WorkoutTrackerScreenState extends ConsumerState<WorkoutTrackerScreen> {
   final FlutterTts _tts = FlutterTts();
-  int _selectedTab = 0;
 
   // Mock data
   final int steps = 7900;
@@ -71,12 +67,6 @@ class _WorkoutTrackerScreenState extends ConsumerState<WorkoutTrackerScreen> {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
-    final List<String> tabs = [
-      AppLocalizations.of(context)!.week,
-      AppLocalizations.of(context)!.month,
-      AppLocalizations.of(context)!.threeMonth,
-      AppLocalizations.of(context)!.year,
-    ];
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
@@ -93,8 +83,8 @@ class _WorkoutTrackerScreenState extends ConsumerState<WorkoutTrackerScreen> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: _WorkoutScreenPremium(
             steps: 7900,
             stepGoal: 10000,
@@ -140,7 +130,7 @@ class _WorkoutScreenPremium extends StatelessWidget {
         // Premium Card with Animated Progress Ring
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color(0xFF4ADE80), Color(0xFF8B5CF6)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -148,9 +138,9 @@ class _WorkoutScreenPremium extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Color(0xFF4ADE80).withOpacity(0.2),
+                color: const Color(0xFF4ADE80).withAlpha((0.2 * 255).toInt()),
                 blurRadius: 16,
-                offset: Offset(0, 8),
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -167,11 +157,19 @@ class _WorkoutScreenPremium extends StatelessWidget {
                     child: CircularProgressIndicator(
                       value: steps / stepGoal,
                       strokeWidth: 8,
-                      backgroundColor: Colors.white.withOpacity(0.2),
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      backgroundColor: Colors.white.withAlpha(
+                        (0.2 * 255).toInt(),
+                      ),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Colors.white,
+                      ),
                     ),
                   ),
-                  Icon(Icons.directions_run, color: Colors.white, size: 40),
+                  const Icon(
+                    Icons.directions_run,
+                    color: Colors.white,
+                    size: 40,
+                  ),
                 ],
               ),
               const SizedBox(width: 24),
@@ -221,9 +219,9 @@ class _WorkoutScreenPremium extends StatelessWidget {
                   height: 120,
                   child: LineChart(
                     LineChartData(
-                      gridData: FlGridData(show: false),
+                      gridData: const FlGridData(show: false),
                       borderData: FlBorderData(show: false),
-                      titlesData: FlTitlesData(show: false),
+                      titlesData: const FlTitlesData(show: false),
                       lineBarsData: [
                         LineChartBarData(
                           spots: List.generate(
@@ -231,9 +229,9 @@ class _WorkoutScreenPremium extends StatelessWidget {
                             (i) => FlSpot(i.toDouble(), trend[i]),
                           ),
                           isCurved: true,
-                          color: Color(0xFF4ADE80),
+                          color: const Color(0xFF4ADE80),
                           barWidth: 4,
-                          dotData: FlDotData(show: false),
+                          dotData: const FlDotData(show: false),
                         ),
                       ],
                     ),
@@ -249,13 +247,13 @@ class _WorkoutScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFE0F7FA),
+          color: const Color(0xFFE0F7FA),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(Icons.emoji_events, color: Color(0xFF4ADE80)),
-                SizedBox(width: 12),
+                const Icon(Icons.emoji_events, color: Color(0xFF4ADE80)),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Personal Best: $bestSteps steps, ${bestDistance.toStringAsFixed(2)} km',
@@ -271,7 +269,7 @@ class _WorkoutScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFE0F7FA),
+          color: const Color(0xFFE0F7FA),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -283,8 +281,8 @@ class _WorkoutScreenPremium extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   '• 20 min brisk walk\n• 10 min stretching\n• 15 min cycling',
                 ),
               ],
@@ -297,7 +295,7 @@ class _WorkoutScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFE0F7FA),
+          color: const Color(0xFFE0F7FA),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -309,8 +307,8 @@ class _WorkoutScreenPremium extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   '• Boosts mood\n• Improves heart health\n• Increases energy\n• Supports weight management',
                 ),
               ],
@@ -321,15 +319,15 @@ class _WorkoutScreenPremium extends StatelessWidget {
         // Export Button
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF4ADE80),
+            backgroundColor: const Color(0xFF4ADE80),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          icon: Icon(Icons.share),
-          label: Text('Export Workout Log'),
+          icon: const Icon(Icons.share),
+          label: const Text('Export Workout Log'),
           onPressed: () {},
         ),
       ],

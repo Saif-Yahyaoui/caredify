@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:caredify/shared/services/ecg_analysis_service.dart';
 import 'package:caredify/shared/models/ecg_analysis_result.dart';
+import 'package:caredify/shared/services/ecg_analysis_service.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('EcgAnalysisService', () {

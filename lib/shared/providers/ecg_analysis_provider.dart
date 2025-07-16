@@ -175,11 +175,13 @@ class EcgSignalDataNotifier extends StateNotifier<List<double>> {
 
 /// Provider for ECG analysis statistics
 final ecgAnalysisStatsProvider = Provider<Map<String, dynamic>>((ref) {
+  final history = ref.watch(ecgAnalysisHistoryProvider);
   final historyNotifier = ref.watch(ecgAnalysisHistoryProvider.notifier);
+  ref.watch(ecgSignalDataProvider);
   final signalDataNotifier = ref.watch(ecgSignalDataProvider.notifier);
 
   return {
-    'totalAnalyses': historyNotifier.state.length,
+    'totalAnalyses': history.length,
     'abnormalRate': historyNotifier.abnormalityRate,
     'averageConfidence': historyNotifier.averageConfidence,
     'recentAbnormal': historyNotifier.abnormalResults.take(5).length,

@@ -4,13 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../../core/theme/app_colors.dart';
-import '../../../shared/providers/language_provider.dart';
-import '../../../shared/providers/theme_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/custom_button.dart';
 import '../../../shared/widgets/accessibility_controls.dart';
 
 class AccessibilitySettingsScreen extends ConsumerWidget {
@@ -19,10 +13,9 @@ class AccessibilitySettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
-    final userType = ref.watch(userTypeProvider);
+    ref.watch(userTypeProvider);
 
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
@@ -41,9 +34,9 @@ class AccessibilitySettingsScreen extends ConsumerWidget {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

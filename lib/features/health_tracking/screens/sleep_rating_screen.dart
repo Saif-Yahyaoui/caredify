@@ -1,14 +1,12 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:fl_chart/fl_chart.dart';
 
 import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/widgets/weekly_chart.dart';
 
 class SleepRatingScreen extends ConsumerStatefulWidget {
   const SleepRatingScreen({super.key});
@@ -19,7 +17,6 @@ class SleepRatingScreen extends ConsumerStatefulWidget {
 
 class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
   final FlutterTts _tts = FlutterTts();
-  int _selectedTab = 0;
 
   // Mock data
   final double totalSleep = 7.0;
@@ -71,12 +68,6 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
-    final List<String> tabs = [
-      AppLocalizations.of(context)!.week,
-      AppLocalizations.of(context)!.month,
-      AppLocalizations.of(context)!.threeMonth,
-      AppLocalizations.of(context)!.year,
-    ];
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
@@ -93,8 +84,8 @@ class _SleepRatingScreenState extends ConsumerState<SleepRatingScreen> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: _SleepScreenPremium(
             totalSleep: 7.0,
             trend: [7.0, 6.5, 8.0, 7.2, 6.8, 7.5, 7.0],
@@ -125,7 +116,7 @@ class _SleepScreenPremium extends StatelessWidget {
         // Premium Card with Animated Moon
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -133,9 +124,9 @@ class _SleepScreenPremium extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Color(0xFF8B5CF6).withOpacity(0.2),
+                color: const Color(0xFF8B5CF6).withAlpha((0.2 * 255).toInt()),
                 blurRadius: 16,
-                offset: Offset(0, 8),
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -145,12 +136,12 @@ class _SleepScreenPremium extends StatelessWidget {
             children: [
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0.8, end: 1.2),
-                duration: Duration(milliseconds: 1200),
+                duration: const Duration(milliseconds: 1200),
                 curve: Curves.easeInOut,
                 builder: (context, scale, child) {
                   return Transform.scale(
                     scale: 1 + 0.05 * (totalSleep % 2),
-                    child: Icon(
+                    child: const Icon(
                       Icons.nightlight_round,
                       color: Colors.white,
                       size: 64,
@@ -194,9 +185,9 @@ class _SleepScreenPremium extends StatelessWidget {
                   height: 120,
                   child: LineChart(
                     LineChartData(
-                      gridData: FlGridData(show: false),
+                      gridData: const FlGridData(show: false),
                       borderData: FlBorderData(show: false),
-                      titlesData: FlTitlesData(show: false),
+                      titlesData: const FlTitlesData(show: false),
                       lineBarsData: [
                         LineChartBarData(
                           spots: List.generate(
@@ -204,9 +195,9 @@ class _SleepScreenPremium extends StatelessWidget {
                             (i) => FlSpot(i.toDouble(), trend[i]),
                           ),
                           isCurved: true,
-                          color: Color(0xFF8B5CF6),
+                          color: const Color(0xFF8B5CF6),
                           barWidth: 4,
-                          dotData: FlDotData(show: false),
+                          dotData: const FlDotData(show: false),
                         ),
                       ],
                     ),
@@ -222,13 +213,13 @@ class _SleepScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFF3F0FF),
+          color: const Color(0xFFF3F0FF),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(Icons.grade, color: Color(0xFF8B5CF6)),
-                SizedBox(width: 12),
+                const Icon(Icons.grade, color: Color(0xFF8B5CF6)),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Sleep Quality: $quality',
@@ -236,14 +227,17 @@ class _SleepScreenPremium extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: Color(0xFF8B5CF6),
+                    color: const Color(0xFF8B5CF6),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     quality,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -259,7 +253,7 @@ class _SleepScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFF7F3FF),
+          color: const Color(0xFFF7F3FF),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -271,8 +265,8 @@ class _SleepScreenPremium extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   '• Keep a regular sleep schedule\n• Avoid caffeine late in the day\n• Create a restful environment\n• Limit screen time before bed',
                 ),
               ],
@@ -285,9 +279,9 @@ class _SleepScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFEDE9FE),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
+          color: const Color(0xFFEDE9FE),
+          child: const Padding(
+            padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Icon(Icons.compare, color: Color(0xFF8B5CF6)),
@@ -305,7 +299,7 @@ class _SleepScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFF3F0FF),
+          color: const Color(0xFFF3F0FF),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -317,8 +311,8 @@ class _SleepScreenPremium extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   '☑️ Dark, quiet room\n☑️ Comfortable bed\n☑️ No screens before bed\n☑️ Regular bedtime',
                 ),
               ],
@@ -329,15 +323,15 @@ class _SleepScreenPremium extends StatelessWidget {
         // Export Button
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF8B5CF6),
+            backgroundColor: const Color(0xFF8B5CF6),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          icon: Icon(Icons.share),
-          label: Text('Export Sleep Report'),
+          icon: const Icon(Icons.share),
+          label: const Text('Export Sleep Report'),
           onPressed: () {},
         ),
       ],

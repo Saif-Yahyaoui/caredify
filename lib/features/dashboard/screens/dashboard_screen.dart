@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../core/theme/app_colors.dart';
+import '../../../shared/providers/health_metrics_provider.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/widgets/alert_card.dart';
 import '../../../shared/widgets/emergency_button.dart';
 import '../../../shared/widgets/premium_components.dart';
 import '../../../shared/widgets/role_based_access.dart';
+import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/unified_vital_cards.dart';
 import '../../../shared/widgets/user_header.dart';
-import '../../../shared/providers/health_metrics_provider.dart';
-import '../../../shared/providers/ecg_analysis_provider.dart';
-import '../../../shared/widgets/section_header.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -29,29 +27,6 @@ class DashboardScreen extends ConsumerWidget {
 
 class _DashboardHome extends ConsumerWidget {
   const _DashboardHome();
-
-  Widget _buildMetricItem(
-    BuildContext context,
-    ThemeData theme,
-    bool isDark,
-    String label,
-    String value,
-    Color color,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: theme.textTheme.bodySmall?.copyWith(color: color)),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -116,9 +91,7 @@ class _DashboardHome extends ConsumerWidget {
                 children: [
                   _PremiumMetricCard(
                     title: 'Heart Rate',
-                    value:
-                        ref.watch(healthMetricsProvider).heartRate.toString() +
-                        ' bpm',
+                    value: '${ref.watch(healthMetricsProvider).heartRate} bpm',
                     iconAsset: 'assets/icons/heart.svg',
                     color: const Color(0xFFFF6B81),
                     onTap: () => context.go('/main/heart'),
@@ -126,9 +99,7 @@ class _DashboardHome extends ConsumerWidget {
                   ),
                   _PremiumMetricCard(
                     title: 'Sleep',
-                    value:
-                        ref.watch(healthMetricsProvider).sleepHours.toString() +
-                        ' h',
+                    value: '${ref.watch(healthMetricsProvider).sleepHours} h',
                     iconAsset: 'assets/icons/moon.svg',
                     color: const Color(0xFF8B5CF6),
                     onTap: () => context.go('/main/sleep'),
@@ -136,9 +107,7 @@ class _DashboardHome extends ConsumerWidget {
                   _PremiumMetricCard(
                     title: 'Water Intake',
                     value:
-                        (ref.watch(healthMetricsProvider).waterIntake * 1000)
-                            .toStringAsFixed(0) +
-                        ' ml',
+                        '${(ref.watch(healthMetricsProvider).waterIntake * 1000).toStringAsFixed(0)} ml',
                     iconAsset: 'assets/icons/water.svg',
                     color: const Color(0xFF22D3EE),
                     onTap: () => context.go('/main/water'),
@@ -146,11 +115,7 @@ class _DashboardHome extends ConsumerWidget {
                   _PremiumMetricCard(
                     title: 'Workout Tracker',
                     value:
-                        ref
-                            .watch(healthMetricsProvider)
-                            .activeMinutes
-                            .toString() +
-                        ' min',
+                        '${ref.watch(healthMetricsProvider).activeMinutes} min',
                     iconAsset: 'assets/icons/exercise.svg',
                     color: const Color(0xFF4ADE80),
                     onTap: () => context.go('/main/workout'),
@@ -552,13 +517,19 @@ class _PremiumMetricCard extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [color.withOpacity(0.12), color.withOpacity(0.06)],
+            colors: [
+              color.withAlpha((0.12 * 255).toInt()),
+              color.withAlpha((0.06 * 255).toInt()),
+            ],
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.18), width: 1.5),
+          border: Border.all(
+            color: color.withAlpha((0.18 * 255).toInt()),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.18),
+              color: color.withAlpha((0.18 * 255).toInt()),
               blurRadius: 18,
               offset: const Offset(0, 8),
             ),
@@ -586,12 +557,15 @@ class _PremiumMetricCard extends StatelessWidget {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [color, color.withOpacity(0.7)],
+                            colors: [
+                              color,
+                              color.withAlpha((0.7 * 255).toInt()),
+                            ],
                           ),
                           borderRadius: BorderRadius.circular(14),
                           boxShadow: [
                             BoxShadow(
-                              color: color.withOpacity(0.18),
+                              color: color.withAlpha((0.18 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -601,7 +575,7 @@ class _PremiumMetricCard extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           child: SvgPicture.asset(
                             iconAsset,
-                            colorFilter: ColorFilter.mode(
+                            colorFilter: const ColorFilter.mode(
                               Colors.white,
                               BlendMode.srcIn,
                             ),

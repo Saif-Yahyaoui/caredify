@@ -1,11 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:fl_chart/fl_chart.dart';
 
 import '../../../shared/providers/voice_feedback_provider.dart';
 
@@ -60,12 +59,6 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
   final int spo2 = 0;
   final String bloodPressure = '00/00';
 
-  void _startHeartMeasurement() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Heart measurement started!')));
-  }
-
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
@@ -86,8 +79,8 @@ class _HeartTrackerScreenState extends ConsumerState<HeartTrackerScreen> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: _HeartTrackerScreenPremium(
             bpm: 72,
             trend: [72, 75, 70, 68, 74, 73, 72],
@@ -112,7 +105,7 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
         // Premium Card with Animated Heart
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color(0xFFFF6B81), Color(0xFFFFA07A)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -120,9 +113,9 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Color(0xFFFF6B81).withOpacity(0.2),
+                color: const Color(0xFFFF6B81).withAlpha((0.2 * 255).toInt()),
                 blurRadius: 16,
-                offset: Offset(0, 8),
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -132,12 +125,16 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
             children: [
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 1.0, end: 1.2),
-                duration: Duration(milliseconds: 800),
+                duration: const Duration(milliseconds: 800),
                 curve: Curves.easeInOut,
                 builder: (context, scale, child) {
                   return Transform.scale(
                     scale: 1 + 0.05 * (bpm % 2),
-                    child: Icon(Icons.favorite, color: Colors.white, size: 64),
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 64,
+                    ),
                   );
                 },
               ),
@@ -177,9 +174,9 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
                   height: 120,
                   child: LineChart(
                     LineChartData(
-                      gridData: FlGridData(show: false),
+                      gridData: const FlGridData(show: false),
                       borderData: FlBorderData(show: false),
-                      titlesData: FlTitlesData(show: false),
+                      titlesData: const FlTitlesData(show: false),
                       lineBarsData: [
                         LineChartBarData(
                           spots: List.generate(
@@ -187,9 +184,9 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
                             (i) => FlSpot(i.toDouble(), trend[i].toDouble()),
                           ),
                           isCurved: true,
-                          color: Color(0xFFFF6B81),
+                          color: const Color(0xFFFF6B81),
                           barWidth: 4,
-                          dotData: FlDotData(show: false),
+                          dotData: const FlDotData(show: false),
                         ),
                       ],
                     ),
@@ -205,9 +202,9 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFFFF1F3),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
+          color: const Color(0xFFFFF1F3),
+          child: const Padding(
+            padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: Color(0xFFFF6B81)),
@@ -227,7 +224,7 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFFFF7F0),
+          color: const Color(0xFFFFF7F0),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -239,8 +236,8 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   '• Stay hydrated\n• Manage stress\n• Get enough sleep\n• Exercise regularly',
                 ),
               ],
@@ -253,9 +250,9 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFFFE4E1),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
+          color: const Color(0xFFFFE4E1),
+          child: const Padding(
+            padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Icon(Icons.warning_amber_rounded, color: Color(0xFFFF6B81)),
@@ -273,15 +270,15 @@ class _HeartTrackerScreenPremium extends StatelessWidget {
         // Share/Export Button
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFFF6B81),
+            backgroundColor: const Color(0xFFFF6B81),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          icon: Icon(Icons.share),
-          label: Text('Share/Export Health Data'),
+          icon: const Icon(Icons.share),
+          label: const Text('Share/Export Health Data'),
           onPressed: () {},
         ),
       ],

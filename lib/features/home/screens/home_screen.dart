@@ -7,8 +7,8 @@ import '../../../shared/providers/health_metrics_provider.dart';
 import '../../../shared/widgets/alert_card.dart';
 import '../../../shared/widgets/coach_card.dart';
 import '../../../shared/widgets/emergency_button.dart';
-import '../../../shared/widgets/user_header.dart';
 import '../../../shared/widgets/section_header.dart';
+import '../../../shared/widgets/user_header.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -57,81 +57,138 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // ECG Card
                       InkWell(
                         borderRadius: BorderRadius.circular(20),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            backgroundColor: Colors.transparent,
-                            insetPadding: const EdgeInsets.all(24),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    const Color(0xFFEF4444).withOpacity(0.95),
-                                    const Color(0xFFEF4444).withOpacity(0.7),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFFEF4444).withOpacity(0.18),
-                                    blurRadius: 18,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.all(24),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              const Color(0xFFEF4444),
-                                              const Color(0xFFEF4444).withOpacity(0.8),
+                        onTap:
+                            () => showDialog(
+                              context: context,
+                              builder:
+                                  (context) => Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: const EdgeInsets.all(24),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            const Color(
+                                              0xFFEF4444,
+                                            ).withAlpha((0.95 * 255).toInt()),
+                                            const Color(
+                                              0xFFEF4444,
+                                            ).withAlpha((0.7 * 255).toInt()),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(24),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(
+                                              0xFFEF4444,
+                                            ).withAlpha((0.18 * 255).toInt()),
+                                            blurRadius: 18,
+                                            offset: const Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.all(24),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 48,
+                                                height: 48,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                      const Color(0xFFEF4444),
+                                                      const Color(
+                                                        0xFFEF4444,
+                                                      ).withAlpha(
+                                                        (0.8 * 255).toInt(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: const Icon(
+                                                  Icons.favorite_rounded,
+                                                  color: Colors.white,
+                                                  size: 24,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 16),
+                                              Text(
+                                                'ECG',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                              ),
                                             ],
                                           ),
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: const Icon(Icons.favorite_rounded, color: Colors.white, size: 24),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            'Current: 72 BPM',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Trend: Stable (↔)',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyMedium?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Your heart rate is within normal range. No abnormalities detected.',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodySmall?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Align(
+                                            alignment: Alignment.centerRight,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                foregroundColor: const Color(
+                                                  0xFFEF4444,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'View Detailed Analysis',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(width: 16),
-                                      Text('ECG', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Text('Current: 72 BPM', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                  const SizedBox(height: 8),
-                                  Text('Trend: Stable (↔)', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 8),
-                                  Text('Your heart rate is within normal range. No abnormalities detected.', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 16),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        foregroundColor: const Color(0xFFEF4444),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text('View Detailed Analysis'),
                                     ),
                                   ),
-                                ],
-                              ),
                             ),
-                          ),
-                        ),
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 0),
                           decoration: BoxDecoration(
@@ -139,15 +196,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                const Color(0xFFEF4444).withOpacity(0.08),
-                                const Color(0xFFEF4444).withOpacity(0.03),
+                                const Color(
+                                  0xFFEF4444,
+                                ).withAlpha((0.08 * 255).toInt()),
+                                const Color(
+                                  0xFFEF4444,
+                                ).withAlpha((0.03 * 255).toInt()),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFFEF4444).withOpacity(0.18), width: 1.5),
+                            border: Border.all(
+                              color: const Color(
+                                0xFFEF4444,
+                              ).withAlpha((0.18 * 255).toInt()),
+                              width: 1.5,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFEF4444).withOpacity(0.18),
+                                color: const Color(
+                                  0xFFEF4444,
+                                ).withAlpha((0.18 * 255).toInt()),
                                 blurRadius: 18,
                                 offset: const Offset(0, 8),
                               ),
@@ -163,17 +231,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   gradient: LinearGradient(
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
-                                    colors: [const Color(0xFFEF4444), const Color(0xFFEF4444).withOpacity(0.8)],
+                                    colors: [
+                                      const Color(0xFFEF4444),
+                                      const Color(
+                                        0xFFEF4444,
+                                      ).withAlpha((0.8 * 255).toInt()),
+                                    ],
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.favorite_rounded, color: Colors.white, size: 24),
+                                child: const Icon(
+                                  Icons.favorite_rounded,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: Text(
                                   'ECG',
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFFEF4444),
                                   ),
@@ -181,7 +260,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                               Text(
                                 '72 BPM',
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: const Color(0xFFEF4444),
                                 ),
@@ -194,81 +275,138 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // SpO2 Card
                       InkWell(
                         borderRadius: BorderRadius.circular(20),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            backgroundColor: Colors.transparent,
-                            insetPadding: const EdgeInsets.all(24),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    const Color(0xFF10B981).withOpacity(0.95),
-                                    const Color(0xFF10B981).withOpacity(0.7),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFF10B981).withOpacity(0.18),
-                                    blurRadius: 18,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.all(24),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              const Color(0xFF10B981),
-                                              const Color(0xFF10B981).withOpacity(0.8),
+                        onTap:
+                            () => showDialog(
+                              context: context,
+                              builder:
+                                  (context) => Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: const EdgeInsets.all(24),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            const Color(
+                                              0xFF10B981,
+                                            ).withAlpha((0.95 * 255).toInt()),
+                                            const Color(
+                                              0xFF10B981,
+                                            ).withAlpha((0.7 * 255).toInt()),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(24),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(
+                                              0xFF10B981,
+                                            ).withAlpha((0.18 * 255).toInt()),
+                                            blurRadius: 18,
+                                            offset: const Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.all(24),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 48,
+                                                height: 48,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                      const Color(0xFF10B981),
+                                                      const Color(
+                                                        0xFF10B981,
+                                                      ).withAlpha(
+                                                        (0.8 * 255).toInt(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: const Icon(
+                                                  Icons.air_rounded,
+                                                  color: Colors.white,
+                                                  size: 24,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 16),
+                                              Text(
+                                                'SpO2',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                              ),
                                             ],
                                           ),
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: const Icon(Icons.air_rounded, color: Colors.white, size: 24),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            'Current: 92%',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Trend: Stable (↔)',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyMedium?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Your SpO2 is within the healthy range.',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodySmall?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Align(
+                                            alignment: Alignment.centerRight,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                foregroundColor: const Color(
+                                                  0xFF10B981,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'View Full Chart',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(width: 16),
-                                      Text('SpO2', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Text('Current: 92%', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                  const SizedBox(height: 8),
-                                  Text('Trend: Stable (↔)', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 8),
-                                  Text('Your SpO2 is within the healthy range.', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 16),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        foregroundColor: const Color(0xFF10B981),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text('View Full Chart'),
                                     ),
                                   ),
-                                ],
-                              ),
                             ),
-                          ),
-                        ),
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 0),
                           decoration: BoxDecoration(
@@ -276,15 +414,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                const Color(0xFF10B981).withOpacity(0.08),
-                                const Color(0xFF10B981).withOpacity(0.03),
+                                const Color(
+                                  0xFF10B981,
+                                ).withAlpha((0.08 * 255).toInt()),
+                                const Color(
+                                  0xFF10B981,
+                                ).withAlpha((0.03 * 255).toInt()),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFF10B981).withOpacity(0.18), width: 1.5),
+                            border: Border.all(
+                              color: const Color(
+                                0xFF10B981,
+                              ).withAlpha((0.18 * 255).toInt()),
+                              width: 1.5,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF10B981).withOpacity(0.18),
+                                color: const Color(
+                                  0xFF10B981,
+                                ).withAlpha((0.18 * 255).toInt()),
                                 blurRadius: 18,
                                 offset: const Offset(0, 8),
                               ),
@@ -300,17 +449,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   gradient: LinearGradient(
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
-                                    colors: [const Color(0xFF10B981), const Color(0xFF10B981).withOpacity(0.8)],
+                                    colors: [
+                                      const Color(0xFF10B981),
+                                      const Color(
+                                        0xFF10B981,
+                                      ).withAlpha((0.8 * 255).toInt()),
+                                    ],
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.air_rounded, color: Colors.white, size: 24),
+                                child: const Icon(
+                                  Icons.air_rounded,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: Text(
                                   'SpO2',
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFF10B981),
                                   ),
@@ -318,7 +478,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                               Text(
                                 '92%',
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: const Color(0xFF10B981),
                                 ),
@@ -331,81 +493,138 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // Blood Pressure Card
                       InkWell(
                         borderRadius: BorderRadius.circular(20),
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            backgroundColor: Colors.transparent,
-                            insetPadding: const EdgeInsets.all(24),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    const Color(0xFF6366F1).withOpacity(0.95),
-                                    const Color(0xFF6366F1).withOpacity(0.7),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFF6366F1).withOpacity(0.18),
-                                    blurRadius: 18,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.all(24),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              const Color(0xFF6366F1),
-                                              const Color(0xFF6366F1).withOpacity(0.8),
+                        onTap:
+                            () => showDialog(
+                              context: context,
+                              builder:
+                                  (context) => Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: const EdgeInsets.all(24),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            const Color(
+                                              0xFF6366F1,
+                                            ).withAlpha((0.95 * 255).toInt()),
+                                            const Color(
+                                              0xFF6366F1,
+                                            ).withAlpha((0.7 * 255).toInt()),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(24),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(
+                                              0xFF6366F1,
+                                            ).withAlpha((0.18 * 255).toInt()),
+                                            blurRadius: 18,
+                                            offset: const Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.all(24),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 48,
+                                                height: 48,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                      const Color(0xFF6366F1),
+                                                      const Color(
+                                                        0xFF6366F1,
+                                                      ).withAlpha(
+                                                        (0.8 * 255).toInt(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: const Icon(
+                                                  Icons.bloodtype_rounded,
+                                                  color: Colors.white,
+                                                  size: 24,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 16),
+                                              Text(
+                                                'Blood Pressure',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                              ),
                                             ],
                                           ),
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: const Icon(Icons.bloodtype_rounded, color: Colors.white, size: 24),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            'Current: 120/80 mmHg',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Trend: Stable (↔)',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyMedium?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            'Your blood pressure is normal.',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodySmall?.copyWith(
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Align(
+                                            alignment: Alignment.centerRight,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                foregroundColor: const Color(
+                                                  0xFF6366F1,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'View Full Chart',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(width: 16),
-                                      Text('Blood Pressure', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Text('Current: 120/80 mmHg', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-                                  const SizedBox(height: 8),
-                                  Text('Trend: Stable (↔)', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 8),
-                                  Text('Your blood pressure is normal.', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70)),
-                                  const SizedBox(height: 16),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        foregroundColor: const Color(0xFF6366F1),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text('View Full Chart'),
                                     ),
                                   ),
-                                ],
-                              ),
                             ),
-                          ),
-                        ),
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 0),
                           decoration: BoxDecoration(
@@ -413,15 +632,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                const Color(0xFF6366F1).withOpacity(0.08),
-                                const Color(0xFF6366F1).withOpacity(0.03),
+                                const Color(
+                                  0xFF6366F1,
+                                ).withAlpha((0.08 * 255).toInt()),
+                                const Color(
+                                  0xFF6366F1,
+                                ).withAlpha((0.03 * 255).toInt()),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFF6366F1).withOpacity(0.18), width: 1.5),
+                            border: Border.all(
+                              color: const Color(
+                                0xFF6366F1,
+                              ).withAlpha((0.18 * 255).toInt()),
+                              width: 1.5,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF6366F1).withOpacity(0.18),
+                                color: const Color(
+                                  0xFF6366F1,
+                                ).withAlpha((0.18 * 255).toInt()),
                                 blurRadius: 18,
                                 offset: const Offset(0, 8),
                               ),
@@ -437,17 +667,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   gradient: LinearGradient(
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
-                                    colors: [const Color(0xFF6366F1), const Color(0xFF6366F1).withOpacity(0.8)],
+                                    colors: [
+                                      const Color(0xFF6366F1),
+                                      const Color(
+                                        0xFF6366F1,
+                                      ).withAlpha((0.8 * 255).toInt()),
+                                    ],
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.bloodtype_rounded, color: Colors.white, size: 24),
+                                child: const Icon(
+                                  Icons.bloodtype_rounded,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: Text(
                                   'Blood Pressure',
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFF6366F1),
                                   ),
@@ -455,7 +696,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                               Text(
                                 '120/80',
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: const Color(0xFF6366F1),
                                 ),
@@ -489,11 +732,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Heart Rate',
                         value:
-                            ref
+                            '${ref
                                 .watch(healthMetricsProvider)
-                                .heartRate
-                                .toString() +
-                            ' bpm',
+                                .heartRate} bpm',
                         iconAsset: 'assets/icons/heart.svg',
                         color: const Color(0xFFFF6B81),
                         onTap: () => context.go('/main/heart'),
@@ -501,11 +742,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Sleep',
                         value:
-                            ref
+                            '${ref
                                 .watch(healthMetricsProvider)
-                                .sleepHours
-                                .toString() +
-                            ' h',
+                                .sleepHours} h',
                         iconAsset: 'assets/icons/moon.svg',
                         color: const Color(0xFF8B5CF6),
                         onTap: () => context.go('/main/sleep'),
@@ -513,10 +752,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Water Intake',
                         value:
-                            (ref.watch(healthMetricsProvider).waterIntake *
+                            '${(ref.watch(healthMetricsProvider).waterIntake *
                                     1000)
-                                .toStringAsFixed(0) +
-                            ' ml',
+                                .toStringAsFixed(0)} ml',
                         iconAsset: 'assets/icons/water.svg',
                         color: const Color(0xFF22D3EE),
                         onTap: () => context.go('/main/water'),
@@ -524,11 +762,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Workout Tracker',
                         value:
-                            ref
+                            '${ref
                                 .watch(healthMetricsProvider)
-                                .activeMinutes
-                                .toString() +
-                            ' min',
+                                .activeMinutes} min',
                         iconAsset: 'assets/icons/exercise.svg',
                         color: const Color(0xFF4ADE80),
                         onTap: () => context.go('/main/workout'),
@@ -968,14 +1204,12 @@ class _PremiumMetricCard extends StatelessWidget {
   final String iconAsset;
   final Color color;
   final VoidCallback onTap;
-  final bool isActive;
   const _PremiumMetricCard({
     required this.title,
     required this.value,
     required this.iconAsset,
     required this.color,
     required this.onTap,
-    this.isActive = false,
   });
   @override
   Widget build(BuildContext context) {
@@ -989,13 +1223,19 @@ class _PremiumMetricCard extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [color.withOpacity(0.12), color.withOpacity(0.06)],
+            colors: [
+              color.withAlpha((0.12 * 255).toInt()),
+              color.withAlpha((0.06 * 255).toInt()),
+            ],
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.18), width: 1.5),
+          border: Border.all(
+            color: color.withAlpha((0.18 * 255).toInt()),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.18),
+              color: color.withAlpha((0.18 * 255).toInt()),
               blurRadius: 18,
               offset: const Offset(0, 8),
             ),
@@ -1023,12 +1263,15 @@ class _PremiumMetricCard extends StatelessWidget {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [color, color.withOpacity(0.7)],
+                            colors: [
+                              color,
+                              color.withAlpha((0.7 * 255).toInt()),
+                            ],
                           ),
                           borderRadius: BorderRadius.circular(14),
                           boxShadow: [
                             BoxShadow(
-                              color: color.withOpacity(0.18),
+                              color: color.withAlpha((0.18 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -1038,7 +1281,7 @@ class _PremiumMetricCard extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           child: SvgPicture.asset(
                             iconAsset,
-                            colorFilter: ColorFilter.mode(
+                            colorFilter: const ColorFilter.mode(
                               Colors.white,
                               BlendMode.srcIn,
                             ),
@@ -1080,7 +1323,6 @@ class _PremiumMetricCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (isActive)
               Positioned(
                 top: 12,
                 right: 12,
@@ -1099,7 +1341,7 @@ class _PremiumMetricCard extends StatelessWidget {
                           color: color,
                           boxShadow: [
                             BoxShadow(
-                              color: color.withOpacity(0.5),
+                              color: color.withAlpha((0.5 * 255).toInt()),
                               blurRadius: 8,
                               spreadRadius: 2,
                             ),
@@ -1113,119 +1355,6 @@ class _PremiumMetricCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-// Full-width enhanced workout tracker card
-class _WorkoutTrackerCard extends StatelessWidget {
-  final int minutes;
-  final int steps;
-  final double calories;
-  final double distance;
-  final VoidCallback onTap;
-  const _WorkoutTrackerCard({
-    required this.minutes,
-    required this.steps,
-    required this.calories,
-    required this.distance,
-    required this.onTap,
-  });
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        elevation: 6,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 22),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xFF8B5CF6), Color(0xFF4ADE80)],
-                      ),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Image.asset(
-                        'assets/icons/exercise.svg',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    'Workout Tracker',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: theme.primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 18),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _WorkoutStat(label: 'Minutes', value: minutes.toString()),
-                  _WorkoutStat(label: 'Steps', value: steps.toString()),
-                  _WorkoutStat(
-                    label: 'Calories',
-                    value: calories.toStringAsFixed(0),
-                  ),
-                  _WorkoutStat(
-                    label: 'Distance',
-                    value: distance.toStringAsFixed(2) + ' km',
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              LinearProgressIndicator(
-                value: minutes / 60.0,
-                minHeight: 8,
-                backgroundColor: theme.primaryColor.withAlpha(30),
-                valueColor: AlwaysStoppedAnimation<Color>(theme.primaryColor),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _WorkoutStat extends StatelessWidget {
-  final String label;
-  final String value;
-  const _WorkoutStat({required this.label, required this.value});
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      children: [
-        Text(
-          value,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          label,
-          style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
-        ),
-      ],
     );
   }
 }

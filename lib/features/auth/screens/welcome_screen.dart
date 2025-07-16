@@ -151,7 +151,9 @@ class WelcomeScreen extends ConsumerWidget {
                           style: TextStyle(
                             color:
                                 isDark
-                                    ? Colors.white.withOpacity(0.7)
+                                    ? Colors.white.withAlpha(
+                                      (0.7 * 255).toInt(),
+                                    )
                                     : const Color(0xFF64748B),
                             fontSize: 15,
                             fontWeight: FontWeight.w400,

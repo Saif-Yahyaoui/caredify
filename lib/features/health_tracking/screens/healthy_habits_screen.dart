@@ -5,8 +5,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
+import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/services/auth_service.dart';
 
 class HealthyHabitsScreen extends ConsumerStatefulWidget {
@@ -116,10 +116,12 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
                             CircularProgressIndicator(
                               value: _done.length / _habits.length,
                               strokeWidth: 10,
-                              valueColor: AlwaysStoppedAnimation<Color>(
+                              valueColor: const AlwaysStoppedAnimation<Color>(
                                 _habitsGreen,
                               ),
-                              backgroundColor: _habitsGreen.withOpacity(0.08),
+                              backgroundColor: _habitsGreen.withAlpha(
+                                (0.08 * 255).toInt(),
+                              ),
                             ),
                             Center(
                               child: Column(
@@ -137,7 +139,7 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
                                     'Habits Done',
                                     style: theme.textTheme.bodyMedium?.copyWith(
                                       color: theme.colorScheme.onSurface
-                                          .withOpacity(0.7),
+                                          .withAlpha((0.7 * 255).toInt()),
                                     ),
                                   ),
                                 ],
@@ -157,7 +159,7 @@ class _HealthyHabitsScreenState extends ConsumerState<HealthyHabitsScreen> {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.check_circle_outline_rounded,
                             color: _habitsGreen,
                             size: 28,

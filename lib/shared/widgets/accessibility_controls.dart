@@ -32,13 +32,17 @@ class AccessibilityControls extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color:
                       isDark
-                          ? const Color(0xFF0092DF).withOpacity(0.15)
-                          : const Color(0xFF0092DF).withOpacity(0.1),
+                          ? const Color(
+                            0xFF0092DF,
+                          ).withAlpha((0.15 * 255).toInt())
+                          : const Color(
+                            0xFF0092DF,
+                          ).withAlpha((0.1 * 255).toInt()),
                   borderRadius: BorderRadius.circular(12), // was 14
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.accessibility_new,
-                  color: const Color(0xFF0092DF),
+                  color: Color(0xFF0092DF),
                   size: 20, // was 24
                 ),
               ),
@@ -113,13 +117,13 @@ class _ProfessionalSection extends StatelessWidget {
       decoration: BoxDecoration(
         color:
             isDark
-                ? const Color(0xFF1E293B).withOpacity(0.6)
-                : Colors.white.withOpacity(0.8),
+                ? const Color(0xFF1E293B).withAlpha((0.6 * 255).toInt())
+                : Colors.white.withAlpha((0.8 * 255).toInt()),
         borderRadius: BorderRadius.circular(12), // was 18
         border: Border.all(
           color:
               isDark
-                  ? const Color(0xFF475569).withOpacity(0.3)
+                  ? const Color(0xFF475569).withAlpha((0.3 * 255).toInt())
                   : const Color(0xFFE2E8F0),
           width: 1,
         ),
@@ -127,10 +131,10 @@ class _ProfessionalSection extends StatelessWidget {
           BoxShadow(
             color:
                 isDark
-                    ? Colors.black.withOpacity(0.15)
+                    ? Colors.black.withAlpha((0.15 * 255).toInt())
                     : const Color(
                       0xFF64748B,
-                    ).withOpacity(0.05), // lighter shadow
+                    ).withAlpha((0.05 * 255).toInt()), // lighter shadow
             blurRadius: 6, // was 10
             offset: const Offset(0, 2), // was 3
           ),
@@ -155,7 +159,7 @@ class _ProfessionalSection extends StatelessWidget {
                   fontSize: 13, // was 16
                   color:
                       isDark
-                          ? Colors.white.withOpacity(0.9)
+                          ? Colors.white.withAlpha((0.9 * 255).toInt())
                           : const Color(0xFF374151),
                 ),
               ),
@@ -169,314 +173,7 @@ class _ProfessionalSection extends StatelessWidget {
   }
 }
 
-class _LanguageSelector extends ConsumerWidget {
-  const _LanguageSelector({required this.ref});
 
-  final WidgetRef ref;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: () => _showLanguageDialog(context, ref),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: theme.colorScheme.outline.withAlpha((0.2 * 255).toInt()),
-          ),
-        ),
-        child: Row(
-          children: [
-            Text(
-              ref.read(languageProvider.notifier).currentLanguageFlag,
-              style: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                ref.read(languageProvider.notifier).currentLanguageString,
-                style: theme.textTheme.bodyMedium,
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: theme.colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showLanguageDialog(BuildContext context, WidgetRef ref) {
-    final t = AppLocalizations.of(context)!;
-
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text(t.chooseLanguage),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children:
-                  LanguageNotifier.supportedLanguages.map((lang) {
-                    return ListTile(
-                      leading: Text(
-                        lang['flag']!,
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                      title: Text(lang['name']!),
-                      onTap: () {
-                        ref
-                            .read(languageProvider.notifier)
-                            .setLanguage(
-                              Locale(lang['code']!, lang['country']!),
-                            );
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  }).toList(),
-            ),
-          ),
-    );
-  }
-}
-
-class _FontSizeSelector extends ConsumerWidget {
-  const _FontSizeSelector({required this.ref});
-
-  final WidgetRef ref;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final t = AppLocalizations.of(context)!;
-    final fontSize = ref.watch(fontSizeProvider);
-
-    return Row(
-      children: [
-        Expanded(
-          child: _FontSizeOption(
-            label: t.normal,
-            isSelected: fontSize == FontSizeNotifier.normalSize,
-            onTap:
-                () => ref
-                    .read(fontSizeProvider.notifier)
-                    .setFontSize(FontSizeNotifier.normalSize),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _FontSizeOption(
-            label: t.large,
-            isSelected: fontSize == FontSizeNotifier.largeSize,
-            onTap:
-                () => ref
-                    .read(fontSizeProvider.notifier)
-                    .setFontSize(FontSizeNotifier.largeSize),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _FontSizeOption extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _FontSizeOption({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          color:
-              isSelected
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color:
-                isSelected
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.outline.withAlpha((0.2 * 255).toInt()),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color:
-                  isSelected
-                      ? theme.colorScheme.onPrimary
-                      : theme.colorScheme.onSurface,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ThemeSelector extends ConsumerWidget {
-  const _ThemeSelector({required this.ref});
-
-  final WidgetRef ref;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final t = AppLocalizations.of(context)!;
-    final themeMode = ref.watch(themeModeProvider);
-
-    return Row(
-      children: [
-        Expanded(
-          child: _ThemeOption(
-            label: t.light,
-            isSelected: themeMode == ThemeMode.light,
-            onTap:
-                () => ref
-                    .read(themeModeProvider.notifier)
-                    .setThemeMode(ThemeMode.light),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _ThemeOption(
-            label: t.dark,
-            isSelected: themeMode == ThemeMode.dark,
-            onTap:
-                () => ref
-                    .read(themeModeProvider.notifier)
-                    .setThemeMode(ThemeMode.dark),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _ThemeOption(
-            label: t.system,
-            isSelected: themeMode == ThemeMode.system,
-            onTap:
-                () => ref
-                    .read(themeModeProvider.notifier)
-                    .setThemeMode(ThemeMode.system),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ThemeOption extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _ThemeOption({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        decoration: BoxDecoration(
-          color:
-              isSelected
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color:
-                isSelected
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.outline.withAlpha((0.2 * 255).toInt()),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color:
-                  isSelected
-                      ? theme.colorScheme.onPrimary
-                      : theme.colorScheme.onSurface,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-            ),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _VoiceFeedbackToggle extends ConsumerWidget {
-  const _VoiceFeedbackToggle({required this.ref});
-
-  final WidgetRef ref;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final voiceEnabled = ref.watch(voiceFeedbackProvider);
-    final theme = Theme.of(context);
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: theme.colorScheme.outline.withAlpha((0.2 * 255).toInt()),
-        ),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.volume_up,
-            color: theme.colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              AppLocalizations.of(context)!.voiceFeedback,
-              style: theme.textTheme.bodyMedium,
-            ),
-          ),
-          Switch(
-            value: voiceEnabled,
-            onChanged:
-                (value) =>
-                    ref.read(voiceFeedbackProvider.notifier).state = value,
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _ModernLanguageSelector extends ConsumerWidget {
   final WidgetRef ref;
@@ -510,14 +207,18 @@ class _ModernLanguageSelector extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color:
                           isSelected
-                              ? theme.primaryColorDark.withOpacity(0.12)
+                              ? theme.primaryColorDark.withAlpha(
+                                (0.12 * 255).toInt(),
+                              )
                               : Colors.transparent,
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(
                         color:
                             isSelected
                                 ? theme.primaryColor
-                                : theme.dividerColor.withOpacity(0.3),
+                                : theme.dividerColor.withAlpha(
+                                  (0.3 * 255).toInt(),
+                                ),
                         width: 2,
                       ),
                     ),
@@ -663,13 +364,13 @@ class _ModernVoiceFeedbackToggle extends ConsumerWidget {
       decoration: BoxDecoration(
         color:
             isDark
-                ? const Color(0xFF334155).withOpacity(0.3)
+                ? const Color(0xFF334155).withAlpha((0.3 * 255).toInt())
                 : const Color(0xFFF1F5F9),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color:
               isDark
-                  ? const Color(0xFF475569).withOpacity(0.4)
+                  ? const Color(0xFF475569).withAlpha((0.4 * 255).toInt())
                   : const Color(0xFFE2E8F0),
           width: 1.5,
         ),
@@ -681,12 +382,14 @@ class _ModernVoiceFeedbackToggle extends ConsumerWidget {
             onChanged:
                 (val) => ref.read(voiceFeedbackProvider.notifier).state = val,
             activeColor: const Color(0xFF0092DF),
-            activeTrackColor: const Color(0xFF0092DF).withOpacity(0.3),
+            activeTrackColor: const Color(
+              0xFF0092DF,
+            ).withAlpha((0.3 * 255).toInt()),
             inactiveThumbColor: isDark ? Colors.grey[400] : Colors.grey[600],
             inactiveTrackColor:
                 isDark
-                    ? Colors.grey[700]?.withOpacity(0.3)
-                    : Colors.grey[300]?.withOpacity(0.5),
+                    ? Colors.grey[700]?.withAlpha((0.3 * 255).toInt())
+                    : Colors.grey[300]?.withAlpha((0.5 * 255).toInt()),
           ),
           const SizedBox(width: 12),
           Text(
@@ -696,7 +399,7 @@ class _ModernVoiceFeedbackToggle extends ConsumerWidget {
                   isEnabled
                       ? const Color(0xFF0092DF)
                       : isDark
-                      ? Colors.white.withOpacity(0.7)
+                      ? Colors.white.withAlpha((0.7 * 255).toInt())
                       : const Color(0xFF64748B),
               fontWeight: isEnabled ? FontWeight.w600 : FontWeight.w500,
               fontSize: 14,
@@ -734,9 +437,11 @@ class _ModernPillOption extends StatelessWidget {
         decoration: BoxDecoration(
           color:
               isSelected
-                  ? const Color(0xFF0092DF).withOpacity(isDark ? 0.18 : 0.09)
+                  ? const Color(0xFF0092DF).withAlpha(
+                    isDark ? (0.18 * 255).toInt() : (0.09 * 255).toInt(),
+                  )
                   : isDark
-                  ? const Color(0xFF334155).withOpacity(0.22)
+                  ? const Color(0xFF334155).withAlpha((0.22 * 255).toInt())
                   : const Color(0xFFF1F5F9),
           borderRadius: BorderRadius.circular(8), // was 12
           border: Border.all(
@@ -744,7 +449,7 @@ class _ModernPillOption extends StatelessWidget {
                 isSelected
                     ? const Color(0xFF0092DF)
                     : isDark
-                    ? const Color(0xFF475569).withOpacity(0.3)
+                    ? const Color(0xFF475569).withAlpha((0.3 * 255).toInt())
                     : const Color(0xFFE2E8F0),
             width: 1.2, // was 1.5
           ),
@@ -754,7 +459,7 @@ class _ModernPillOption extends StatelessWidget {
                     BoxShadow(
                       color: const Color(
                         0xFF0092DF,
-                      ).withOpacity(0.13), // lighter
+                      ).withAlpha((0.13 * 255).toInt()), // lighter
                       blurRadius: 3, // was 4
                       offset: const Offset(0, 1), // was 2
                     ),
@@ -768,7 +473,7 @@ class _ModernPillOption extends StatelessWidget {
                 isSelected
                     ? const Color(0xFF0092DF)
                     : isDark
-                    ? Colors.white.withOpacity(0.85)
+                    ? Colors.white.withAlpha((0.85 * 255).toInt())
                     : const Color(0xFF374151),
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
             fontSize: 12, // was 14

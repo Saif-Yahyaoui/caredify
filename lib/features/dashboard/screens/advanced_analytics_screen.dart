@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/role_based_access.dart';
 import '../../../shared/widgets/premium_tabbar.dart';
+import '../../../shared/widgets/role_based_access.dart';
 
 class _PremiumTabData {
   final String label;
@@ -34,9 +34,9 @@ class _AdvancedAnalyticsScreenState
   }
 
   final List<_PremiumTabData> _tabs = [
-    _PremiumTabData('Correlation', Icons.compare_arrows),
-    _PremiumTabData('Prediction', Icons.trending_up),
-    _PremiumTabData('Visuals', Icons.bar_chart),
+    const _PremiumTabData('Correlation', Icons.compare_arrows),
+    const _PremiumTabData('Prediction', Icons.trending_up),
+    const _PremiumTabData('Visuals', Icons.bar_chart),
   ];
 
   @override
@@ -193,7 +193,7 @@ class _AdvancedAnalyticsScreenState
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withAlpha((0.1 * 255).toInt()),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -285,7 +285,7 @@ class _AdvancedAnalyticsScreenState
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withAlpha((0.1 * 255).toInt()),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(

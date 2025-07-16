@@ -11,7 +11,7 @@ class GradientButton extends StatelessWidget {
   final double borderRadius;
 
   const GradientButton({
-    Key? key,
+    super.key,
     required this.text,
     this.onPressed,
     this.isLoading = false,
@@ -20,7 +20,7 @@ class GradientButton extends StatelessWidget {
     this.icon,
     this.padding,
     this.borderRadius = 32,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +38,15 @@ class GradientButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF0092DF).withOpacity(0.18),
+              color: const Color(0xFF0092DF).withAlpha((0.18 * 255).toInt()),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(color: Colors.white.withOpacity(0.18), width: 1.5),
+          border: Border.all(
+            color: Colors.white.withAlpha((0.18 * 255).toInt()),
+            width: 1.5,
+          ),
         ),
         child: Material(
           color: Colors.transparent,
@@ -57,7 +60,7 @@ class GradientButton extends StatelessWidget {
               child: Center(
                 child:
                     isLoading
-                        ? SizedBox(
+                        ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
@@ -111,7 +114,7 @@ class SecondaryGradientButton extends StatelessWidget {
   final double borderRadius;
 
   const SecondaryGradientButton({
-    Key? key,
+    super.key,
     required this.text,
     this.onPressed,
     this.isLoading = false,
@@ -120,16 +123,11 @@ class SecondaryGradientButton extends StatelessWidget {
     this.icon,
     this.padding,
     this.borderRadius = 32,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final isEnabled = onPressed != null && !isLoading;
-    const borderGradient = LinearGradient(
-      colors: [Color(0xFF0092DF), Color(0xFF00C853)],
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-    );
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 56,
@@ -139,7 +137,7 @@ class SecondaryGradientButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF0092DF).withOpacity(0.08),
+              color: const Color(0xFF0092DF).withAlpha((0.08 * 255).toInt()),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -158,7 +156,7 @@ class SecondaryGradientButton extends StatelessWidget {
               child: Center(
                 child:
                     isLoading
-                        ? SizedBox(
+                        ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(

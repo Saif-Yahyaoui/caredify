@@ -37,7 +37,7 @@ class PremiumRecommendationCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: priorityColor.withOpacity(0.1),
+                    color: priorityColor.withAlpha((0.1 * 255).toInt()),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(icon, color: priorityColor, size: 24),

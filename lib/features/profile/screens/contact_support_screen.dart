@@ -4,14 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/services/auth_service.dart';
 
 class ContactSupportScreen extends ConsumerWidget {
   const ContactSupportScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userType = ref.watch(userTypeProvider);
+    ref.watch(userTypeProvider);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 

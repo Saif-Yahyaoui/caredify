@@ -154,7 +154,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
                         : Colors.white.withValues(alpha: 0.5),
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.description_outlined,
               size: 40,
               color: AppColors.primaryBlue,
@@ -234,7 +234,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
           // Section title
           Row(
             children: [
-              Icon(Icons.gavel, color: AppColors.primaryBlue, size: 24),
+              const Icon(Icons.gavel, color: AppColors.primaryBlue, size: 24),
               const SizedBox(width: 12),
               Text(
                 t.termsAndConditions,
@@ -329,7 +329,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline, color: AppColors.healthGreen, size: 24),
+              const Icon(Icons.info_outline, color: AppColors.healthGreen, size: 24),
               const SizedBox(width: 12),
               Text(
                 t.importantNotice,

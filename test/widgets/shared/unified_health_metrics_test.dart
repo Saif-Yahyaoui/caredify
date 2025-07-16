@@ -1,12 +1,12 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 import 'package:caredify/shared/widgets/unified_health_metrics.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('UnifiedHealthMetrics', () {
     testWidgets('renders and shows Heart Rate label', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: SingleChildScrollView(
               child: UnifiedHealthMetrics(

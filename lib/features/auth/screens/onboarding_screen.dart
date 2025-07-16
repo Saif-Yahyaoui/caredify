@@ -101,7 +101,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
@@ -168,7 +167,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color:
                               isDark
-                                  ? Colors.white.withOpacity(0.9)
+                                  ? Colors.white.withAlpha((0.9 * 255).toInt())
                                   : const Color(0xFF1E293B),
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
@@ -352,7 +351,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: TextStyle(
                             color:
                                 isDark
-                                    ? Colors.white.withOpacity(0.7)
+                                    ? Colors.white.withAlpha(
+                                      (0.7 * 255).toInt(),
+                                    )
                                     : const Color(0xFF64748B),
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
@@ -416,15 +417,14 @@ class _OnboardingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
     final isDark = theme.brightness == Brightness.dark;
 
     return Center(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         constraints: BoxConstraints(
-          maxWidth: size.width * 0.85,
-          maxHeight: size.height * 0.5,
+          maxWidth: MediaQuery.of(context).size.width * 0.85,
+          maxHeight: MediaQuery.of(context).size.height * 0.5,
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -471,8 +471,10 @@ class _OnboardingCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     color:
                         isDark
-                            ? Colors.white.withOpacity(0.05)
-                            : theme.primaryColor.withOpacity(0.05),
+                            ? Colors.white.withAlpha((0.05 * 255).toInt())
+                            : theme.primaryColor.withAlpha(
+                              (0.05 * 255).toInt(),
+                            ),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
@@ -491,7 +493,9 @@ class _OnboardingCard extends StatelessWidget {
                             (isDark
                                 ? const Color(0xFF60A5FA)
                                 : theme.primaryColor))
-                        .withOpacity(isDark ? 0.2 : 0.15),
+                        .withAlpha(
+                          isDark ? (0.2 * 255).toInt() : (0.15 * 255).toInt(),
+                        ),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -526,7 +530,7 @@ class _OnboardingCard extends StatelessWidget {
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color:
                       isDark
-                          ? Colors.white.withOpacity(0.8)
+                          ? Colors.white.withAlpha((0.8 * 255).toInt())
                           : const Color(0xFF64748B),
                   fontSize: 14,
                   height: 1.4,
@@ -560,14 +564,18 @@ class _OnboardingCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color:
                         isDark
-                            ? Colors.white.withOpacity(0.05)
-                            : theme.primaryColor.withOpacity(0.05),
+                            ? Colors.white.withAlpha((0.05 * 255).toInt())
+                            : theme.primaryColor.withAlpha(
+                              (0.05 * 255).toInt(),
+                            ),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color:
                           isDark
-                              ? Colors.white.withOpacity(0.1)
-                              : theme.primaryColor.withOpacity(0.1),
+                              ? Colors.white.withAlpha((0.1 * 255).toInt())
+                              : theme.primaryColor.withAlpha(
+                                (0.1 * 255).toInt(),
+                              ),
                       width: 1,
                     ),
                   ),
@@ -604,8 +612,9 @@ class _OnboardingCard extends StatelessWidget {
                                             ?.copyWith(
                                               color:
                                                   isDark
-                                                      ? Colors.white
-                                                          .withOpacity(0.9)
+                                                      ? Colors.white.withAlpha(
+                                                        (0.9 * 255).toInt(),
+                                                      )
                                                       : const Color(0xFF475569),
                                               fontSize: 13,
                                               height: 1.3,
@@ -631,7 +640,7 @@ class _OnboardingCard extends StatelessWidget {
                   style: theme.textTheme.bodySmall?.copyWith(
                     color:
                         isDark
-                            ? Colors.white.withOpacity(0.7)
+                            ? Colors.white.withAlpha((0.7 * 255).toInt())
                             : const Color(0xFF64748B),
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
@@ -678,7 +687,7 @@ class _EnhancedDot extends StatelessWidget {
             isActive
                 ? null
                 : isDark
-                ? Colors.white.withOpacity(0.3)
+                ? Colors.white.withAlpha((0.3 * 255).toInt())
                 : const Color(0xFFCBD5E1),
       ),
     );
@@ -706,12 +715,13 @@ class _EnhancedCircleIconButton extends StatelessWidget {
 
     final backgroundColor =
         isSuccess
-            ? Colors.green.withOpacity(0.1)
+            ? Colors.green.withAlpha((0.1 * 255).toInt())
             : isActive
-            ? (isDark ? const Color(0xFF60A5FA) : theme.primaryColor)
-                .withOpacity(0.1)
+            ? (isDark ? const Color(0xFF60A5FA) : theme.primaryColor).withAlpha(
+              (0.1 * 255).toInt(),
+            )
             : isDark
-            ? Colors.white.withOpacity(0.1)
+            ? Colors.white.withAlpha((0.1 * 255).toInt())
             : const Color(0xFFE2E8F0);
 
     final iconColor =
@@ -720,7 +730,7 @@ class _EnhancedCircleIconButton extends StatelessWidget {
             : isActive
             ? (isDark ? const Color(0xFF60A5FA) : theme.primaryColor)
             : isDark
-            ? Colors.white.withOpacity(0.4)
+            ? Colors.white.withAlpha((0.4 * 255).toInt())
             : const Color(0xFF94A3B8);
 
     final borderColor =
@@ -728,7 +738,7 @@ class _EnhancedCircleIconButton extends StatelessWidget {
             ? (isSuccess
                     ? Colors.green
                     : (isDark ? const Color(0xFF60A5FA) : theme.primaryColor))
-                .withOpacity(0.3)
+                .withAlpha((0.3 * 255).toInt())
             : Colors.transparent;
 
     return Material(

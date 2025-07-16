@@ -20,12 +20,15 @@ class PremiumTabBar extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E293B).withOpacity(0.8) : Colors.white,
+        color:
+            isDark
+                ? const Color(0xFF1E293B).withAlpha((0.8 * 255).toInt())
+                : Colors.white,
         borderRadius: BorderRadius.circular(25),
         border: Border.all(
           color:
               isDark
-                  ? const Color(0xFF475569).withOpacity(0.3)
+                  ? const Color(0xFF475569).withAlpha((0.3 * 255).toInt())
                   : const Color(0xFFE2E8F0),
           width: 1.5,
         ),
@@ -33,8 +36,8 @@ class PremiumTabBar extends StatelessWidget {
           BoxShadow(
             color:
                 isDark
-                    ? Colors.black.withOpacity(0.3)
-                    : Colors.grey.withOpacity(0.1),
+                    ? Colors.black.withAlpha((0.3 * 255).toInt())
+                    : Colors.grey.withAlpha((0.1 * 255).toInt()),
             blurRadius: 20,
             offset: const Offset(0, 6),
           ),
@@ -62,7 +65,9 @@ class PremiumTabBar extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF0092DF).withOpacity(0.3),
+                              color: const Color(
+                                0xFF0092DF,
+                              ).withAlpha((0.3 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),

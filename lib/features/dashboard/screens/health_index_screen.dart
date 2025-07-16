@@ -5,8 +5,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
+import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/services/auth_service.dart';
 
 class HealthIndexScreen extends ConsumerStatefulWidget {
@@ -357,9 +357,9 @@ class _BMICard extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
+            const Icon(
               Icons.monitor_weight,
-              color: const Color(0xFF00B8A9),
+              color: Color(0xFF00B8A9),
               size: 28,
             ),
             const SizedBox(width: 8),
@@ -500,9 +500,9 @@ class _BodyFatRateCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
+            const Icon(
               Icons.fitness_center,
-              color: const Color(0xFF8B5CF6),
+              color: Color(0xFF8B5CF6),
               size: 28,
             ),
             const SizedBox(width: 8),

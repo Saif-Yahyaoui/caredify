@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../providers/user_type_provider.dart';
-import '../providers/ecg_analysis_provider.dart';
-import '../models/ecg_analysis_result.dart';
-import 'ecg_ai_analysis_card.dart';
 import '../../core/theme/app_colors.dart';
+import '../models/ecg_analysis_result.dart';
+import '../providers/ecg_analysis_provider.dart';
 
 /// Premium ECG Analysis Card
 class PremiumEcgAnalysisCard extends ConsumerStatefulWidget {
@@ -49,10 +47,12 @@ class _PremiumEcgAnalysisCardState
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryBlue.withOpacity(0.1),
+                      color: AppColors.primaryBlue.withAlpha(
+                        (0.1 * 255).toInt(),
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.psychology,
                       color: AppColors.primaryBlue,
                       size: 20,
@@ -181,9 +181,11 @@ class _PremiumEcgAnalysisCardState
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: indicatorColor.withOpacity(0.1),
+        color: indicatorColor.withAlpha((0.1 * 255).toInt()),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: indicatorColor.withOpacity(0.3)),
+        border: Border.all(
+          color: indicatorColor.withAlpha((0.3 * 255).toInt()),
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -287,10 +289,12 @@ class HistoricalDataCard extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.healthGreen.withOpacity(0.1),
+                      color: AppColors.healthGreen.withAlpha(
+                        (0.1 * 255).toInt(),
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.history,
                       color: AppColors.healthGreen,
                       size: 20,
@@ -404,10 +408,10 @@ class AiAlertsCard extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.alertRed.withOpacity(0.1),
+                      color: AppColors.alertRed.withAlpha((0.1 * 255).toInt()),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.notifications_active,
                       color: AppColors.alertRed,
                       size: 20,
@@ -466,12 +470,12 @@ class AiAlertsCard extends ConsumerWidget {
                           decoration: BoxDecoration(
                             color: _getAlertColor(
                               alert['priority'] as String,
-                            ).withOpacity(0.1),
+                            ).withAlpha((0.1 * 255).toInt()),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: _getAlertColor(
                                 alert['priority'] as String,
-                              ).withOpacity(0.3),
+                              ).withAlpha((0.3 * 255).toInt()),
                             ),
                           ),
                           child: Row(
@@ -580,10 +584,12 @@ class ExportDataCard extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryBlue.withOpacity(0.1),
+                      color: AppColors.primaryBlue.withAlpha(
+                        (0.1 * 255).toInt(),
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.download,
                       color: AppColors.primaryBlue,
                       size: 20,

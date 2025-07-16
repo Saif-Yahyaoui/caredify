@@ -1,5 +1,4 @@
 import 'package:caredify/features/profile/screens/profile_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

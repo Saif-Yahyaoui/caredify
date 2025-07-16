@@ -153,7 +153,7 @@ class _PrivacyPolicyScreenState extends ConsumerState<PrivacyPolicyScreen> {
                         : Colors.white.withValues(alpha: 0.5),
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.privacy_tip_outlined,
               size: 40,
               color: AppColors.primaryBlue,
@@ -233,7 +233,7 @@ class _PrivacyPolicyScreenState extends ConsumerState<PrivacyPolicyScreen> {
           // Section title
           Row(
             children: [
-              Icon(Icons.security, color: AppColors.primaryBlue, size: 24),
+              const Icon(Icons.security, color: AppColors.primaryBlue, size: 24),
               const SizedBox(width: 12),
               Text(
                 t.dataProtection,
@@ -328,7 +328,7 @@ class _PrivacyPolicyScreenState extends ConsumerState<PrivacyPolicyScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.info_outline, color: AppColors.healthGreen, size: 24),
+              const Icon(Icons.info_outline, color: AppColors.healthGreen, size: 24),
               const SizedBox(width: 12),
               Text(
                 t.yourRights,

@@ -5,10 +5,10 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/services/auth_service.dart';
+import '../../../shared/widgets/custom_text_field.dart';
 
 class HealthIndexReevaluateScreen extends ConsumerStatefulWidget {
   const HealthIndexReevaluateScreen({super.key});
@@ -74,7 +74,7 @@ class _HealthIndexReevaluateScreenState
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     final isDark = theme.brightness == Brightness.dark;
-    const _indexGold = Color(0xFFFFC94D);
+    const indexGold = Color(0xFFFFC94D);
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
@@ -135,7 +135,7 @@ class _HealthIndexReevaluateScreenState
                           child: Icon(
                             Icons.event_available_outlined,
                             size: 120,
-                            color: _indexGold.withAlpha((0.2 * 255).round()),
+                            color: indexGold.withAlpha((0.2 * 255).round()),
                           ),
                         ),
                       ),
@@ -169,7 +169,7 @@ class _HealthIndexReevaluateScreenState
                             onChanged: (val) {
                               setState(() => _sex = 'Female');
                             },
-                            activeColor: _indexGold,
+                            activeColor: indexGold,
                           ),
                           Text(
                             AppLocalizations.of(context)!.genderFemale,
@@ -181,7 +181,7 @@ class _HealthIndexReevaluateScreenState
                             onChanged: (val) {
                               setState(() => _sex = 'Male');
                             },
-                            activeColor: _indexGold,
+                            activeColor: indexGold,
                           ),
                           Text(
                             AppLocalizations.of(context)!.genderMale,
@@ -222,7 +222,7 @@ class _HealthIndexReevaluateScreenState
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: _indexGold,
+                            backgroundColor: indexGold,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -233,7 +233,7 @@ class _HealthIndexReevaluateScreenState
                             padding: const EdgeInsets.symmetric(vertical: 14),
                           ),
                           onPressed: () {},
-                          child: Text('Save Changes'),
+                          child: const Text('Save Changes'),
                         ),
                       ),
                     ],

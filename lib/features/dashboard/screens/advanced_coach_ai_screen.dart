@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/role_based_access.dart';
-import '../../../shared/widgets/premium_tabbar.dart';
 import '../../../shared/widgets/premium_recommendation_card.dart';
+import '../../../shared/widgets/premium_tabbar.dart';
+import '../../../shared/widgets/role_based_access.dart';
 import '../../../shared/widgets/section_header.dart';
 
 class AdvancedCoachAiScreen extends ConsumerStatefulWidget {
@@ -300,88 +300,37 @@ class _AdvancedCoachAiScreenState extends ConsumerState<AdvancedCoachAiScreen>
     );
   }
 
-  Widget _buildTodayRecommendations(BuildContext context, bool isDark) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.lightbulb, color: Colors.amber, size: 24),
-                const SizedBox(width: 8),
-                Text(
-                  "Today's Recommendations",
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const _RecommendationItem(
-              title: 'Morning Walk',
-              description: 'Take a 30-minute walk to improve heart health',
-              icon: Icons.directions_walk,
-              color: Colors.green,
-              priority: 'High',
-            ),
-            const SizedBox(height: 8),
-            const _RecommendationItem(
-              title: 'Hydration Check',
-              description: 'Drink 8 glasses of water today',
-              icon: Icons.water_drop,
-              color: Colors.blue,
-              priority: 'Medium',
-            ),
-            const SizedBox(height: 8),
-            const _RecommendationItem(
-              title: 'Stress Management',
-              description: 'Practice 10 minutes of meditation',
-              icon: Icons.self_improvement,
-              color: Colors.purple,
-              priority: 'Medium',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildWeeklyInsights(BuildContext context, bool isDark) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
+      child: const Padding(
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SectionHeader(
+            SectionHeader(
               title: 'Weekly Insights',
               icon: Icons.analytics,
               iconColor: Colors.orange,
             ),
-            const SizedBox(height: 16),
-            const _InsightItem(
+            SizedBox(height: 16),
+            _InsightItem(
               title: 'Heart Rate Improvement',
               description:
                   'Your average heart rate decreased by 5 BPM this week',
               icon: Icons.trending_down,
               color: Colors.green,
             ),
-            const SizedBox(height: 8),
-            const _InsightItem(
+            SizedBox(height: 8),
+            _InsightItem(
               title: 'Sleep Quality',
               description: 'Sleep duration increased by 30 minutes on average',
               icon: Icons.bedtime,
               color: Colors.blue,
             ),
-            const SizedBox(height: 8),
-            const _InsightItem(
+            SizedBox(height: 8),
+            _InsightItem(
               title: 'Activity Level',
               description: 'You exceeded your daily step goal 5 out of 7 days',
               icon: Icons.directions_run,
@@ -755,91 +704,6 @@ class _AdvancedCoachAiScreenState extends ConsumerState<AdvancedCoachAiScreen>
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _RecommendationItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final IconData icon;
-  final Color color;
-  final String priority;
-
-  const _RecommendationItem({
-    required this.title,
-    required this.description,
-    required this.icon,
-    required this.color,
-    required this.priority,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final priorityColor =
-        priority == 'High'
-            ? Colors.red
-            : priority == 'Medium'
-            ? Colors.orange
-            : Colors.green;
-
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withAlpha((0.1 * 255).toInt()),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withAlpha((0.3 * 255).toInt())),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: priorityColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        priority,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 8,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  description,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).hintColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

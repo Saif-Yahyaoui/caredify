@@ -409,7 +409,7 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                     child: _ComparisonPreviewCard(
                       title: 'Basic',
                       color: const Color(0xFF0092DF),
-                      features: ['Basic ECG', 'Simple Metrics', 'Basic Alerts'],
+                      features: const ['Basic ECG', 'Simple Metrics', 'Basic Alerts'],
                       isDark: isDark,
                     ),
                   ),
@@ -418,7 +418,7 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                     child: _ComparisonPreviewCard(
                       title: 'Premium',
                       color: const Color(0xFFFFD700),
-                      features: [
+                      features: const [
                         'Advanced AI',
                         'Full Analytics',
                         'Priority Support',
@@ -453,12 +453,12 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                   onPressed: () {
                     _showEnhancedFeatureComparison(context, isDark);
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.visibility_rounded, size: 22),
-                      const SizedBox(width: 10),
-                      const Text('View Detailed Comparison'),
+                      Icon(Icons.visibility_rounded, size: 22),
+                      SizedBox(width: 10),
+                      Text('View Detailed Comparison'),
                     ],
                   ),
                 ),
@@ -540,13 +540,13 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                   // Header
                   Container(
                     padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [Color(0xFF0092DF), Color(0xFF0077CC)],
                       ),
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(24),
                         topRight: Radius.circular(24),
                       ),
@@ -556,7 +556,7 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withAlpha((0.2 * 255).toInt()),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Icon(
@@ -581,7 +581,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                               Text(
                                 'Comprehensive feature comparison',
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.white.withAlpha(
+                                    (0.9 * 255).toInt(),
+                                  ),
                                 ),
                               ),
                             ],
@@ -591,7 +593,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                           onPressed: () => Navigator.pop(context),
                           icon: const Icon(Icons.close, color: Colors.white),
                           style: IconButton.styleFrom(
-                            backgroundColor: Colors.white.withOpacity(0.2),
+                            backgroundColor: Colors.white.withAlpha(
+                              (0.2 * 255).toInt(),
+                            ),
                           ),
                         ),
                       ],
@@ -609,7 +613,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                             decoration: BoxDecoration(
                               color:
                                   isDark
-                                      ? const Color(0xFF1E293B).withOpacity(0.8)
+                                      ? const Color(
+                                        0xFF1E293B,
+                                      ).withAlpha((0.8 * 255).toInt())
                                       : Colors.white,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
@@ -617,7 +623,7 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                     isDark
                                         ? const Color(
                                           0xFF475569,
-                                        ).withOpacity(0.3)
+                                        ).withAlpha((0.3 * 255).toInt())
                                         : const Color(0xFFE2E8F0),
                                 width: 1.5,
                               ),
@@ -625,8 +631,12 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                 BoxShadow(
                                   color:
                                       isDark
-                                          ? Colors.black.withOpacity(0.3)
-                                          : Colors.grey.withOpacity(0.1),
+                                          ? Colors.black.withAlpha(
+                                            (0.3 * 255).toInt(),
+                                          )
+                                          : Colors.grey.withAlpha(
+                                            (0.1 * 255).toInt(),
+                                          ),
                                   blurRadius: 20,
                                   offset: const Offset(0, 8),
                                 ),
@@ -644,10 +654,14 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                               ? [
                                                 const Color(
                                                   0xFF475569,
-                                                ).withOpacity(0.4),
+                                                ).withAlpha(
+                                                  (0.4 * 255).toInt(),
+                                                ),
                                                 const Color(
                                                   0xFF334155,
-                                                ).withOpacity(0.4),
+                                                ).withAlpha(
+                                                  (0.4 * 255).toInt(),
+                                                ),
                                               ]
                                               : [
                                                 const Color(0xFFF8FAFC),
@@ -694,7 +708,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                                   BoxShadow(
                                                     color: const Color(
                                                       0xFF0092DF,
-                                                    ).withOpacity(0.15),
+                                                    ).withAlpha(
+                                                      (0.15 * 255).toInt(),
+                                                    ),
                                                     blurRadius: 4,
                                                     offset: const Offset(0, 2),
                                                   ),
@@ -703,7 +719,7 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  Icon(
+                                                  const Icon(
                                                     Icons.person_outline,
                                                     color: Colors.white,
                                                     size: 16,
@@ -752,7 +768,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                                   BoxShadow(
                                                     color: const Color(
                                                       0xFFFFA500,
-                                                    ).withOpacity(0.15),
+                                                    ).withAlpha(
+                                                      (0.15 * 255).toInt(),
+                                                    ),
                                                     blurRadius: 4,
                                                     offset: const Offset(0, 2),
                                                   ),
@@ -803,7 +821,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                               isDark
                                                   ? const Color(
                                                     0xFF475569,
-                                                  ).withOpacity(0.2)
+                                                  ).withAlpha(
+                                                    (0.2 * 255).toInt(),
+                                                  )
                                                   : const Color(0xFFE2E8F0),
                                           width: 1,
                                         ),
@@ -826,7 +846,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                                       isDark
                                                           ? const Color(
                                                             0xFF475569,
-                                                          ).withOpacity(0.3)
+                                                          ).withAlpha(
+                                                            (0.3 * 255).toInt(),
+                                                          )
                                                           : const Color(
                                                             0xFFF1F5F9,
                                                           ),
@@ -876,13 +898,17 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                                 decoration: BoxDecoration(
                                                   color: const Color(
                                                     0xFF0092DF,
-                                                  ).withOpacity(0.1),
+                                                  ).withAlpha(
+                                                    (0.1 * 255).toInt(),
+                                                  ),
                                                   borderRadius:
                                                       BorderRadius.circular(12),
                                                   border: Border.all(
                                                     color: const Color(
                                                       0xFF0092DF,
-                                                    ).withOpacity(0.2),
+                                                    ).withAlpha(
+                                                      (0.2 * 255).toInt(),
+                                                    ),
                                                     width: 1,
                                                   ),
                                                 ),
@@ -937,7 +963,9 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                                     BoxShadow(
                                                       color: const Color(
                                                         0xFFFFA500,
-                                                      ).withOpacity(0.2),
+                                                      ).withAlpha(
+                                                        (0.2 * 255).toInt(),
+                                                      ),
                                                       blurRadius: 8,
                                                       offset: const Offset(
                                                         0,
@@ -1003,21 +1031,21 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                   foregroundColor: const Color(0xFFFFA500),
                                   shadowColor: const Color(
                                     0xFFFFA500,
-                                  ).withOpacity(0.2),
+                                  ).withAlpha((0.2 * 255).toInt()),
                                   textStyle: theme.textTheme.titleMedium
                                       ?.copyWith(
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1.1,
                                       ),
                                 ),
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.workspace_premium,
                                       color: Color(0xFFFFA500),
                                     ),
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: 10),
                                     Text('Upgrade to Premium'),
                                   ],
                                 ),
@@ -1218,9 +1246,15 @@ class _ComparisonPreviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF334155).withOpacity(0.3) : Colors.white,
+        color:
+            isDark
+                ? const Color(0xFF334155).withAlpha((0.3 * 255).toInt())
+                : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.3), width: 2),
+        border: Border.all(
+          color: color.withAlpha((0.3 * 255).toInt()),
+          width: 2,
+        ),
         boxShadow: [
           BoxShadow(
             color: color.withAlpha((0.1 * 255).toInt()),

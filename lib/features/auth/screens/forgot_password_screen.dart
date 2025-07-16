@@ -157,7 +157,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         : Colors.white.withValues(alpha: 0.5),
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.lock_reset,
               size: 40,
               color: AppColors.primaryBlue,
@@ -238,7 +238,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             // Section title
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.email_outlined,
                   color: AppColors.primaryBlue,
                   size: 24,
@@ -302,7 +302,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.check_circle_outline,
                       color: AppColors.healthGreen,
                       size: 20,

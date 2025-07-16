@@ -40,7 +40,9 @@ class SectionHeader extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: (iconColor ?? theme.primaryColor).withOpacity(0.08),
+                color: (iconColor ?? theme.primaryColor).withAlpha(
+                  (0.08 * 255).toInt(),
+                ),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -52,8 +54,12 @@ class SectionHeader extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      (iconColor ?? theme.primaryColor).withOpacity(0.9),
-                      (iconColor ?? theme.primaryColor).withOpacity(0.6),
+                      (iconColor ?? theme.primaryColor).withAlpha(
+                        (0.9 * 255).toInt(),
+                      ),
+                      (iconColor ?? theme.primaryColor).withAlpha(
+                        (0.6 * 255).toInt(),
+                      ),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -88,7 +94,9 @@ class SectionHeader extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       (iconColor ?? theme.primaryColor),
-                      (iconColor ?? theme.primaryColor).withOpacity(0.5),
+                      (iconColor ?? theme.primaryColor).withAlpha(
+                        (0.5 * 255).toInt(),
+                      ),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

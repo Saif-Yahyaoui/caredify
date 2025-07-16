@@ -1,7 +1,7 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
-import 'package:caredify/shared/widgets/ecg_ai_analysis_card.dart';
 import 'package:caredify/shared/models/ecg_analysis_result.dart';
+import 'package:caredify/shared/widgets/ecg_ai_analysis_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('EcgAiAnalysisCard', () {
