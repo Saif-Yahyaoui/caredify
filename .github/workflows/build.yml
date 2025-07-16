@@ -31,7 +31,11 @@ jobs:
       - name: Generate stub firebase_options.dart
         run: |
           mkdir -p lib
-          echo "// ignore_for_file: type=lint\nimport 'package:firebase_core/firebase_core.dart';\nclass DefaultFirebaseOptions {\n  static const currentPlatform = null;\n}" > lib/firebase_options.dart
+          echo "// ignore_for_file: type=lint" > lib/firebase_options.dart
+          echo "import 'package:firebase_core/firebase_core.dart';" >> lib/firebase_options.dart
+          echo "class DefaultFirebaseOptions {" >> lib/firebase_options.dart
+          echo "  static FirebaseOptions get currentPlatform => throw UnimplementedError('FirebaseOptions are not available in CI.');" >> lib/firebase_options.dart
+          echo "}" >> lib/firebase_options.dart
 
       - name: Analyze Dart code  
         run: flutter analyze
