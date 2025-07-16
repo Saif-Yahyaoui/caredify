@@ -44,6 +44,7 @@ jobs:
           echo "// Stub Firebase initialization for test" > test/firebase_setup_test.dart
           echo "import 'package:firebase_core/firebase_core.dart';" >> test/firebase_setup_test.dart
           echo "Future<void> setupFirebase() async => await Firebase.initializeApp();" >> test/firebase_setup_test.dart
+          echo "void main() {}" >> test/firebase_setup_test.dart
 
       - name: Run tests with coverage
         run: flutter test --coverage
