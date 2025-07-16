@@ -27,6 +27,12 @@ jobs:
 
       - name: Generate localization files
         run: flutter gen-l10n
+
+      - name: Generate stub firebase_options.dart
+        run: |
+          mkdir -p lib
+          echo "// ignore_for_file: type=lint\nimport 'package:firebase_core/firebase_core.dart';\nclass DefaultFirebaseOptions {\n  static const currentPlatform = null;\n}" > lib/firebase_options.dart
+
       - name: Analyze Dart code  
         run: flutter analyze
       - name: Set up Firebase (stub initialization)
