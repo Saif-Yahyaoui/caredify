@@ -31,6 +31,11 @@ class Validators {
       return AppLocalizations.of(context)!.passwordRequired;
     }
 
+    // TEMPORARY: Allow test passwords 'basic' and 'premium' for dev login
+    if (value == 'basic' || value == 'premium') {
+      return null;
+    }
+
     if (value.length < 6) {
       return AppLocalizations.of(context)!.passwordMinLength;
     }
@@ -49,8 +54,27 @@ class Validators {
       return AppLocalizations.of(context)!.emailRequired;
     }
 
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value.trim())) {
+    final trimmed = value.trim();
+    // Split local and domain parts
+    final parts = trimmed.split('@');
+    if (parts.length != 2) {
+      return AppLocalizations.of(context)!.emailInvalid;
+    }
+    final local = parts[0];
+    final domain = parts[1];
+
+    // Disallow consecutive dots in local part
+    if (local.contains('..')) {
+      return AppLocalizations.of(context)!.emailInvalid;
+    }
+
+    // Check for valid local part (letters, numbers, dots, hyphens, underscores)
+    if (!RegExp(r'^[a-zA-Z0-9._%+-]+$').hasMatch(local)) {
+      return AppLocalizations.of(context)!.emailInvalid;
+    }
+
+    // Check for valid domain format
+    if (!RegExp(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(domain)) {
       return AppLocalizations.of(context)!.emailInvalid;
     }
 
@@ -79,8 +103,8 @@ class Validators {
       return AppLocalizations.of(context)!.nameMinLength;
     }
 
-    // Check for valid name characters (letters and spaces only)
-    final nameRegex = RegExp(r'^[a-zA-Z\s]+$');
+    // Allow letters, spaces, hyphens, and apostrophes
+    final nameRegex = RegExp(r"^[a-zA-Z\s\-']+$");
     if (!nameRegex.hasMatch(value.trim())) {
       return AppLocalizations.of(context)!.nameInvalid;
     }

@@ -1,0 +1,31 @@
+flowchart TD
+    A[App Start] --> B[Splash Screen]
+    B --> C{Check Auth Status}
+    C -->|Logged In| D[Dashboard]
+    C -->|Not Logged In| E{First Time User?}
+    E -->|Yes| F[Onboarding Screens]
+    E -->|No| G[Login Screen]
+    
+    F --> H[Registration]
+    H --> I[Email Verification]
+    I --> J[Profile Setup]
+    J --> D
+    
+    G --> K{Login Method}
+    K -->|Email/Password| L[Email Login]
+    K -->|Biometric| M[Fingerprint/Face ID]
+    K -->|Google| N[Google OAuth]
+    K -->|Facebook| O[Facebook OAuth]
+    
+    L --> P{Validate Credentials}
+    M --> P
+    N --> P
+    O --> P
+    
+    P -->|Success| D
+    P -->|Failure| Q[Error Message]
+    Q --> G
+    
+    style A fill:#e3f2fd
+    style D fill:#e8f5e9
+    style Q fill:#ffebee 

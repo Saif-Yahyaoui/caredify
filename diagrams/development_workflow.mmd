@@ -1,0 +1,20 @@
+flowchart LR
+    A[Code Commit] --> B[Automated Tests]
+    B --> C{Tests Pass?}
+    C -->|No| D[Fix Issues]
+    D --> B
+    C -->|Yes| E[Build App]
+    E --> F[Code Review]
+    F --> G{Approved?}
+    G -->|No| H[Address Feedback]
+    H --> F
+    G -->|Yes| I[Deploy to Staging]
+    I --> J[Manual Testing]
+    J --> K{Ready for Production?}
+    K -->|No| L[Fix Issues]
+    L --> I
+    K -->|Yes| M[Deploy to Production]
+    
+    style A fill:#e3f2fd
+    style M fill:#e8f5e9
+    style D fill:#ffebee 

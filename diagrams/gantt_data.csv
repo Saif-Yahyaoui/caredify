@@ -1,0 +1,19 @@
+Section,Task/Phase,Start Date,End Date,Duration (days)
+Foundation & Planning,Project Setup & Tooling,2025-04-01,2025-04-05,5
+Foundation & Planning,Requirements Analysis,2025-04-06,2025-04-12,7
+Foundation & Planning,Architecture & Design,2025-04-13,2025-04-19,7
+Core Features,Authentication & Onboarding,2025-04-20,2025-04-26,7
+Core Features,Health Data Models & Services,2025-04-27,2025-05-03,7
+Core Features,Dashboard & Main Screens,2025-05-04,2025-05-13,10
+Core Features,Health Tracking (ECG, Vitals),2025-05-14,2025-05-27,14
+Advanced Features,AI Health Companion (Chatbot),2025-05-28,2025-06-06,10
+Advanced Features,Advanced Analytics & Scoring,2025-06-07,2025-06-13,7
+Advanced Features,Notifications & Reminders,2025-06-14,2025-06-18,5
+Advanced Features,Device Integration (Wearables),2025-06-19,2025-06-25,7
+Accessibility & UX,Multi-language & RTL Support,2025-06-26,2025-06-30,5
+Accessibility & UX,Accessibility Features (TTS, Font, Theme),2025-07-01,2025-07-05,5
+Testing & Quality,Unit & Widget Testing,2025-07-06,2025-07-12,7
+Testing & Quality,Integration & User Flow Testing,2025-07-13,2025-07-19,7
+Finalization,Bug Fixes & Optimization,2025-07-20,2025-07-26,7
+Finalization,Documentation & Diagrams,2025-07-27,2025-07-31,5
+Finalization,Deployment & Delivery,2025-08-01,2025-08-03,3 

@@ -1,0 +1,2 @@
+# This file ensures the models directory is tracked by git
+# Place your TensorFlow Lite model files here (e.g., best_model.tflite) 

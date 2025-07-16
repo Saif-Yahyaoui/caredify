@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant U as User
+    participant W as ECG Belt
+    participant A as Flutter App
+    participant S as Server
+    participant AI as AI Engine
+    participant F as Firebase
+    
+    U->>W: Start ECG Recording
+    W->>A: Send ECG Data via BLE
+    A->>S: Upload Raw Data
+    S->>AI: Process ECG Signal
+    AI->>S: Analysis Results
+    S->>A: Health Insights
+    A->>U: Display Results
+    A->>F: Store Historical Data
+    
+    alt Abnormal Detection
+        AI->>S: Alert Generated
+        S->>A: Emergency Notification
+        A->>U: Show Alert
+        U->>A: Confirm Action
+        A->>S: Send to Emergency Services
+    end
+    
+    Note over U,AI: Real-time monitoring with AI analysis 

@@ -75,7 +75,7 @@
     "description": "Register button text"
   },
   
-  "alreadyHaveAccount": "لديك حساب بالفعل؟ تسجيل الدخول",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟  ",
   "@alreadyHaveAccount": {
     "description": "Link to login from register screen"
   },
@@ -189,10 +189,7 @@
     "description": "Passwords do not match message"
   },
   
-  "fieldRequired": "هذا الحقل مطلوب",
-  "@fieldRequired": {
-    "description": "Generic field required message"
-  },
+
   
   "phoneRequired": "رقم الهاتف مطلوب",
   "@phoneRequired": {
@@ -328,70 +325,388 @@
     "description": "تسمية لعلامة التبويب الرئيسية في أسفل التنقل"
   },
   "voiceFeedback": "التعليقات الصوتية",
+  "@voiceFeedback": { 
+    "description": "تسمية لتعليقات صوتية في الإعدادات"
+  },
   "workoutTrackerTitle": "متتبع التمارين",
+  "@workoutTrackerTitle": { 
+    "description": "Title for workout tracker section"
+  },
   "waterIntakeTitle": "كمية الماء المستهلكة",
+  "@waterIntakeTitle": {
+    "description": "Title for water intake section"
+  }, 
   "sleepRatingTitle": "تقييم النوم",
+  "@sleepRatingTitle": {
+    "description": "Title for sleep rating section"
+  },
   "heartTrackerTitle": "متتبع القلب",
+  "@heartTrackerTitle": {
+    "description": "Title for heart tracker section"
+  },
   "healthRatingTitle": "تقييم الصحة",
+  "@healthRatingTitle": {
+    "description": "Title for health rating section"
+  },
   "bmiLight": "نحيف",
+  "@bmiLight": {
+    "description": "BMI light category label"
+  },
   "bmiHealthy": "صحي",
+  "@bmiHealthy": {
+    "description": "BMI healthy category label"
+  },
   "bmiOverweight": "وزن زائد",
+  "@bmiOverweight": {
+    "description": "BMI overweight category label"
+  },
   "bmiObesity": "سمنة",
+  "@bmiObesity": {
+    "description": "BMI obesity category label"
+  },
   "bmi18": "18",
+  "@bmi18": {
+    "description": "BMI value 18"
+  },
   "bmi20": "20",
+  "@bmi20": {
+    "description": "BMI value 20"
+  },
   "bmi24": "24",
+  "@bmi24": {
+    "description": "BMI value 24"
+  },
   "bmi26": "26",
+  "@bmi26": {
+    "description": "BMI value 26"
+  },
   "bmi28": "28",
+  "@bmi28": {
+    "description": "BMI value 28"
+  },
   "bmi30": "30",
+  "@bmi30": {
+    "description": "BMI value 30"
+  },
   "bmiThin": "نحيف",
+  "@bmiThin": {
+    "description": "BMI thin category label"
+  },
   "bmiSThin": "نحيف جدًا",
+  "@bmiSThin": {
+    "description": "BMI very thin category label"
+  },
   "bmiSFat": "سمين",
+  "@bmiSFat": {
+    "description": "BMI fat category label"
+  },
   "bmiObesity2": "سمنة",
+  "@bmiObesity2": {
+    "description": "BMI obesity category label (alternative)"
+  },
   "bmi15": "15",
+  "@bmi15": {
+    "description": "BMI value 15"
+  },
   "bmi20_2": "20",
+  "@bmi20_2": {
+    "description": "BMI value 20 (alternative)"
+  },
   "bmi25": "25",
+  "@bmi25": {
+    "description": "BMI value 25"
+  },
   "bmi30_2": "30",
+  "@bmi30_2": {
+    "description": "BMI value 30 (alternative)"
+  },
   "bmi35": "35",
+  "@bmi35": {
+    "description": "BMI value 35"
+  },
   "bmi40": "40",
+  "@bmi40": {
+    "description": "BMI value 40"
+  },
   "genderFemale": "أنثى",
+  "@genderFemale": {
+    "description": "Female gender label"
+  },
   "genderMale": "ذكر",
+  "@genderMale": {
+    "description": "Male gender label"
+  },
   "healthyHabitsTitle": "عادات صحية",
+  "@healthyHabitsTitle": {
+    "description": "Title for healthy habits section"
+  },
   "save": "حفظ",
+  "@save": {
+    "description": "Save button text"
+  },
   "seeMore": "عرض المزيد",
-  "chatTab": "الدردشة",
-  "appointmentsTab": "المواعيد",
+  "@seeMore": {
+    "description": "See more link text"
+  },
   "skip": "تخطي",
+  "@skip": {
+    "description": "Skip button text"
+  },
   "unitBpm": "الوحدة: نبضة/دقيقة",
+  "@unitBpm": {
+    "description": "Unit label for BPM"
+  },
   "spo2": "نسبة الأكسجين",
+  "@spo2": {
+    "description": "SpO2 label"
+  },
   "blood": "الدم",
+  "@blood": {
+    "description": "Blood label"
+  },
   "mmHg": "(ملم زئبق)",
+  "@mmHg": {
+    "description": "mmHg unit label"
+  },
   "startMeasuring": "ابدأ القياس",
+  "@startMeasuring": {
+    "description": "Start measuring button text"
+  },
   "reevaluate": "إعادة التقييم",
+  "@reevaluate": {
+    "description": "Reevaluate button text"
+  },
   "bmi": "مؤشر كتلة الجسم",
+  "@bmi": {
+    "description": "BMI label"
+  },
   "bmiValue": "22.4",
+  "@bmiValue": {
+    "description": "BMI value display"
+  },
   "bmiHealthyLabel": "صحي",
+  "@bmiHealthyLabel": {
+    "description": "BMI healthy label"
+  },
   "biometricFailed": "فشل التحقق البيومتري.",
+  "@biometricFailed": {
+    "description": "Biometric authentication failed message"
+  },
   "biometricUnavailable": "التحقق البيومتري غير متوفر على هذا الجهاز.",
+  "@biometricUnavailable": {
+    "description": "Biometric authentication unavailable message"
+  },
   "biometricPrompt": "يرجى التحقق للوصول إلى لوحة التحكم الخاصة بك",
+  "@biometricPrompt": {
+    "description": "Biometric authentication prompt message"
+  },
   "google": "جوجل",
+  "@google": {
+    "description": "Google label"
+  },
   "facebook": "فيسبوك",
+  "@facebook": {
+    "description": "Facebook label"
+  },
   "showPassword": "عرض كلمة المرور",
+  "@showPassword": {
+    "description": "Show password button text"
+  },
   "hidePassword": "إخفاء كلمة المرور",
+  "@hidePassword": {
+    "description": "Hide password button text"
+  },
   "watchTab": "الساعة",
+  "@watchTab": {
+    "description": "Label for watch tab in bottom navigation"
+  },
   "voice": "التعليقات الصوتية",
+  "@voice": {
+    "description": "Voice feedback label"
+  },
   "heart": "القلب",
+  "@heart": {
+    "description": "Heart label"
+  },
   "water": "الماء",
+  "@water": {
+    "description": "Water label"
+  },
   "sleep": "النوم",
+  "@sleep": {
+    "description": "Sleep label"
+  },
   "workout": "التمرين",
+  "@workout": {
+    "description": "Workout label"
+  },
   "habits": "العادات",
+  "@habits": {
+    "description": "Habits label"
+  },
   "track": "تتبع",
+  "@track": {
+    "description": "Track label"
+  },
   "healthyHabits": "عادات صحية",
+  "@healthyHabits": {
+    "description": "Healthy habits label"
+  },
   "index": "المؤشر",
+  "@index": {
+    "description": "Index label"
+  },
   "score": "النتيجة",
+  "@score": {
+    "description": "Score label"
+  },
   "myHealthIndex": "مؤشر صحتي",
+  "@myHealthIndex": {
+    "description": "My health index label"
+  },
   "week": "الأسبوع",
+  "@week": {
+    "description": "Week label"
+  },
   "month": "الشهر",
+  "@month": {
+    "description": "Month label"
+  },
   "threeMonth": "3 أشهر",
+  "@threeMonth": {
+    "description": "Three month label"
+  },
   "year": "السنة",
-  "privacyPolicyDescription": "خصوصيتك مهمة بالنسبة لنا. يقوم هذا التطبيق بتخزين بياناتك الصحية بأمان، ويستخدم التشفير، ولا يشارك معلوماتك أبدًا دون موافقتك. لمزيد من التفاصيل، يرجى الرجوع إلى وثيقة سياسة الخصوصية الرسمية الخاصة بنا."
+  "@year": {
+    "description": "Year label"
+  },
+  "privacyPolicyDescription": "خصوصيتك مهمة بالنسبة لنا. يقوم هذا التطبيق بتخزين بياناتك الصحية بأمان، ويستخدم التشفير، ولا يشارك معلوماتك أبدًا دون موافقتك. لمزيد من التفاصيل، يرجى الرجوع إلى وثيقة سياسة الخصوصية الرسمية الخاصة بنا.",
+  "@privacyPolicyDescription": {
+    "description": "Privacy policy description text"
+  },
+  
+  "accessibilitySettings": "إعدادات إمكانية الوصول",
+  "@accessibilitySettings": {
+    "description": "Title for the accessibility settings card"
+  },
+  "voiceFeedbackEnabled": "التعليقات الصوتية مفعلة",
+  "@voiceFeedbackEnabled": {
+    "description": "Indicates that voice feedback is enabled"
+  },
+  "voiceFeedbackDisabled": "التعليقات الصوتية معطلة",
+  "@voiceFeedbackDisabled": {
+    "description": "Indicates that voice feedback is disabled"
+  },
+  "signUp": "إنشاء حساب",
+  "@signUp": {
+    "description": "Button text for signing up"
+  },
+  
+  "quickAccess": "الوصول السريع",
+  "@quickAccess": {
+    "description": "Title for biometric authentication section"
+  },
+  "fingerprint": "بصمة الإصبع",
+  "@fingerprint": {
+    "description": "Label for fingerprint authentication"
+  },
+  "faceId": "التعرف على الوجه",
+  "@faceId": {
+    "description": "Label for face ID authentication"
+  },
+  "orContinueWith": "أو المتابعة مع",
+  "@orContinueWith": {
+    "description": "Text for social login divider"
+  },
+  
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "@resetPassword": {
+    "description": "Title for reset password section"
+  },
+  
+  "backToLogin": "العودة إلى تسجيل الدخول",
+  "@backToLogin": {
+    "description": "Button text to go back to login screen"
+  },
+  
+  "dataSecurityPriority": "أمان بياناتك هو أولويتنا",
+  "@dataSecurityPriority": {
+    "description": "Subtitle for privacy policy header"
+  },
+  "dataProtection": "حماية البيانات",
+  "@dataProtection": {
+    "description": "Title for data protection section"
+  },
+  "endToEndEncryption": "التشفير من طرف إلى طرف",
+  "@endToEndEncryption": {
+    "description": "Title for encryption feature"
+  },
+  "encryptionDescription": "جميع بياناتك الصحية مشفرة باستخدام بروتوكولات معيارية للصناعة.",
+  "@encryptionDescription": {
+    "description": "Description for encryption feature"
+  },
+  "secureStorage": "التخزين الآمن",
+  "@secureStorage": {
+    "description": "Title for secure storage feature"
+  },
+  "secureStorageDescription": "معلوماتك مخزنة على خوادم آمنة مع طبقات متعددة من الحماية.",
+  "@secureStorageDescription": {
+    "description": "Description for secure storage feature"
+  },
+  "privacyFirst": "الخصوصية أولاً",
+  "@privacyFirst": {
+    "description": "Title for privacy feature"
+  },
+  "privacyFirstDescription": "نحن لا نشارك معلوماتك الشخصية أبداً دون موافقتك الصريحة.",
+  "@privacyFirstDescription": {
+    "description": "Description for privacy feature"
+  },
+  "yourRights": "حقوقك",
+  "@yourRights": {
+    "description": "Title for user rights section"
+  },
+  "yourRightsDescription": "لديك الحق في الوصول إلى بياناتك الشخصية وتعديلها أو حذفها في أي وقت. اتصل بفريق الدعم للحصول على المساعدة.",
+  "@yourRightsDescription": {
+    "description": "Description for user rights"
+  },
+  "readTermsCarefully": "يرجى قراءة هذه الشروط بعناية",
+  "@readTermsCarefully": {
+    "description": "Subtitle for terms of service header"
+  },
+  "termsAndConditions": "الشروط والأحكام",
+  "@termsAndConditions": {
+    "description": "Title for terms and conditions section"
+  },
+  "acceptanceOfTerms": "قبول الشروط",
+  "@acceptanceOfTerms": {
+    "description": "Title for terms acceptance feature"
+  },
+  "acceptanceDescription": "باستخدام تطبيقنا، فإنك توافق على الالتزام بهذه الشروط والأحكام.",
+  "@acceptanceDescription": {
+    "description": "Description for terms acceptance"
+  },
+  "healthInformation": "المعلومات الصحية",
+  "@healthInformation": {
+    "description": "Title for health information feature"
+  },
+  "healthInformationDescription": "أنت مسؤول عن دقة بيانات الصحة التي تقدمها.",
+  "@healthInformationDescription": {
+    "description": "Description for health information responsibility"
+  },
+  "medicalDisclaimer": "إخلاء المسؤولية الطبية",
+  "@medicalDisclaimer": {
+    "description": "Title for medical disclaimer"
+  },
+  "medicalDisclaimerDescription": "هذا التطبيق ليس بديلاً عن النصائح الطبية المهنية.",
+  "@medicalDisclaimerDescription": {
+    "description": "Description for medical disclaimer"
+  },
+  "importantNotice": "إشعار مهم",
+  "@importantNotice": {
+    "description": "Title for important notice section"
+  },
+  "termsUpdateNotice": "قد يتم تحديث هذه الشروط من وقت لآخر. الاستخدام المستمر للتطبيق يشكل قبولاً لأي تغييرات.",
+  "@termsUpdateNotice": {
+    "description": "Description for terms update notice"
+  }
 } 

@@ -1,0 +1,32 @@
+graph TB
+    subgraph "Basic Plan"
+        A1[ECG Monitoring]
+        A2[Basic Analytics]
+        A3[Health Tracking]
+        A4[Emergency Button]
+    end
+    
+    subgraph "Premium Plan"
+        B1[Advanced ECG Analysis]
+        B2[AI Health Coach]
+        B3[Priority Support]
+        B4[Data Export]
+        B5[Custom Alerts]
+        B6[Advanced Analytics]
+    end
+    
+    subgraph "Enterprise Plan"
+        C1[Multi-User Management]
+        C2[Advanced Reporting]
+        C3[API Access]
+        C4[Custom Integration]
+        C5[24/7 Support]
+    end
+    
+    A1 -.-> B1
+    A2 -.-> B2
+    A3 -.-> B3
+    
+    style A1 fill:#e3f2fd
+    style B1 fill:#e8f5e9
+    style C1 fill:#fff3e0 

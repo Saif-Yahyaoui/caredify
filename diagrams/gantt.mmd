@@ -1,0 +1,32 @@
+gantt
+    title Caredify PFE Timeline (01-04-2025 to 01-10-2025)
+    dateFormat  YYYY-MM-DD
+    section Foundation & Planning
+    Project Setup & Tooling         :done,    a1, 2025-04-01, 5d
+    Requirements Analysis           :done,    a2, after a1, 7d
+    Architecture & Design           :done,    a3, after a2, 7d
+    _                           :milestone, 2025-04-30, 0d
+    section Core Features
+    Authentication & Onboarding     :done,    b1, after a3, 7d
+    Health Data Models & Services   :done,    b2, after b1, 7d
+    Dashboard & Main Screens        :done,    b3, after b2, 10d
+    Health Tracking (ECG, Vitals)   :done,    b4, after b3, 14d
+    _                               :milestone, 2025-05-30, 0d
+    section Advanced Features
+    AI Health Companion (Chatbot)   :active,  c1, after b4, 10d
+    Advanced Analytics & Scoring    :active,  c2, after c1, 7d
+    Notifications & Reminders       :active,  c3, after c2, 5d
+    Device Integration (Wearables)  :active,  c4, after c3, 7d
+    _                               :milestone, 2025-06-30, 0d
+    section Accessibility & UX
+    Multi-language & RTL Support    :         d1, after c4, 5d
+    Accessibility Features (TTS, Font, Theme) : d2, after d1, 5d
+    _                               :milestone, 2025-07-10, 0d
+    section Testing & Quality
+    Unit & Widget Testing           :         e1, after d2, 7d
+    Integration & User Flow Testing :         e2, after e1, 7d
+    _                               :milestone, 2025-07-20, 0d
+    section Finalization
+    Bug Fixes & Optimization        :         f1, after e2, 7d
+    Documentation & Diagrams        :         f2, after f1, 5d
+    Deployment & Delivery           :         f3, after f2, 3d 

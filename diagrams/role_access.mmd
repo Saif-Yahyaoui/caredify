@@ -1,0 +1,24 @@
+graph TB
+    A[User Login] --> B{Check User Type}
+    B -->|Basic User| C[Home Screen]
+    B -->|Premium User| D[Dashboard Screen]
+    
+    subgraph "Basic Features"
+        C --> E[Basic Health Info]
+        E --> F[Emergency Button]
+        F --> G[Activity Tracking]
+        G --> H[Upgrade Prompts]
+    end
+    
+    subgraph "Premium Features"
+        D --> I[Advanced Analytics]
+        I --> J[AI Health Coach]
+        J --> K[Data Export]
+        K --> L[Priority Support]
+        L --> M[Custom Alerts]
+    end
+    
+    style A fill:#e3f2fd
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+    style H fill:#ffebee 

@@ -75,7 +75,7 @@
     "description": "Register button text"
   },
   
-  "alreadyHaveAccount": "Déjà un compte? Se connecter",
+  "alreadyHaveAccount": "Déjà un compte? ",
   "@alreadyHaveAccount": {
     "description": "Link to login from register screen"
   },
@@ -140,10 +140,7 @@
     "description": "Error message for incomplete fields"
   },
   
-  "fieldRequired": "Ce champ est requis",
-  "@fieldRequired": {
-    "description": "Error message for required field"
-  },
+ 
   
   "invalidCredentials": "Identifiants invalides",
   "@invalidCredentials": {
@@ -325,71 +322,391 @@
   },
   "homeTab": "Accueil",
   "@homeTab": {
-    "description": "Label pour l'onglet accueil dans la navigation inférieure"
+    "description": "Label for home tab in bottom navigation"
   },
   "voiceFeedback": "Retour vocal",
-  "voice": "Retour vocal",
+  "@voiceFeedback": {
+    "description": "Label for voice feedback in settings"
+  },
   "workoutTrackerTitle": "Votre suivi d'entraînement",
+  "@workoutTrackerTitle": {
+    "description": "Title for workout tracker section"
+  },
   "waterIntakeTitle": "Votre consommation d'eau",
-  "sleepRatingTitle": "Votre score de sommeil",
+  "@waterIntakeTitle": {
+    "description": "Title for water intake section"
+  },
+  "sleepRatingTitle": "Votre évaluation du sommeil",
+  "@sleepRatingTitle": {
+    "description": "Title for sleep rating section"
+  },
   "heartTrackerTitle": "Suivi cardiaque",
-  "healthRatingTitle": "Votre score de santé",
-  "bmiLight": "Maigre",
+  "@heartTrackerTitle": {
+    "description": "Title for heart tracker section"
+  },
+  "healthRatingTitle": "Votre évaluation de santé",
+  "@healthRatingTitle": {
+    "description": "Title for health rating section"
+  },
+  "bmiLight": "Léger",
+  "@bmiLight": {
+    "description": "BMI light category label"
+  },
   "bmiHealthy": "Sain",
+  "@bmiHealthy": {
+    "description": "BMI healthy category label"
+  },
   "bmiOverweight": "Surpoids",
+  "@bmiOverweight": {
+    "description": "BMI overweight category label"
+  },
   "bmiObesity": "Obésité",
+  "@bmiObesity": {
+    "description": "BMI obesity category label"
+  },
   "bmi18": "18",
+  "@bmi18": {
+    "description": "BMI value 18"
+  },
   "bmi20": "20",
+  "@bmi20": {
+    "description": "BMI value 20"
+  },
   "bmi24": "24",
+  "@bmi24": {
+    "description": "BMI value 24"
+  },
   "bmi26": "26",
+  "@bmi26": {
+    "description": "BMI value 26"
+  },
   "bmi28": "28",
+  "@bmi28": {
+    "description": "BMI value 28"
+  },
   "bmi30": "30",
+  "@bmi30": {
+    "description": "BMI value 30"
+  },
   "bmiThin": "Mince",
+  "@bmiThin": {
+    "description": "BMI thin category label"
+  },
   "bmiSThin": "Très mince",
-  "bmiSFat": "Surpoids",
+  "@bmiSThin": {
+    "description": "BMI very thin category label"
+  },
+  "bmiSFat": "Gros",
+  "@bmiSFat": {
+    "description": "BMI fat category label"
+  },
   "bmiObesity2": "Obésité",
+  "@bmiObesity2": {
+    "description": "BMI obesity category label (alternative)"
+  },
   "bmi15": "15",
+  "@bmi15": {
+    "description": "BMI value 15"
+  },
   "bmi20_2": "20",
+  "@bmi20_2": {
+    "description": "BMI value 20 (alternative)"
+  },
   "bmi25": "25",
+  "@bmi25": {
+    "description": "BMI value 25"
+  },
   "bmi30_2": "30",
+  "@bmi30_2": {
+    "description": "BMI value 30 (alternative)"
+  },
   "bmi35": "35",
+  "@bmi35": {
+    "description": "BMI value 35"
+  },
   "bmi40": "40",
+  "@bmi40": {
+    "description": "BMI value 40"
+  },
   "genderFemale": "Femme",
+  "@genderFemale": {
+    "description": "Female gender label"
+  },
   "genderMale": "Homme",
+  "@genderMale": {
+    "description": "Male gender label"
+  },
   "healthyHabitsTitle": "Habitudes saines",
+  "@healthyHabitsTitle": {
+    "description": "Title for healthy habits section"
+  },
   "save": "Enregistrer",
+  "@save": {
+    "description": "Save button text"
+  },
   "seeMore": "voir plus",
+  "@seeMore": {
+    "description": "See more link text"
+  },
   "skip": "Passer",
-  "unitBpm": "unité : BPM",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "unitBpm": "unité: BPM",
+  "@unitBpm": {
+    "description": "Unit label for BPM"
+  },
   "spo2": "Spo2",
+  "@spo2": {
+    "description": "SpO2 label"
+  },
   "blood": "Sang",
+  "@blood": {
+    "description": "Blood label"
+  },
   "mmHg": "(mmHg)",
-  "startMeasuring": "Commencer la mesure",
+  "@mmHg": {
+    "description": "mmHg unit label"
+  },
+  "startMeasuring": "Commencer à mesurer",
+  "@startMeasuring": {
+    "description": "Start measuring button text"
+  },
   "reevaluate": "RÉÉVALUER",
+  "@reevaluate": {
+    "description": "Reevaluate button text"
+  },
   "bmi": "IMC",
+  "@bmi": {
+    "description": "BMI label"
+  },
   "bmiValue": "22.4",
+  "@bmiValue": {
+    "description": "BMI value display"
+  },
   "bmiHealthyLabel": "SAIN",
+  "@bmiHealthyLabel": {
+    "description": "BMI healthy label"
+  },
   "biometricFailed": "L'authentification biométrique a échoué.",
+  "@biometricFailed": {
+    "description": "Biometric authentication failed message"
+  },
   "biometricUnavailable": "L'authentification biométrique n'est pas disponible sur cet appareil.",
+  "@biometricUnavailable": {
+    "description": "Biometric authentication unavailable message"
+  },
   "biometricPrompt": "Veuillez vous authentifier pour accéder à votre tableau de bord",
+  "@biometricPrompt": {
+    "description": "Biometric authentication prompt message"
+  },
   "google": "Google",
+  "@google": {
+    "description": "Google label"
+  },
   "facebook": "Facebook",
+  "@facebook": {
+    "description": "Facebook label"
+  },
   "showPassword": "Afficher le mot de passe",
+  "@showPassword": {
+    "description": "Show password button text"
+  },
   "hidePassword": "Masquer le mot de passe",
+  "@hidePassword": {
+    "description": "Hide password button text"
+  },
   "watchTab": "Montre",
+  "@watchTab": {
+    "description": "Label for watch tab in bottom navigation"
+  },
+  "voice": "Retour vocal",
+  "@voice": {
+    "description": "Voice feedback label"
+  },
   "heart": "Cœur",
+  "@heart": {
+    "description": "Heart label"
+  },
   "water": "Eau",
+  "@water": {
+    "description": "Water label"
+  },
   "sleep": "Sommeil",
+  "@sleep": {
+    "description": "Sleep label"
+  },
   "workout": "Entraînement",
+  "@workout": {
+    "description": "Workout label"
+  },
   "habits": "Habitudes",
+  "@habits": {
+    "description": "Habits label"
+  },
   "track": "Suivre",
+  "@track": {
+    "description": "Track label"
+  },
   "healthyHabits": "Habitudes saines",
+  "@healthyHabits": {
+    "description": "Healthy habits label"
+  },
   "index": "Indice",
+  "@index": {
+    "description": "Index label"
+  },
   "score": "Score",
-  "myHealthIndex": "Mon Indice de Santé",
+  "@score": {
+    "description": "Score label"
+  },
+  "myHealthIndex": "Mon indice de santé",
+  "@myHealthIndex": {
+    "description": "My health index label"
+  },
   "week": "Semaine",
+  "@week": {
+    "description": "Week label"
+  },
   "month": "Mois",
+  "@month": {
+    "description": "Month label"
+  },
   "threeMonth": "3 Mois",
+  "@threeMonth": {
+    "description": "Three month label"
+  },
   "year": "Année",
-  "privacyPolicyDescription": "Votre vie privée est importante pour nous. Cette application stocke vos données de santé en toute sécurité, utilise le chiffrement et ne partage jamais vos informations sans votre consentement. Pour plus de détails, veuillez consulter notre politique de confidentialité officielle."
+  "@year": {
+    "description": "Year label"
+  },
+  "privacyPolicyDescription": "Votre vie privée est importante pour nous. Cette application stocke vos données de santé en toute sécurité, utilise le chiffrement et ne partage jamais vos informations sans votre consentement. Pour plus de détails, veuillez consulter notre politique de confidentialité officielle.",
+  "@privacyPolicyDescription": {
+    "description": "Privacy policy description text"
+  },
+  
+  "accessibilitySettings": "Paramètres d'accessibilité",
+  "@accessibilitySettings": {
+    "description": "Title for the accessibility settings card"
+  },
+  "voiceFeedbackEnabled": "Retour vocal activé",
+  "@voiceFeedbackEnabled": {
+    "description": "Indicates that voice feedback is enabled"
+  },
+  "voiceFeedbackDisabled": "Retour vocal désactivé",
+  "@voiceFeedbackDisabled": {
+    "description": "Indicates that voice feedback is disabled"
+  },
+  "signUp": "S'inscrire",
+  "@signUp": {
+    "description": "Button text for signing up"
+  },
+  
+  "quickAccess": "Accès Rapide",
+  "@quickAccess": {
+    "description": "Title for biometric authentication section"
+  },
+  "fingerprint": "Empreinte",
+  "@fingerprint": {
+    "description": "Label for fingerprint authentication"
+  },
+  "faceId": "Face ID",
+  "@faceId": {
+    "description": "Label for face ID authentication"
+  },
+  "orContinueWith": "ou continuer avec",
+  "@orContinueWith": {
+    "description": "Text for social login divider"
+  },
+  
+  "resetPassword": "Réinitialiser le mot de passe",
+  "@resetPassword": {
+    "description": "Title for reset password section"
+  },
+  
+  "backToLogin": "Retour à la connexion",
+  "@backToLogin": {
+    "description": "Button text to go back to login screen"
+  },
+  
+  "dataSecurityPriority": "La sécurité de vos données est notre priorité",
+  "@dataSecurityPriority": {
+    "description": "Subtitle for privacy policy header"
+  },
+  "dataProtection": "Protection des Données",
+  "@dataProtection": {
+    "description": "Title for data protection section"
+  },
+  "endToEndEncryption": "Chiffrement de Bout en Bout",
+  "@endToEndEncryption": {
+    "description": "Title for encryption feature"
+  },
+  "encryptionDescription": "Toutes vos données de santé sont chiffrées selon les protocoles standards de l'industrie.",
+  "@encryptionDescription": {
+    "description": "Description for encryption feature"
+  },
+  "secureStorage": "Stockage Sécurisé",
+  "@secureStorage": {
+    "description": "Title for secure storage feature"
+  },
+  "secureStorageDescription": "Vos informations sont stockées sur des serveurs sécurisés avec plusieurs couches de protection.",
+  "@secureStorageDescription": {
+    "description": "Description for secure storage feature"
+  },
+  "privacyFirst": "Confidentialité d'Abord",
+  "@privacyFirst": {
+    "description": "Title for privacy feature"
+  },
+  "privacyFirstDescription": "Nous ne partageons jamais vos informations personnelles sans votre consentement explicite.",
+  "@privacyFirstDescription": {
+    "description": "Description for privacy feature"
+  },
+  "yourRights": "Vos Droits",
+  "@yourRights": {
+    "description": "Title for user rights section"
+  },
+  "yourRightsDescription": "Vous avez le droit d'accéder, de modifier ou de supprimer vos données personnelles à tout moment. Contactez notre équipe de support pour obtenir de l'aide.",
+  "@yourRightsDescription": {
+    "description": "Description for user rights"
+  },
+  "readTermsCarefully": "Veuillez lire attentivement ces conditions",
+  "@readTermsCarefully": {
+    "description": "Subtitle for terms of service header"
+  },
+  "termsAndConditions": "Conditions Générales",
+  "@termsAndConditions": {
+    "description": "Title for terms and conditions section"
+  },
+  "acceptanceOfTerms": "Acceptation des Conditions",
+  "@acceptanceOfTerms": {
+    "description": "Title for terms acceptance feature"
+  },
+  "acceptanceDescription": "En utilisant notre application, vous acceptez d'être lié par ces conditions générales.",
+  "@acceptanceDescription": {
+    "description": "Description for terms acceptance"
+  },
+  "healthInformation": "Informations de Santé",
+  "@healthInformation": {
+    "description": "Title for health information feature"
+  },
+  "healthInformationDescription": "Vous êtes responsable de l'exactitude des données de santé que vous fournissez.",
+  "@healthInformationDescription": {
+    "description": "Description for health information responsibility"
+  },
+  "medicalDisclaimer": "Avertissement Médical",
+  "@medicalDisclaimer": {
+    "description": "Title for medical disclaimer"
+  },
+  "medicalDisclaimerDescription": "Cette application ne remplace pas les conseils médicaux professionnels.",
+  "@medicalDisclaimerDescription": {
+    "description": "Description for medical disclaimer"
+  },
+  "importantNotice": "Avis Important",
+  "@importantNotice": {
+    "description": "Title for important notice section"
+  },
+  "termsUpdateNotice": "Ces conditions peuvent être mises à jour de temps à autre. L'utilisation continue de l'application constitue l'acceptation de tout changement.",
+  "@termsUpdateNotice": {
+    "description": "Description for terms update notice"
+  }
 } 

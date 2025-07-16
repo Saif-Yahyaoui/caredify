@@ -1,32 +1,57 @@
+import 'package:caredify/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:caredify/widgets/custom_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../test_helpers.dart';
 
 void main() {
-  setUp(() {
-    SharedPreferences.setMockInitialValues({});
+  setUpAll(() async {
+    await TestSetup.setupTestEnvironment();
   });
 
-  testWidgets('CustomButton calls onPressed', (WidgetTester tester) async {
-    bool pressed = false;
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: CustomButton(
-            text: 'Test',
-            onPressed: () {
-              pressed = true;
-            },
+  group('CustomButton Widget Tests', () {
+    testWidgets('calls onPressed when tapped', (tester) async {
+      bool wasPressed = false;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TestSetup.createTestWidget(
+              CustomButton(
+                text: 'Tap Me',
+                onPressed: () {
+                  wasPressed = true;
+                },
+              ),
+            ),
           ),
         ),
-      ),
-    );
+      );
+      await tester.pumpAndSettle();
 
-    final buttonFinder = find.text('Test');
-    await tester.ensureVisible(buttonFinder);
-    await tester.tap(buttonFinder);
-    await tester.pump();
-    expect(pressed, isTrue);
+      // Find and tap the button
+      final buttonFinder = find.byType(CustomButton);
+      expect(buttonFinder, findsOneWidget);
+
+      await tester.tap(buttonFinder);
+      await tester.pumpAndSettle();
+
+      expect(wasPressed, isTrue);
+    });
+
+    testWidgets('renders with correct text', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TestSetup.createTestWidget(
+              const CustomButton(text: 'Test Button', onPressed: null),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Test Button'), findsOneWidget);
+    });
   });
 }
