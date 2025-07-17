@@ -6,12 +6,15 @@ import 'package:go_router/go_router.dart';
 import '../../../shared/providers/health_metrics_provider.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/widgets/alert_card.dart';
+import '../../../shared/widgets/coach_card.dart';
 import '../../../shared/widgets/emergency_button.dart';
 import '../../../shared/widgets/premium_components.dart';
 import '../../../shared/widgets/role_based_access.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/unified_vital_cards.dart';
 import '../../../shared/widgets/user_header.dart';
+import '../../../shared/widgets/health_index.dart';
+import '../../../shared/widgets/healthy_habits.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -124,6 +127,143 @@ class _DashboardHome extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 16),
+            // Health Index Card
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                height: 120,
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () => context.go('/main/health-index'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFFFFC94D), Color(0xFF7ED6D6)],
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.stars_rounded,
+                              color: Colors.white,
+                              size: 28,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Health Index',
+                                  style: Theme.of(context).textTheme.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'See your overall health rating',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(
+                            Icons.chevron_right,
+                            color: Color(0xFFBDBDBD),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Healthy Habits Card
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                height: 120,
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () => context.go('/main/habits'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFF10B981), Color(0xFF8B5CF6)],
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.check_circle_outline_rounded,
+                              color: Colors.white,
+                              size: 28,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Healthy Habits',
+                                  style: Theme.of(context).textTheme.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Track your daily healthy habits',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(
+                            Icons.chevron_right,
+                            color: Color(0xFFBDBDBD),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
             // 3. AI & ANALYTICS SECTION
             const SectionHeader(
@@ -257,6 +397,19 @@ class _DashboardHome extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
 
+            // Basic Coach Card
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CoachCard(
+                message:
+                    "votre coeur est stable. Pensez à boire un verre d'eau !",
+                userName: 'Saif',
+                onVoice: () {},
+                onText: () {},
+              ),
+            ),
+            const SizedBox(height: 16),
+
             // 4. ALERTS & NOTIFICATIONS SECTION
             const SectionHeader(
               title: 'Alerts & Notifications',
@@ -301,8 +454,8 @@ class _DashboardHome extends ConsumerWidget {
 
             // 5. SUPPORT & TOOLS SECTION
             const SectionHeader(
-              title: 'Support & Tools',
-              icon: Icons.support_agent,
+              title: 'Tools',
+              icon: Icons.import_export,
               iconColor: Color(0xFFF59E42),
             ),
             const SizedBox(height: 16),

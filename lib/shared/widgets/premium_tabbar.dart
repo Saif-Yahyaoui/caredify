@@ -51,7 +51,7 @@ class PremiumTabBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onTabSelected(i),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 250),
+                duration: const Duration(milliseconds: 100),
                 curve: Curves.easeInOut,
                 margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
                 decoration:

@@ -17,11 +17,8 @@ import '../features/dashboard/screens/dashboard_screen.dart';
 import '../features/dashboard/screens/data_export_screen.dart';
 import '../features/dashboard/screens/ecg_alerts_screen.dart';
 import '../features/dashboard/screens/ecg_analysis_screen.dart';
-import '../features/dashboard/screens/health_index_reevaluate_screen.dart';
-import '../features/dashboard/screens/health_index_screen.dart';
 import '../features/dashboard/screens/health_score_screen.dart';
 import '../features/health_tracking/screens/blood_pressure_graph_screen.dart';
-import '../features/health_tracking/screens/healthy_habits_screen.dart';
 import '../features/health_tracking/screens/heart_tracker_screen.dart';
 import '../features/health_tracking/screens/sleep_rating_screen.dart';
 import '../features/health_tracking/screens/spo2_graph_screen.dart';
@@ -51,6 +48,9 @@ import '../features/profile/screens/upgrade_screen.dart';
 import '../features/watch/screens/health_watch_screen.dart';
 import '../shared/providers/auth_provider.dart';
 import '../shared/services/auth_service.dart';
+import '../shared/widgets/health_index.dart';
+import '../shared/widgets/health_index_reevaluate.dart';
+import '../shared/widgets/healthy_habits.dart';
 import '../shared/widgets/main_screen.dart';
 // Add other screens as needed
 
@@ -224,7 +224,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: '/main/workout',
             builder: (context, state) => const WorkoutTrackerScreen(),
           ),
-         
+
           GoRoute(
             path: '/main/dashboard',
             builder: (context, state) => const DashboardScreen(),

@@ -21,75 +21,78 @@ class AccessibilityControls extends ConsumerWidget {
 
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header with icon
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8), // was 10
-                decoration: BoxDecoration(
-                  color:
-                      isDark
-                          ? const Color(
-                            0xFF0092DF,
-                          ).withAlpha((0.15 * 255).toInt())
-                          : const Color(
-                            0xFF0092DF,
-                          ).withAlpha((0.1 * 255).toInt()),
-                  borderRadius: BorderRadius.circular(12), // was 14
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header with icon
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8), // was 10
+                  decoration: BoxDecoration(
+                    color:
+                        isDark
+                            ? const Color(
+                              0xFF0092DF,
+                            ).withAlpha((0.15 * 255).toInt())
+                            : const Color(
+                              0xFF0092DF,
+                            ).withAlpha((0.1 * 255).toInt()),
+                    borderRadius: BorderRadius.circular(12), // was 14
+                  ),
+                  child: const Icon(
+                    Icons.accessibility_new,
+                    color: Color(0xFF0092DF),
+                    size: 20, // was 24
+                  ),
                 ),
-                child: const Icon(
-                  Icons.accessibility_new,
-                  color: Color(0xFF0092DF),
-                  size: 20, // was 24
+                const SizedBox(width: 10), // was 16
+                Text(
+                  t.accessibilitySettings,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18, // was 22
+                    color: isDark ? Colors.white : const Color(0xFF1E293B),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10), // was 16
-              Text(
-                t.accessibilitySettings,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18, // was 22
-                  color: isDark ? Colors.white : const Color(0xFF1E293B),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16), // was 32
-          // Language Section
-          _ProfessionalSection(
-            title: t.language,
-            icon: Icons.language,
-            isDark: isDark,
-            child: _ModernLanguageSelector(ref: ref, t: t),
-          ),
-          const SizedBox(height: 12), // was 24
-          // Font Size Section
-          _ProfessionalSection(
-            title: t.fontSize,
-            icon: Icons.text_fields,
-            isDark: isDark,
-            child: _ModernFontSizeSelector(ref: ref, t: t),
-          ),
-          const SizedBox(height: 12), // was 24
-          // Theme Section
-          _ProfessionalSection(
-            title: t.theme,
-            icon: Icons.palette,
-            isDark: isDark,
-            child: _ModernThemeSelector(ref: ref, t: t),
-          ),
-          const SizedBox(height: 12), // was 24
-          // Voice Feedback Section
-          _ProfessionalSection(
-            title: t.voice,
-            icon: Icons.volume_up,
-            isDark: isDark,
-            child: _ModernVoiceFeedbackToggle(ref: ref, t: t),
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(height: 16), // was 32
+            // Language Section
+            _ProfessionalSection(
+              title: t.language,
+              icon: Icons.language,
+              isDark: isDark,
+              child: _ModernLanguageSelector(ref: ref, t: t),
+            ),
+            const SizedBox(height: 12), // was 24
+            // Font Size Section
+            _ProfessionalSection(
+              title: t.fontSize,
+              icon: Icons.text_fields,
+              isDark: isDark,
+              child: _ModernFontSizeSelector(ref: ref, t: t),
+            ),
+            const SizedBox(height: 12), // was 24
+            // Theme Section
+            _ProfessionalSection(
+              title: t.theme,
+              icon: Icons.palette,
+              isDark: isDark,
+              child: _ModernThemeSelector(ref: ref, t: t),
+            ),
+            const SizedBox(height: 12), // was 24
+            // Voice Feedback Section
+            _ProfessionalSection(
+              title: t.voice,
+              icon: Icons.volume_up,
+              isDark: isDark,
+              child: _ModernVoiceFeedbackToggle(ref: ref, t: t),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -172,8 +175,6 @@ class _ProfessionalSection extends StatelessWidget {
     );
   }
 }
-
-
 
 class _ModernLanguageSelector extends ConsumerWidget {
   final WidgetRef ref;
@@ -392,17 +393,20 @@ class _ModernVoiceFeedbackToggle extends ConsumerWidget {
                     : Colors.grey[300]?.withAlpha((0.5 * 255).toInt()),
           ),
           const SizedBox(width: 12),
-          Text(
-            isEnabled ? t.voiceFeedbackEnabled : t.voiceFeedbackDisabled,
-            style: TextStyle(
-              color:
-                  isEnabled
-                      ? const Color(0xFF0092DF)
-                      : isDark
-                      ? Colors.white.withAlpha((0.7 * 255).toInt())
-                      : const Color(0xFF64748B),
-              fontWeight: isEnabled ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 14,
+          Expanded(
+            child: Text(
+              isEnabled ? t.voiceFeedbackEnabled : t.voiceFeedbackDisabled,
+              style: TextStyle(
+                color:
+                    isEnabled
+                        ? const Color(0xFF0092DF)
+                        : isDark
+                        ? Colors.white.withAlpha((0.7 * 255).toInt())
+                        : const Color(0xFF64748B),
+                fontWeight: isEnabled ? FontWeight.w600 : FontWeight.w500,
+                fontSize: 14,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

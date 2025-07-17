@@ -55,12 +55,12 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
             _buildBenefitsSection(context, upgradeBenefits, isDark),
             const SizedBox(height: 24),
 
-            // Upgrade Button
-            _buildUpgradeButton(context),
-            const SizedBox(height: 24),
-
             // Feature Comparison Section
             _buildFeatureComparisonSection(context, isDark),
+            const SizedBox(height: 24),
+
+            // Upgrade Button
+            _buildUpgradeButton(context),
           ],
         ),
       ),
@@ -409,7 +409,11 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                     child: _ComparisonPreviewCard(
                       title: 'Basic',
                       color: const Color(0xFF0092DF),
-                      features: const ['Basic ECG', 'Simple Metrics', 'Basic Alerts'],
+                      features: const [
+                        'Basic ECG',
+                        'Simple Metrics',
+                        'Basic Alerts',
+                      ],
                       isDark: isDark,
                     ),
                   ),
@@ -1007,49 +1011,6 @@ class _UpgradeScreenState extends ConsumerState<UpgradeScreen> {
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 32),
-
-                          Center(
-                            child: SizedBox(
-                              width: 220,
-                              height: 52,
-                              child: ElevatedButton(
-                                onPressed: _handleUpgrade,
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 12,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  elevation: 6,
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: const Color(0xFFFFA500),
-                                  shadowColor: const Color(
-                                    0xFFFFA500,
-                                  ).withAlpha((0.2 * 255).toInt()),
-                                  textStyle: theme.textTheme.titleMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1.1,
-                                      ),
-                                ),
-                                child: const Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.workspace_premium,
-                                      color: Color(0xFFFFA500),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text('Upgrade to Premium'),
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
 

@@ -5,10 +5,10 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../providers/user_type_provider.dart';
+import '../providers/voice_feedback_provider.dart';
+import '../services/auth_service.dart';
+import 'custom_text_field.dart';
 
 class HealthIndexReevaluateScreen extends ConsumerStatefulWidget {
   const HealthIndexReevaluateScreen({super.key});

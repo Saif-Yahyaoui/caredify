@@ -1,4 +1,4 @@
-import 'package:caredify/features/health_tracking/screens/healthy_habits_screen.dart';
+import 'package:caredify/shared/widgets/healthy_habits.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

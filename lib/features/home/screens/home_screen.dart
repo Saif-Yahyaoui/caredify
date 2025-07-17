@@ -9,6 +9,8 @@ import '../../../shared/widgets/coach_card.dart';
 import '../../../shared/widgets/emergency_button.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/user_header.dart';
+import '../../../shared/widgets/health_index.dart';
+import '../../../shared/widgets/healthy_habits.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -732,9 +734,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Heart Rate',
                         value:
-                            '${ref
-                                .watch(healthMetricsProvider)
-                                .heartRate} bpm',
+                            '${ref.watch(healthMetricsProvider).heartRate} bpm',
                         iconAsset: 'assets/icons/heart.svg',
                         color: const Color(0xFFFF6B81),
                         onTap: () => context.go('/main/heart'),
@@ -742,9 +742,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Sleep',
                         value:
-                            '${ref
-                                .watch(healthMetricsProvider)
-                                .sleepHours} h',
+                            '${ref.watch(healthMetricsProvider).sleepHours} h',
                         iconAsset: 'assets/icons/moon.svg',
                         color: const Color(0xFF8B5CF6),
                         onTap: () => context.go('/main/sleep'),
@@ -752,9 +750,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Water Intake',
                         value:
-                            '${(ref.watch(healthMetricsProvider).waterIntake *
-                                    1000)
-                                .toStringAsFixed(0)} ml',
+                            '${(ref.watch(healthMetricsProvider).waterIntake * 1000).toStringAsFixed(0)} ml',
                         iconAsset: 'assets/icons/water.svg',
                         color: const Color(0xFF22D3EE),
                         onTap: () => context.go('/main/water'),
@@ -762,14 +758,154 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _PremiumMetricCard(
                         title: 'Workout Tracker',
                         value:
-                            '${ref
-                                .watch(healthMetricsProvider)
-                                .activeMinutes} min',
+                            '${ref.watch(healthMetricsProvider).activeMinutes} min',
                         iconAsset: 'assets/icons/exercise.svg',
                         color: const Color(0xFF4ADE80),
                         onTap: () => context.go('/main/workout'),
                       ),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Health Index Card
+                SizedBox(
+                  height: 120,
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () => context.go('/main/health-index'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color(0xFFFFC94D),
+                                    Color(0xFF7ED6D6),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.stars_rounded,
+                                color: Colors.white,
+                                size: 28,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Health Index',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'See your overall health rating',
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall?.copyWith(
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: Color(0xFFBDBDBD),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Healthy Habits Card
+                SizedBox(
+                  height: 120,
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () => context.go('/main/habits'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color(0xFF10B981),
+                                    Color(0xFF8B5CF6),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.check_circle_outline_rounded,
+                                color: Colors.white,
+                                size: 28,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Healthy Habits',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Track your daily healthy habits',
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall?.copyWith(
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: Color(0xFFBDBDBD),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -820,9 +956,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
 
-                // 5. DEVICE & CONNECTION SECTION
-
-                // 6. UPGRADE SECTION
+                // 5. UPGRADE SECTION
                 const SectionHeader(
                   title: 'Upgrade to Premium',
                   icon: Icons.star_rounded,
@@ -1323,35 +1457,35 @@ class _PremiumMetricCard extends StatelessWidget {
                 ),
               ),
             ),
-              Positioned(
-                top: 12,
-                right: 12,
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween(begin: 1.0, end: 1.2),
-                  duration: const Duration(milliseconds: 900),
-                  curve: Curves.easeInOut,
-                  builder: (context, scale, child) {
-                    return Transform.scale(
-                      scale: scale,
-                      child: Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: color,
-                          boxShadow: [
-                            BoxShadow(
-                              color: color.withAlpha((0.5 * 255).toInt()),
-                              blurRadius: 8,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                        ),
+            Positioned(
+              top: 12,
+              right: 12,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 1.0, end: 1.2),
+                duration: const Duration(milliseconds: 900),
+                curve: Curves.easeInOut,
+                builder: (context, scale, child) {
+                  return Transform.scale(
+                    scale: scale,
+                    child: Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: color,
+                        boxShadow: [
+                          BoxShadow(
+                            color: color.withAlpha((0.5 * 255).toInt()),
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
+            ),
           ],
         ),
       ),
