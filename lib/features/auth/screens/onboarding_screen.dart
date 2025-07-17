@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/constants/auth_constants.dart';
 import '../../../core/navigation/route_names.dart';
-import '../../../shared/widgets/gradient_button.dart';
+import '../../../shared/models/auth_models.dart';
+import '../../../shared/widgets/custom_button.dart';
+import '../widgets/auth_floating_card.dart';
+import '../widgets/auth_onboarding_card.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -18,17 +22,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
-  final List<_OnboardingCardData> _pages = [
-    _OnboardingCardData(
-      imageAsset: 'assets/images/logo.png',
+  final List<OnboardingCardData> _pages = [
+    const OnboardingCardData(
+      imageAsset: AuthConstants.logoLight,
       title: 'Welcome to CAREDIFY',
       subtitle: 'Your heart under 24/7 monitoring',
       features: [],
       bottomText: 'Smart cardiac monitoring',
     ),
-    _OnboardingCardData(
+    const OnboardingCardData(
       icon: Icons.flash_on,
-      iconColor: const Color(0xFFB388FF),
+      iconColor: Color(0xFFB388FF),
       title: 'Cardio-AI',
       subtitle: 'Intelligence that cares for your heart.',
       features: [
@@ -38,9 +42,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ],
       featuresTitle: 'Advanced technology',
     ),
-    _OnboardingCardData(
+    const OnboardingCardData(
       icon: Icons.bar_chart,
-      iconColor: const Color(0xFFB388FF),
+      iconColor: Color(0xFFB388FF),
       title: 'Your health at a glance',
       subtitle: 'Simple, clear, and reassuring information.',
       features: [
@@ -50,9 +54,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ],
       featuresTitle: 'Intuitive interface',
     ),
-    _OnboardingCardData(
+    const OnboardingCardData(
       icon: Icons.lightbulb,
-      iconColor: const Color(0xFF60A5FA),
+      iconColor: Color(0xFF60A5FA),
       title: 'Intelligent Cardiac Tracking',
       subtitle: 'Your heart monitored, effortlessly.',
       features: [
@@ -62,9 +66,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ],
       featuresTitle: 'How does it work?',
     ),
-    _OnboardingCardData(
+    const OnboardingCardData(
       icon: Icons.person,
-      iconColor: const Color(0xFF4ADE80),
+      iconColor: Color(0xFF4ADE80),
       title: 'Direct link with your doctor',
       subtitle: 'Your data shared securely.',
       features: [
@@ -79,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onContinue() async {
     if (_currentPage < _pages.length - 1) {
       _controller.nextPage(
-        duration: const Duration(milliseconds: 400),
+        duration: AuthConstants.durationMedium,
         curve: Curves.easeInOut,
       );
     } else {
@@ -94,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onPrev() {
     if (_currentPage > 0) {
       _controller.previousPage(
-        duration: const Duration(milliseconds: 400),
+        duration: AuthConstants.durationMedium,
         curve: Curves.easeInOut,
       );
     }
@@ -107,110 +111,64 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     return Scaffold(
       backgroundColor:
-          isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+          isDark ? AuthConstants.backgroundDark : AuthConstants.backgroundLight,
       body: SafeArea(
         child: Column(
           children: [
             // Enhanced Top Section - Floating Card like UserHeader
-            Container(
+            AuthFloatingCard(
+              isPrimary: true,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors:
-                      isDark
-                          ? [
-                            const Color(
-                              0xFF1E293B,
-                            ).withAlpha((0.9 * 255).toInt()),
-                            const Color(
-                              0xFF334155,
-                            ).withAlpha((0.7 * 255).toInt()),
-                          ]
-                          : [const Color(0xFFE3F0FF), const Color(0xFFF8FAFC)],
-                ),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color:
-                      isDark
-                          ? const Color(
-                            0xFF475569,
-                          ).withAlpha((0.3 * 255).toInt())
-                          : const Color(
-                            0xFFB6D0E2,
-                          ).withAlpha((0.5 * 255).toInt()),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        isDark
-                            ? Colors.black.withAlpha((0.4 * 255).toInt())
-                            : const Color(
-                              0xFF60A5FA,
-                            ).withAlpha((0.10 * 255).toInt()),
-                    blurRadius: 24,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 24,
-                ),
-                child: Row(
-                  children: [
-                    // Welcome message with enhanced styling
-                    Expanded(
-                      child: Text(
-                        'Welcome to your health space',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color:
-                              isDark
-                                  ? Colors.white.withAlpha((0.9 * 255).toInt())
-                                  : const Color(0xFF1E293B),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+              borderRadius: AuthConstants.borderRadius24,
+              child: Row(
+                children: [
+                  // Welcome message with enhanced styling
+                  Expanded(
+                    child: Text(
+                      'Welcome to your health space',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color:
+                            isDark
+                                ? Colors.white.withAlpha((0.9 * 255).toInt())
+                                : AuthConstants.textDark,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    // Skip link as clickable, theme-adaptive text
-                    if (_currentPage < _pages.length - 1)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(8),
-                          onTap: () async {
-                            final prefs = await SharedPreferences.getInstance();
-                            await prefs.setBool('onboarding_complete', true);
-                            if (!mounted) return;
-                            context.go('/welcome');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            child: Text(
-                              'Skip',
-                              style: TextStyle(
-                                color:
-                                    isDark
-                                        ? const Color(0xFF60A5FA)
-                                        : const Color(0xFF0092DF),
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                // No underline
-                              ),
+                  ),
+                  // Skip link as clickable, theme-adaptive text
+                  if (_currentPage < _pages.length - 1)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(8),
+                        onTap: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.setBool('onboarding_complete', true);
+                          if (!mounted) return;
+                          context.go('/welcome');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          child: Text(
+                            'Skip',
+                            style: TextStyle(
+                              color:
+                                  isDark
+                                      ? const Color(0xFF60A5FA)
+                                      : const Color(0xFF0092DF),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
                             ),
                           ),
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             ),
 
@@ -225,7 +183,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       itemCount: _pages.length,
                       onPageChanged: (i) => setState(() => _currentPage = i),
                       itemBuilder:
-                          (context, i) => _OnboardingCard(data: _pages[i]),
+                          (context, i) => AuthOnboardingCard(data: _pages[i]),
                     ),
                   ),
 
@@ -244,7 +202,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               isActive: _currentPage > 0,
                               theme: theme,
                             ),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: AuthConstants.spacingMedium),
                             if (_currentPage < _pages.length - 1)
                               _EnhancedCircleIconButton(
                                 icon: Icons.arrow_forward_ios,
@@ -263,7 +221,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ],
                         ),
 
-                        const SizedBox(height: 16),
+                        const SizedBox(height: AuthConstants.buttonSpacing),
 
                         // Enhanced progress dots
                         Row(
@@ -284,66 +242,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             // Fixed Bottom Section - Floating Card like UserHeader
-            Container(
+            AuthFloatingCard(
+              isPrimary: true,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors:
-                      isDark
-                          ? [
-                            const Color(
-                              0xFF1E293B,
-                            ).withAlpha((0.9 * 255).toInt()),
-                            const Color(
-                              0xFF334155,
-                            ).withAlpha((0.7 * 255).toInt()),
-                          ]
-                          : [const Color(0xFFE3F0FF), const Color(0xFFF8FAFC)],
-                ),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color:
-                      isDark
-                          ? const Color(
-                            0xFF475569,
-                          ).withAlpha((0.3 * 255).toInt())
-                          : const Color(
-                            0xFFB6D0E2,
-                          ).withAlpha((0.5 * 255).toInt()),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        isDark
-                            ? Colors.black.withAlpha((0.4 * 255).toInt())
-                            : const Color(
-                              0xFF60A5FA,
-                            ).withAlpha((0.10 * 255).toInt()),
-                    blurRadius: 24,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
+              borderRadius: AuthConstants.borderRadius24,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 24,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Sign up button
                     SizedBox(
                       width: double.infinity,
-                      child: GradientButton(
+                      child: CustomButton.primary(
                         text: 'Sign up',
                         onPressed: () => context.go(RouteNames.register),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AuthConstants.buttonSpacing),
                     // Login text
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -356,7 +272,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     ? Colors.white.withAlpha(
                                       (0.7 * 255).toInt(),
                                     )
-                                    : const Color(0xFF64748B),
+                                    : AuthConstants.textGray,
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
                           ),
@@ -389,277 +305,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-class _OnboardingCardData {
-  final IconData? icon;
-  final Color? iconColor;
-  final String? imageAsset;
-  final String title;
-  final String subtitle;
-  final List<String> features;
-  final String? featuresTitle;
-  final String? bottomText;
-
-  _OnboardingCardData({
-    this.icon,
-    this.iconColor,
-    this.imageAsset,
-    required this.title,
-    required this.subtitle,
-    this.features = const [],
-    this.featuresTitle,
-    this.bottomText,
-  });
-}
-
-class _OnboardingCard extends StatelessWidget {
-  final _OnboardingCardData data;
-
-  const _OnboardingCard({required this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.85,
-          maxHeight: MediaQuery.of(context).size.height * 0.5,
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors:
-                isDark
-                    ? [
-                      const Color(0xFF1E293B).withAlpha((0.9 * 255).toInt()),
-                      const Color(0xFF334155).withAlpha((0.7 * 255).toInt()),
-                    ]
-                    : [const Color(0xFFF8FAFC), const Color(0xFFE2E8F0)],
-          ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color:
-                isDark
-                    ? const Color(0xFF475569).withAlpha((0.3 * 255).toInt())
-                    : const Color(0xFFCBD5E1).withAlpha((0.5 * 255).toInt()),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color:
-                  isDark
-                      ? Colors.black.withAlpha((0.4 * 255).toInt())
-                      : const Color(0xFF64748B).withAlpha((0.15 * 255).toInt()),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Image or Icon
-              if (data.imageAsset != null)
-                Container(
-                  height: 120,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color:
-                        isDark
-                            ? Colors.white.withAlpha((0.05 * 255).toInt())
-                            : theme.primaryColor.withAlpha(
-                              (0.05 * 255).toInt(),
-                            ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      isDark ? 'assets/images/logo_dark.png' : data.imageAsset!,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                )
-              else if (data.icon != null)
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: (data.iconColor ??
-                            (isDark
-                                ? const Color(0xFF60A5FA)
-                                : theme.primaryColor))
-                        .withAlpha(
-                          isDark ? (0.2 * 255).toInt() : (0.15 * 255).toInt(),
-                        ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    data.icon,
-                    color:
-                        data.iconColor ??
-                        (isDark ? const Color(0xFF60A5FA) : theme.primaryColor),
-                    size: 30,
-                  ),
-                ),
-
-              const SizedBox(height: 20),
-
-              // Title
-              Text(
-                data.title,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.white : const Color(0xFF1E293B),
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-
-              const SizedBox(height: 12),
-
-              // Subtitle
-              Text(
-                data.subtitle,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color:
-                      isDark
-                          ? Colors.white.withAlpha((0.8 * 255).toInt())
-                          : const Color(0xFF64748B),
-                  fontSize: 14,
-                  height: 1.4,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-
-              // Features section
-              if (data.features.isNotEmpty) ...[
-                const SizedBox(height: 20),
-
-                if (data.featuresTitle != null) ...[
-                  Text(
-                    data.featuresTitle!,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: isDark ? Colors.white : const Color(0xFF1E293B),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 12),
-                ],
-
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color:
-                        isDark
-                            ? Colors.white.withAlpha((0.05 * 255).toInt())
-                            : theme.primaryColor.withAlpha(
-                              (0.05 * 255).toInt(),
-                            ),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color:
-                          isDark
-                              ? Colors.white.withAlpha((0.1 * 255).toInt())
-                              : theme.primaryColor.withAlpha(
-                                (0.1 * 255).toInt(),
-                              ),
-                      width: 1,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:
-                        data.features
-                            .map(
-                              (feature) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 6),
-                                      width: 6,
-                                      height: 6,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            data.iconColor ??
-                                            (isDark
-                                                ? const Color(0xFF60A5FA)
-                                                : theme.primaryColor),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(
-                                        feature,
-                                        style: theme.textTheme.bodySmall
-                                            ?.copyWith(
-                                              color:
-                                                  isDark
-                                                      ? Colors.white.withAlpha(
-                                                        (0.9 * 255).toInt(),
-                                                      )
-                                                      : const Color(0xFF475569),
-                                              fontSize: 13,
-                                              height: 1.3,
-                                            ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .toList(),
-                  ),
-                ),
-              ],
-
-              // Bottom text
-              if (data.bottomText != null) ...[
-                const SizedBox(height: 16),
-                Text(
-                  data.bottomText!,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color:
-                        isDark
-                            ? Colors.white.withAlpha((0.7 * 255).toInt())
-                            : const Color(0xFF64748B),
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _EnhancedDot extends StatelessWidget {
   final bool isActive;
   final ThemeData theme;
@@ -671,12 +316,17 @@ class _EnhancedDot extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? 32 : 8,
-      height: 8,
+      duration: AuthConstants.durationMedium,
+      margin: const EdgeInsets.symmetric(
+        horizontal: AuthConstants.spacingSmall,
+      ),
+      width:
+          isActive
+              ? AuthConstants.dotWidthActive
+              : AuthConstants.dotWidthInactive,
+      height: AuthConstants.dotHeight,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(4.0),
         gradient:
             isActive
                 ? const LinearGradient(
@@ -690,7 +340,7 @@ class _EnhancedDot extends StatelessWidget {
                 ? null
                 : isDark
                 ? Colors.white.withAlpha((0.3 * 255).toInt())
-                : const Color(0xFFCBD5E1),
+                : AuthConstants.textGrayLight,
       ),
     );
   }
@@ -724,7 +374,7 @@ class _EnhancedCircleIconButton extends StatelessWidget {
             )
             : isDark
             ? Colors.white.withAlpha((0.1 * 255).toInt())
-            : const Color(0xFFE2E8F0);
+            : AuthConstants.textGrayLight;
 
     final iconColor =
         isSuccess
@@ -733,7 +383,7 @@ class _EnhancedCircleIconButton extends StatelessWidget {
             ? (isDark ? const Color(0xFF60A5FA) : theme.primaryColor)
             : isDark
             ? Colors.white.withAlpha((0.4 * 255).toInt())
-            : const Color(0xFF94A3B8);
+            : AuthConstants.textGray;
 
     final borderColor =
         isActive
@@ -749,15 +399,18 @@ class _EnhancedCircleIconButton extends StatelessWidget {
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onPressed,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AuthConstants.borderRadius24),
         child: Container(
-          width: 48,
-          height: 48,
+          width: AuthConstants.iconButtonSize,
+          height: AuthConstants.iconButtonSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: borderColor, width: 1.5),
+            border: Border.all(
+              color: borderColor,
+              width: AuthConstants.borderWidth,
+            ),
           ),
-          child: Icon(icon, color: iconColor, size: 20),
+          child: Icon(icon, color: iconColor, size: AuthConstants.iconSize),
         ),
       ),
     );

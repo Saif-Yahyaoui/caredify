@@ -5,12 +5,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/constants/auth_constants.dart';
 import '../../../core/navigation/route_names.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/validators.dart';
+import '../../../shared/mixins/auth_mixin.dart';
+import '../../../shared/models/auth_models.dart';
 import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/widgets/custom_button.dart';
 import '../../../shared/widgets/custom_text_field.dart';
+import '../widgets/auth_floating_card.dart';
+import '../widgets/auth_logo_header.dart';
 
 /// Registration screen with user information and account creation
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -20,20 +25,20 @@ class RegisterScreen extends ConsumerStatefulWidget {
   ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends ConsumerState<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen>
+    with AuthMixin<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  AuthFormData _formData = const AuthFormData();
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
   final _nameFocusNode = FocusNode();
   final _phoneFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   final _confirmPasswordFocusNode = FocusNode();
-
   bool _isLoading = false;
   String? _errorMessage;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
@@ -47,13 +52,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       if (voiceFeedbackEnabled) {
         final t = AppLocalizations.of(context)!;
         try {
-          final result = await _tts.setLanguage(
-            Localizations.localeOf(context).languageCode == 'ar'
-                ? 'ar-SA'
-                : Localizations.localeOf(context).languageCode == 'fr'
-                ? 'fr-FR'
-                : 'en-US',
-          );
+          final result = await _tts.setLanguage(getLanguageCode());
           if (result != 1) {
             await _tts.setLanguage('en-US');
           }
@@ -85,42 +84,32 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     super.dispose();
   }
 
-  /// Handle registration form submission
   Future<void> _handleRegister() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
     setState(() {
       _isLoading = true;
       _errorMessage = null;
     });
-
-    // Gather values BEFORE async gap
     final name = _nameController.text.trim();
     final phone = _phoneController.text.trim();
     final email = _emailController.text.trim();
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
-
     try {
-      // Simulate token
-      await _secureStorage.write(key: 'auth_token', value: 'demo_token');
-
+      await _secureStorage.write(
+        key: AuthConstants.authTokenKey,
+        value: AuthConstants.demoToken,
+      );
       if (!mounted) return;
-
       if (name.isNotEmpty &&
           phone.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
           password == confirmPassword) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.accountCreated),
-            backgroundColor: AppColors.healthGreen,
-          ),
-        );
-        context.go(RouteNames.login);
+        showSuccessMessage(AppLocalizations.of(context)!.accountCreated);
+        navigateToLogin();
       } else {
         throw Exception(AppLocalizations.of(context)!.fillAllFields);
       }
@@ -138,7 +127,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
   }
 
-  /// Navigate back to login screen
   void _handleBackToLogin() {
     context.go(RouteNames.login);
   }
@@ -146,251 +134,118 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final t = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: AuthConstants.paddingAll24,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 20),
-
-              // Top floating card - Logo and welcome message
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      isDark
-                          ? AppColors.primaryBlue.withAlpha((0.1 * 255).toInt())
-                          : AppColors.primaryBlue.withAlpha(
-                            (0.05 * 255).toInt(),
-                          ),
-                      isDark
-                          ? AppColors.primaryBlue.withAlpha(
-                            (0.05 * 255).toInt(),
-                          )
-                          : AppColors.primaryBlue.withAlpha(
-                            (0.02 * 255).toInt(),
-                          ),
+              const SizedBox(height: AuthConstants.spacingMedium),
+              AuthFloatingCard(
+                isPrimary: true,
+                child: AuthLogoHeader(
+                  isDark: isDark,
+                  subtitle: t.joinHealthSpace,
+                ),
+              ),
+              const SizedBox(height: AuthConstants.spacingLarge),
+              AuthFloatingCard(
+                isFormCard: true,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      buildErrorMessage(_errorMessage),
+                      CustomTextField.name(
+                        label: t.fullName,
+                        hint: t.fullNameHint,
+                        controller: _nameController,
+                        focusNode: _nameFocusNode,
+                        validator:
+                            (value) => Validators.validateName(value, context),
+                        onChanged:
+                            (value) => setState(() {
+                              _formData = _formData.copyWith(name: value);
+                            }),
+                      ),
+                      const SizedBox(height: AuthConstants.buttonSpacing),
+                      CustomTextField.phone(
+                        label: t.phoneNumber,
+                        hint: t.phoneNumberHint,
+                        controller: _phoneController,
+                        focusNode: _phoneFocusNode,
+                        validator:
+                            (value) => Validators.validatePhone(value, context),
+                        onChanged:
+                            (value) => setState(() {
+                              _formData = _formData.copyWith(phone: value);
+                            }),
+                      ),
+                      const SizedBox(height: AuthConstants.buttonSpacing),
+                      CustomTextField.email(
+                        label: t.email,
+                        hint: t.emailHint,
+                        controller: _emailController,
+                        focusNode: _emailFocusNode,
+                        validator:
+                            (value) => Validators.validateEmail(value, context),
+                        onChanged:
+                            (value) => setState(() {
+                              _formData = _formData.copyWith(email: value);
+                            }),
+                      ),
+                      const SizedBox(height: AuthConstants.buttonSpacing),
+                      CustomTextField.password(
+                        label: t.password,
+                        hint: t.passwordHint,
+                        controller: _passwordController,
+                        focusNode: _passwordFocusNode,
+                        validator:
+                            (value) =>
+                                Validators.validatePassword(value, context),
+                        onChanged:
+                            (value) => setState(() {
+                              _formData = _formData.copyWith(password: value);
+                            }),
+                      ),
+                      const SizedBox(height: AuthConstants.buttonSpacing),
+                      CustomTextField.password(
+                        label: t.confirmPassword,
+                        hint: t.confirmPasswordHint,
+                        controller: _confirmPasswordController,
+                        focusNode: _confirmPasswordFocusNode,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return t.fieldRequired;
+                          }
+                          if (value != _passwordController.text) {
+                            return t.passwordsDoNotMatch;
+                          }
+                          return null;
+                        },
+                        onChanged:
+                            (value) => setState(() {
+                              _formData = _formData.copyWith(
+                                confirmPassword: value,
+                              );
+                            }),
+                      ),
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color:
-                        isDark
-                            ? AppColors.primaryBlue.withAlpha(
-                              (0.2 * 255).toInt(),
-                            )
-                            : AppColors.primaryBlue.withAlpha(
-                              (0.1 * 255).toInt(),
-                            ),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          isDark
-                              ? Colors.black.withAlpha((0.3 * 255).toInt())
-                              : AppColors.primaryBlue.withAlpha(
-                                (0.1 * 255).toInt(),
-                              ),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
                 ),
-                child: _buildHeader(context),
               ),
-
-              const SizedBox(height: 24),
-
-              // Center floating card - Registration form
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      isDark
-                          ? Colors.white.withAlpha((0.05 * 255).toInt())
-                          : Colors.white.withAlpha((0.8 * 255).toInt()),
-                      isDark
-                          ? Colors.white.withAlpha((0.02 * 255).toInt())
-                          : Colors.white.withAlpha((0.6 * 255).toInt()),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color:
-                        isDark
-                            ? Colors.white.withAlpha((0.1 * 255).toInt())
-                            : Colors.white.withAlpha((0.3 * 255).toInt()),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          isDark
-                              ? Colors.black.withAlpha((0.3 * 255).toInt())
-                              : Colors.black.withAlpha((0.1 * 255).toInt()),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: _buildRegistrationForm(context),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Action buttons
+              const SizedBox(height: AuthConstants.spacingLarge),
               _buildActionButtons(context),
-
-              const SizedBox(height: 32),
-
-              // Footer
+              const SizedBox(
+                height: AuthConstants.spacingLarge + AuthConstants.spacingSmall,
+              ),
               _buildFooter(context),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  /// Build header with logo and welcome message
-  Widget _buildHeader(BuildContext context) {
-    return Column(
-      children: [
-        // Logo
-        Image.asset(
-          Theme.of(context).brightness == Brightness.dark
-              ? 'assets/images/logo_dark.png'
-              : 'assets/images/logo.png',
-          width: 250,
-          height: 170,
-          fit: BoxFit.fill,
-        ),
-
-        // Welcome message
-        Text(
-          AppLocalizations.of(context)!.joinHealthSpace,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-            fontWeight: FontWeight.w400,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-
-  /// Build registration form with validation
-  Widget _buildRegistrationForm(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          // Error message display
-          if (_errorMessage != null)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.only(bottom: 16),
-              decoration: BoxDecoration(
-                color: AppColors.alertBackground,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: AppColors.alertRed.withValues(alpha: 0.3),
-                ),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.error_outline,
-                    color: AppColors.alertRed,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      _errorMessage!,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.alertRed,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          // Name field
-          CustomTextField.name(
-            label: AppLocalizations.of(context)!.fullName,
-            hint: AppLocalizations.of(context)!.fullNameHint,
-            controller: _nameController,
-            focusNode: _nameFocusNode,
-            validator: (value) => Validators.validateName(value, context),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Phone number field
-          CustomTextField.phone(
-            label: AppLocalizations.of(context)!.phoneNumber,
-            hint: AppLocalizations.of(context)!.phoneNumberHint,
-            controller: _phoneController,
-            focusNode: _phoneFocusNode,
-            validator: (value) => Validators.validatePhone(value, context),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Email field
-          CustomTextField.email(
-            label: AppLocalizations.of(context)!.email,
-            hint: AppLocalizations.of(context)!.emailHint,
-            controller: _emailController,
-            focusNode: _emailFocusNode,
-            validator: (value) => Validators.validateEmail(value, context),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Password field
-          CustomTextField.password(
-            label: AppLocalizations.of(context)!.password,
-            hint: AppLocalizations.of(context)!.passwordHint,
-            controller: _passwordController,
-            focusNode: _passwordFocusNode,
-            validator: (value) => Validators.validatePassword(value, context),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Confirm password field
-          CustomTextField.password(
-            label: AppLocalizations.of(context)!.confirmPassword,
-            hint: AppLocalizations.of(context)!.confirmPasswordHint,
-            controller: _confirmPasswordController,
-            focusNode: _confirmPasswordFocusNode,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return AppLocalizations.of(context)!.fieldRequired;
-              }
-              if (value != _passwordController.text) {
-                return AppLocalizations.of(context)!.passwordsDoNotMatch;
-              }
-              return null;
-            },
-          ),
-        ],
       ),
     );
   }
@@ -407,7 +262,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           icon: Icons.person_add,
         ),
 
-        const SizedBox(height: 16),
+        const SizedBox(height: AuthConstants.buttonSpacing),
 
         // Back to login button
         CustomButton.secondary(
@@ -443,7 +298,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     color: AppColors.healthGreen,
                     size: 20,
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: AuthConstants.spacingSmall),
                   Text(
                     AppLocalizations.of(context)!.termsOfService,
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -453,7 +308,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AuthConstants.spacingSmall),
               Text(
                 AppLocalizations.of(context)!.termsOfServiceDescription,
                 style: Theme.of(
@@ -465,7 +320,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           ),
         ),
 
-        const SizedBox(height: 24),
+        const SizedBox(height: AuthConstants.spacingLarge),
 
         // Terms and privacy links
         Row(

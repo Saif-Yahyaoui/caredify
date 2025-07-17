@@ -3,9 +3,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/constants/auth_constants.dart';
 import '../../../core/navigation/route_names.dart';
 import '../../../shared/widgets/accessibility_controls.dart';
-import '../../../shared/widgets/gradient_button.dart';
+import '../../../shared/widgets/custom_button.dart';
+import '../widgets/auth_floating_card.dart';
 
 /// Welcome screen with accessibility controls and logo
 class WelcomeScreen extends ConsumerWidget {
@@ -18,117 +20,29 @@ class WelcomeScreen extends ConsumerWidget {
     final t = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor:
-          isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+          isDark ? AuthConstants.backgroundDark : AuthConstants.backgroundLight,
       body: SafeArea(
         child: Column(
           children: [
             // Main accessibility controls area
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors:
-                        isDark
-                            ? [
-                              const Color(
-                                0xFF1E293B,
-                              ).withAlpha((0.9 * 255).toInt()),
-                              const Color(
-                                0xFF334155,
-                              ).withAlpha((0.7 * 255).toInt()),
-                            ]
-                            : [
-                              const Color(0xFFE3F0FF),
-                              const Color(0xFFF8FAFC),
-                            ],
-                  ),
-                  borderRadius: BorderRadius.circular(28),
-                  border: Border.all(
-                    color:
-                        isDark
-                            ? const Color(
-                              0xFF475569,
-                            ).withAlpha((0.3 * 255).toInt())
-                            : const Color(
-                              0xFFB6D0E2,
-                            ).withAlpha((0.5 * 255).toInt()),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          isDark
-                              ? Colors.black.withAlpha((0.4 * 255).toInt())
-                              : const Color(
-                                0xFF60A5FA,
-                              ).withAlpha((0.10 * 255).toInt()),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                  child: AccessibilityControls(),
-                ),
+            const Expanded(
+              child: AuthFloatingCard(
+                isPrimary: true,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                borderRadius: AuthConstants.floatingCardBorderRadius,
+                padding: EdgeInsets.zero,
+                child: AccessibilityControls(),
               ),
             ),
             // Bottom card - fixed at bottom
-            Container(
-              width: double.infinity,
+            AuthFloatingCard(
+              isPrimary: true,
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors:
-                      isDark
-                          ? [
-                            const Color(
-                              0xFF1E293B,
-                            ).withAlpha((0.9 * 255).toInt()),
-                            const Color(
-                              0xFF334155,
-                            ).withAlpha((0.7 * 255).toInt()),
-                          ]
-                          : [const Color(0xFFE3F0FF), const Color(0xFFF8FAFC)],
-                ),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color:
-                      isDark
-                          ? const Color(
-                            0xFF475569,
-                          ).withAlpha((0.3 * 255).toInt())
-                          : const Color(
-                            0xFFB6D0E2,
-                          ).withAlpha((0.5 * 255).toInt()),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        isDark
-                            ? Colors.black.withAlpha((0.4 * 255).toInt())
-                            : const Color(
-                              0xFF60A5FA,
-                            ).withAlpha((0.10 * 255).toInt()),
-                    blurRadius: 24,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
+              borderRadius: AuthConstants.floatingCardBorderRadius,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 24,
+                  horizontal: AuthConstants.floatingCardHorizontalPadding,
+                  vertical: AuthConstants.floatingCardVerticalPadding,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -136,12 +50,12 @@ class WelcomeScreen extends ConsumerWidget {
                     // Sign up button
                     SizedBox(
                       width: double.infinity,
-                      child: GradientButton(
+                      child: CustomButton.primary(
                         text: t.signUp,
                         onPressed: () => context.go(RouteNames.register),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AuthConstants.buttonSpacing),
                     // Login text
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +69,7 @@ class WelcomeScreen extends ConsumerWidget {
                                       (0.7 * 255).toInt(),
                                     )
                                     : const Color(0xFF64748B),
-                            fontSize: 15,
+                            fontSize: AuthConstants.loginTextFontSize,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -169,7 +83,7 @@ class WelcomeScreen extends ConsumerWidget {
                                       ? const Color(0xFF0092DF)
                                       : const Color(0xFF0092DF),
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize: AuthConstants.loginTextFontSize,
                             ),
                           ),
                         ),
