@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
 import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/widgets/accessibility_controls.dart';
+import '../../../shared/widgets/access/accessibility_controls.dart';
 
 class AccessibilitySettingsScreen extends ConsumerWidget {
   const AccessibilitySettingsScreen({super.key});

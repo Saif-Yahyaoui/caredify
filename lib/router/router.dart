@@ -48,10 +48,10 @@ import '../features/profile/screens/upgrade_screen.dart';
 import '../features/watch/screens/health_watch_screen.dart';
 import '../shared/providers/auth_provider.dart';
 import '../shared/services/auth_service.dart';
-import '../shared/widgets/health_index.dart';
-import '../shared/widgets/health_index_reevaluate.dart';
-import '../shared/widgets/healthy_habits.dart';
-import '../shared/widgets/main_screen.dart';
+import '../shared/widgets/cards/health_index.dart';
+import '../shared/widgets/cards/health_index_reevaluate.dart';
+import '../shared/widgets/cards/healthy_habits.dart';
+import '../shared/widgets/misc/main_screen.dart';
 // Add other screens as needed
 
 final routerProvider = Provider<GoRouter>((ref) {

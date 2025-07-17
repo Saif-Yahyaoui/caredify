@@ -7,8 +7,8 @@ import '../../../core/constants/auth_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/validators.dart';
 import '../../../shared/mixins/auth_mixin.dart';
-import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
+import '../../../shared/widgets/forms/custom_text_field.dart';
 import '../widgets/auth_floating_card.dart';
 import '../widgets/auth_section_title.dart';
 

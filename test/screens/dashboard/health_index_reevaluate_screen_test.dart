@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/health_index_reevaluate.dart';
+import 'package:caredify/shared/widgets/cards/health_index_reevaluate.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

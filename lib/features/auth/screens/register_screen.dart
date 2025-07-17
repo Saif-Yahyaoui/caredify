@@ -12,8 +12,8 @@ import '../../../core/utils/validators.dart';
 import '../../../shared/mixins/auth_mixin.dart';
 import '../../../shared/models/auth_models.dart';
 import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
+import '../../../shared/widgets/forms/custom_text_field.dart';
 import '../widgets/auth_floating_card.dart';
 import '../widgets/auth_logo_header.dart';
 

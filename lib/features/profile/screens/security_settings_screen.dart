@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/providers/user_type_provider.dart';
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../../../shared/widgets/forms/custom_text_field.dart';
 
 class SecuritySettingsScreen extends ConsumerStatefulWidget {
   const SecuritySettingsScreen({super.key});

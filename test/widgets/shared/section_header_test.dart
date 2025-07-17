@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/section_header.dart';
+import 'package:caredify/shared/widgets/sections/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

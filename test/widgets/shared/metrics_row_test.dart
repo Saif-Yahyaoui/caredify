@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/metrics_row.dart';
+import 'package:caredify/shared/widgets/metrics/metrics_row.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

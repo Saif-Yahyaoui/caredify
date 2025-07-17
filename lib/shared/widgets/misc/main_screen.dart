@@ -1,10 +1,10 @@
-import 'package:caredify/shared/widgets/floating_bottom_nav_bar.dart';
+import 'package:caredify/shared/widgets/navigation/floating_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../providers/auth_provider.dart';
-import '../services/auth_service.dart';
+import '../../providers/auth_provider.dart';
+import '../../services/auth_service.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
   final Widget child;

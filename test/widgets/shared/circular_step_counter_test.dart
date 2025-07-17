@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/circular_step_counter.dart';
+import 'package:caredify/shared/widgets/charts/circular_step_counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

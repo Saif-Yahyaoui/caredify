@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_button.dart';
+import '../buttons/custom_button.dart';
 
 class WatchConnectionBanner extends StatefulWidget {
   final bool isConnected;

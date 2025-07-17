@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/auth_constants.dart';
 import '../../../core/navigation/route_names.dart';
 import '../../../shared/models/auth_models.dart';
-import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
 import '../widgets/auth_floating_card.dart';
 import '../widgets/auth_onboarding_card.dart';
 

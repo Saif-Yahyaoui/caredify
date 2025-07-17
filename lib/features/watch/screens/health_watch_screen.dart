@@ -5,7 +5,7 @@ import 'package:intl/intl.dart' as intl;
 
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/providers/voice_feedback_provider.dart';
-import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
 
 class HealthWatchScreen extends ConsumerStatefulWidget {
   const HealthWatchScreen({super.key});

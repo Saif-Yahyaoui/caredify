@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../../core/theme/app_colors.dart';
+import '../../../core/theme/app_colors.dart';
 
 /// Custom text field widget with CAREDIFY styling and validation
 class CustomTextField extends StatefulWidget {

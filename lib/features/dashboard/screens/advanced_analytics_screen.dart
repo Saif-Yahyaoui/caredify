@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/premium_tabbar.dart';
-import '../../../shared/widgets/role_based_access.dart';
+import '../../../shared/widgets/access/role_based_access.dart';
+import '../../../shared/widgets/navigation/premium_tabbar.dart';
 
 class _PremiumTabData {
   final String label;

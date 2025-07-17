@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/providers/auth_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
-import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
 
 class UpgradeScreen extends ConsumerStatefulWidget {
   const UpgradeScreen({super.key});

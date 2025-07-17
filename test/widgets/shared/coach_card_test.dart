@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/coach_card.dart';
+import 'package:caredify/shared/widgets/cards/coach_card.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

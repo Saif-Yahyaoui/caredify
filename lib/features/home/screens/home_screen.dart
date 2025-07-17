@@ -4,13 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/providers/health_metrics_provider.dart';
-import '../../../shared/widgets/alert_card.dart';
-import '../../../shared/widgets/coach_card.dart';
-import '../../../shared/widgets/emergency_button.dart';
-import '../../../shared/widgets/section_header.dart';
-import '../../../shared/widgets/user_header.dart';
-import '../../../shared/widgets/health_index.dart';
-import '../../../shared/widgets/healthy_habits.dart';
+import '../../../shared/widgets/buttons/emergency_button.dart';
+import '../../../shared/widgets/cards/alert_card.dart';
+import '../../../shared/widgets/cards/coach_card.dart';
+import '../../../shared/widgets/sections/section_header.dart';
+import '../../../shared/widgets/sections/user_header.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

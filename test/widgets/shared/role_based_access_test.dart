@@ -1,5 +1,5 @@
 import 'package:caredify/shared/services/auth_service.dart';
-import 'package:caredify/shared/widgets/role_based_access.dart';
+import 'package:caredify/shared/widgets/access/role_based_access.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

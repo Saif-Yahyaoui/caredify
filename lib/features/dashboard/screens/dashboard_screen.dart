@@ -5,16 +5,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../shared/providers/health_metrics_provider.dart';
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/alert_card.dart';
-import '../../../shared/widgets/coach_card.dart';
-import '../../../shared/widgets/emergency_button.dart';
-import '../../../shared/widgets/premium_components.dart';
-import '../../../shared/widgets/role_based_access.dart';
-import '../../../shared/widgets/section_header.dart';
-import '../../../shared/widgets/unified_vital_cards.dart';
-import '../../../shared/widgets/user_header.dart';
-import '../../../shared/widgets/health_index.dart';
-import '../../../shared/widgets/healthy_habits.dart';
+import '../../../shared/widgets/access/role_based_access.dart';
+import '../../../shared/widgets/buttons/emergency_button.dart';
+import '../../../shared/widgets/cards/alert_card.dart';
+import '../../../shared/widgets/cards/coach_card.dart';
+import '../../../shared/widgets/cards/unified_vital_cards.dart';
+import '../../../shared/widgets/misc/premium_components.dart';
+import '../../../shared/widgets/sections/section_header.dart';
+import '../../../shared/widgets/sections/user_header.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});

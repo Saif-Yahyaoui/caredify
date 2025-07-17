@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/unified_health_metrics.dart';
+import 'package:caredify/shared/widgets/metrics/unified_health_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

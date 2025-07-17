@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/premium_recommendation_card.dart';
+import 'package:caredify/shared/widgets/cards/premium_recommendation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

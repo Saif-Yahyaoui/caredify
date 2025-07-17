@@ -1,5 +1,5 @@
 import 'package:caredify/shared/models/ecg_analysis_result.dart';
-import 'package:caredify/shared/widgets/ecg_ai_analysis_card.dart';
+import 'package:caredify/shared/widgets/cards/ecg_ai_analysis_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

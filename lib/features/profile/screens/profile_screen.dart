@@ -11,7 +11,7 @@ import '../../../shared/providers/auth_provider.dart';
 import '../../../shared/providers/user_type_provider.dart';
 import '../../../shared/providers/voice_feedback_provider.dart';
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/section_header.dart';
+import '../../../shared/widgets/sections/section_header.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});

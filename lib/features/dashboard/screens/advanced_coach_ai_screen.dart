@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../shared/services/auth_service.dart';
-import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/premium_recommendation_card.dart';
-import '../../../shared/widgets/premium_tabbar.dart';
-import '../../../shared/widgets/role_based_access.dart';
-import '../../../shared/widgets/section_header.dart';
+import '../../../shared/widgets/access/role_based_access.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
+import '../../../shared/widgets/cards/premium_recommendation_card.dart';
+import '../../../shared/widgets/navigation/premium_tabbar.dart';
+import '../../../shared/widgets/sections/section_header.dart';
 
 class AdvancedCoachAiScreen extends ConsumerStatefulWidget {
   const AdvancedCoachAiScreen({super.key});

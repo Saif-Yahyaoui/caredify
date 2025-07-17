@@ -3,9 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../providers/language_provider.dart';
-import '../providers/theme_provider.dart';
-import '../providers/voice_feedback_provider.dart';
+import '../../providers/language_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../providers/voice_feedback_provider.dart';
 
 /// Accessibility controls widget with language, font size, and theme toggles
 class AccessibilityControls extends ConsumerWidget {

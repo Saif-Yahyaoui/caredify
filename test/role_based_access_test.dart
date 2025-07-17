@@ -1,7 +1,7 @@
 import 'package:caredify/shared/providers/auth_provider.dart' as auth;
 import 'package:caredify/shared/providers/user_type_provider.dart' as user_type;
 import 'package:caredify/shared/services/auth_service.dart';
-import 'package:caredify/shared/widgets/role_based_access.dart';
+import 'package:caredify/shared/widgets/access/role_based_access.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/premium_components.dart';
+import 'package:caredify/shared/widgets/misc/premium_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

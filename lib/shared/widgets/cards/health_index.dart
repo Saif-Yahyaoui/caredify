@@ -5,9 +5,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 
-import '../providers/user_type_provider.dart';
-import '../providers/voice_feedback_provider.dart';
-import '../services/auth_service.dart';
+import '../../providers/user_type_provider.dart';
+import '../../providers/voice_feedback_provider.dart';
+import '../../services/auth_service.dart';
 
 class HealthIndexScreen extends ConsumerStatefulWidget {
   const HealthIndexScreen({super.key});

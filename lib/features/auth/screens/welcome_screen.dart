@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/auth_constants.dart';
 import '../../../core/navigation/route_names.dart';
-import '../../../shared/widgets/accessibility_controls.dart';
-import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/access/accessibility_controls.dart';
+import '../../../shared/widgets/buttons/custom_button.dart';
 import '../widgets/auth_floating_card.dart';
 
 /// Welcome screen with accessibility controls and logo

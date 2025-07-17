@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/watch_connection_banner.dart';
+import 'package:caredify/shared/widgets/banners/watch_connection_banner.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../providers/language_provider.dart';
-import '../providers/theme_provider.dart';
-import '../providers/user_type_provider.dart';
-import '../providers/voice_feedback_provider.dart';
-import '../services/auth_service.dart';
+import '../../providers/language_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../providers/user_type_provider.dart';
+import '../../providers/voice_feedback_provider.dart';
+import '../../services/auth_service.dart';
 
 class UserHeader extends ConsumerWidget {
   const UserHeader({super.key});

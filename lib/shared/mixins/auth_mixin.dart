@@ -8,7 +8,7 @@ import '../../core/theme/app_colors.dart';
 import '../../features/auth/widgets/auth_floating_card.dart';
 import '../../features/auth/widgets/auth_logo_header.dart';
 import '../../features/auth/widgets/auth_message_container.dart';
-import '../widgets/custom_button.dart';
+import '../widgets/buttons/custom_button.dart';
 
 /// Mixin providing common authentication functionality
 mixin AuthMixin<T extends StatefulWidget> on State<T> {

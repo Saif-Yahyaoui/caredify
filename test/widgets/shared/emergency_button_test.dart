@@ -1,4 +1,4 @@
-import 'package:caredify/shared/widgets/emergency_button.dart';
+import 'package:caredify/shared/widgets/buttons/emergency_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_helpers.dart';

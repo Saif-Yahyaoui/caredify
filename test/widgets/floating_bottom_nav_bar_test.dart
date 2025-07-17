@@ -1,5 +1,5 @@
 import 'package:caredify/shared/services/auth_service.dart';
-import 'package:caredify/shared/widgets/floating_bottom_nav_bar.dart';
+import 'package:caredify/shared/widgets/navigation/floating_bottom_nav_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_helpers.dart';
