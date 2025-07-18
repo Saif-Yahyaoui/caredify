@@ -143,14 +143,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: AuthConstants.spacingMedium),
-              AuthFloatingCard(
-                isPrimary: true,
-                child: AuthLogoHeader(
-                  isDark: isDark,
-                  subtitle: t.joinHealthSpace,
-                ),
-              ),
+              AuthLogoHeader(isDark: isDark, subtitle: t.joinHealthSpace),
               const SizedBox(height: AuthConstants.spacingLarge),
               AuthFloatingCard(
                 isFormCard: true,
@@ -334,6 +327,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                 child: Text(
                   AppLocalizations.of(context)!.termsOfService,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.textSecondary,
                   ),
                   textAlign: TextAlign.center,
@@ -341,7 +336,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
               ),
             ),
             Container(
-              width: 1,
+              width: 3,
               height: 16,
               color: AppColors.textSecondary.withValues(alpha: 0.3),
             ),
@@ -354,6 +349,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                 child: Text(
                   AppLocalizations.of(context)!.privacyPolicy,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.textSecondary,
                   ),
                   textAlign: TextAlign.center,

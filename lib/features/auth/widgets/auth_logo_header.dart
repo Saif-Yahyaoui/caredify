@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/auth_constants.dart';
 
-/// A reusable widget that displays the app logo with optional title and subtitle.
-///
-/// This widget automatically adapts to the current theme (light/dark) and displays
-/// the appropriate logo asset. It's commonly used at the top of authentication
-/// screens to provide brand recognition and context.
-///
-/// Example usage:
-/// ```dart
-/// AuthLogoHeader(
-///   isDark: isDark,
-///   title: 'Welcome,
-///   subtitle: 'Sign in to continue',
-/// )
-/// ```
 class AuthLogoHeader extends StatelessWidget {
   /// Optional title text to display below the logo.
   final String? title;
@@ -46,7 +32,7 @@ class AuthLogoHeader extends StatelessWidget {
           isDark ? AuthConstants.logoDarkAsset : AuthConstants.logoAsset,
           width: AuthConstants.logoWidth,
           height: AuthConstants.logoHeight,
-          fit: BoxFit.contain,
+          fit: BoxFit.fitHeight,
         ),
         if (title != null) ...[
           const SizedBox(height: AuthConstants.titleSpacing),

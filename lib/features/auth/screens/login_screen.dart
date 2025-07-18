@@ -122,18 +122,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: AuthConstants.paddingAll24,
+          padding: AuthConstants.paddingAll16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: AuthConstants.spacingMedium),
-              AuthFloatingCard(
-                isPrimary: true,
-                child: AuthLogoHeader(
-                  isDark: isDark,
-                  subtitle: t.welcomeMessage,
-                ),
-              ),
+              AuthLogoHeader(isDark: isDark, subtitle: t.welcomeMessage),
               const SizedBox(height: AuthConstants.spacingLarge),
               AuthFloatingCard(
                 isFormCard: true,
@@ -290,8 +283,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                           padding: AuthConstants.paddingSymmetricH16,
                           child: Text(
                             t.orContinueWith,
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: AppColors.textSecondary),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                         Expanded(

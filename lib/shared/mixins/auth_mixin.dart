@@ -116,7 +116,7 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
   /// Build common footer with terms and privacy links
   Widget buildFooter() {
     final t = AppLocalizations.of(context)!;
-    
+
     return Row(
       children: [
         Expanded(
@@ -127,15 +127,17 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
             ),
             child: Text(
               t.termsOfService,
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
         ),
         Container(
-          width: 1,
+          width: 3,
           height: 16,
           color: AppColors.textSecondary.withAlpha((0.3 * 255).toInt()),
         ),
@@ -149,6 +151,8 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
               t.privacyPolicy,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.textSecondary,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
             ),

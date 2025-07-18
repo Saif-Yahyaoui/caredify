@@ -97,7 +97,7 @@ class AuthConstants {
 
   // Sizes
   static const double logoWidth = 200.0;
-  static const double logoHeight = 120.0;
+  static const double logoHeight = 150.0;
   static const double iconSizeLarge = 60.0;
   static const double iconSizeMedium = 48.0;
   static const double iconSizeSmall = 36.0;

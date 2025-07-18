@@ -1,101 +1,92 @@
-import 'package:caredify/features/auth/screens/splash_screen.dart';
-import 'package:caredify/shared/providers/auth_provider.dart';
-import 'package:caredify/shared/services/auth_service.dart';
+import 'package:caredify/features/auth/screens/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../mocks/auth_service_mock.dart';
-
-/// Mock AuthState for testing navigation
-class MockAuthState extends AuthState {
-  MockAuthState({
-    super.isLoggedIn,
-    super.userType = UserType.basic,
-    super.isLoading,
-  });
-}
+import '../../test_helpers.dart';
 
 void main() {
-  late ProviderContainer container;
-
   setUpAll(() async {
-    SharedPreferences.setMockInitialValues({});
+    await TestSetup.setupTestEnvironment();
   });
 
-  setUp(() {
-    container = ProviderContainer(
-      overrides: [
-        authStateProvider.overrideWith(
-          (ref) => AuthStateNotifier(MockAuthService()),
-        ),
-      ],
-    );
-  });
+  group('RegisterScreen Widget Tests', () {
+    testWidgets('renders all form fields and buttons', (tester) async {
+      await tester.pumpWidget(
+        TestSetup.createTestWidget(const RegisterScreen()),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(RegisterScreen), findsOneWidget);
+      expect(find.byType(TextFormField), findsNWidgets(5));
+      expect(find.textContaining('Register'), findsWidgets);
+      expect(find.textContaining('Already have an account'), findsWidgets);
+    });
 
-  tearDown(() {
-    container.dispose();
-  });
+    testWidgets('shows error when submitting empty form', (tester) async {
+      await tester.pumpWidget(
+        TestSetup.createTestWidget(const RegisterScreen()),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.textContaining('Register').first);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('required', findRichText: true), findsWidgets);
+    });
 
-  testWidgets('SplashScreen renders and shows animated logo and loading', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
-        child: const MaterialApp(home: SplashScreen(disableNavigation: true)),
-      ),
-    );
+    testWidgets('shows error when passwords do not match', (tester) async {
+      await tester.pumpWidget(
+        TestSetup.createTestWidget(const RegisterScreen()),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextFormField).at(0), 'Test User');
+      await tester.enterText(find.byType(TextFormField).at(1), '1234567890');
+      await tester.enterText(
+        find.byType(TextFormField).at(2),
+        'test@email.com',
+      );
+      await tester.enterText(find.byType(TextFormField).at(3), 'password1');
+      await tester.enterText(find.byType(TextFormField).at(4), 'password2');
+      await tester.tap(find.textContaining('Register').first);
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('do not match', findRichText: true),
+        findsWidgets,
+      );
+    });
 
-    // Start initial animations
-    await tester.pump(); // first frame
-    await tester.pump(const Duration(milliseconds: 300)); // scale animation
-    await tester.pump(
-      const Duration(milliseconds: 2500),
-    ); // wait for transition
+    testWidgets('navigates to login on Already have an account', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestSetup.createTestWidgetWithRouter(const RegisterScreen()),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.textContaining('Already have an account'));
+      await tester.pumpAndSettle();
+      // Should navigate away from RegisterScreen
+      expect(find.byType(RegisterScreen), findsNothing);
+    });
 
-    // Find image by type
-    expect(find.byType(Image), findsOneWidget);
-
-    // Welcome message (via localization fallback)
-    expect(find.byType(Text), findsWidgets);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
-
-  testWidgets('SplashScreen displays loading text and progress', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
-        child: const MaterialApp(home: SplashScreen(disableNavigation: true)),
-      ),
-    );
-
-    // Let the splash timer and animations complete (3 seconds total)
-    await tester.pump(const Duration(seconds: 3));
-
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    expect(
-      find.textContaining('Loading', findRichText: true),
-      findsOneWidget,
-    ); // Using English fallback
-  });
-
-  testWidgets('SplashScreen does not navigate when disableNavigation is true', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
-        child: const MaterialApp(home: SplashScreen(disableNavigation: true)),
-      ),
-    );
-
-    // Let the splash timer and animations complete (3 seconds total)
-    await tester.pump(const Duration(seconds: 3));
-
-    // No navigation is expected, we just assert it's still showing SplashScreen
-    expect(find.byType(SplashScreen), findsOneWidget);
+    testWidgets('shows success and navigates on valid registration', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestSetup.createTestWidgetWithRouter(const RegisterScreen()),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextFormField).at(0), 'Test User');
+      await tester.enterText(find.byType(TextFormField).at(1), '1234567890');
+      await tester.enterText(
+        find.byType(TextFormField).at(2),
+        'test@email.com',
+      );
+      await tester.enterText(find.byType(TextFormField).at(3), 'password1');
+      await tester.enterText(find.byType(TextFormField).at(4), 'password1');
+      await tester.tap(find.textContaining('Register').first);
+      await tester.pumpAndSettle();
+      // Should show success message and navigate
+      expect(
+        find.textContaining('account created', findRichText: true),
+        findsWidgets,
+      );
+      expect(find.byType(RegisterScreen), findsNothing);
+    });
   });
 }
