@@ -32,10 +32,9 @@ class AuthLogoHeader extends StatelessWidget {
           isDark ? AuthConstants.logoDarkAsset : AuthConstants.logoAsset,
           width: AuthConstants.logoWidth,
           height: AuthConstants.logoHeight,
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.cover,
         ),
         if (title != null) ...[
-          const SizedBox(height: AuthConstants.titleSpacing),
           Text(
             title!,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -49,7 +48,6 @@ class AuthLogoHeader extends StatelessWidget {
           ),
         ],
         if (subtitle != null) ...[
-          const SizedBox(height: AuthConstants.subtitleSpacing),
           Text(
             subtitle!,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -57,6 +55,7 @@ class AuthLogoHeader extends StatelessWidget {
                   isDark
                       ? AuthConstants.darkSubtitleColor
                       : AuthConstants.lightSubtitleColor,
+              fontSize: 22,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,

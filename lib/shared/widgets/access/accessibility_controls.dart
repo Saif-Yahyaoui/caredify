@@ -19,8 +19,8 @@ class AccessibilityControls extends ConsumerWidget {
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     final cardColor =
         isDark ? const Color(0xFF232B33) : const Color(0xFFF1F8FA);
-    final borderColor = isDark ? Colors.grey[800]! : Colors.grey.shade200;
-    final activeColor = const Color(0xFF2140D2);
+    final borderColor = isDark ? Colors.grey[800]! : Colors.grey.shade300;
+    const activeColor = Color(0xFF2140D2);
     final inactiveColor = isDark ? Colors.grey[500]! : Colors.grey[400]!;
     final fieldColor = cardColor;
 
@@ -45,7 +45,7 @@ class AccessibilityControls extends ConsumerWidget {
       child: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 420),
-          margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: cardColor,
@@ -65,6 +65,16 @@ class AccessibilityControls extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Title
+              Text(
+                'Configuration initiale',
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+              ),
+              const SizedBox(height: 20),
               // Language Dropdown
               Container(
                 decoration: BoxDecoration(
@@ -279,10 +289,7 @@ class AccessibilityControls extends ConsumerWidget {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color:
-                      isVoiceEnabled
-                          ? activeColor.withOpacity(0.08)
-                          : fieldColor,
+                  color: isVoiceEnabled ? fieldColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: isVoiceEnabled ? activeColor : borderColor,
@@ -316,7 +323,6 @@ class AccessibilityControls extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),

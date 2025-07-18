@@ -96,7 +96,7 @@ class AuthConstants {
   static const String facialIcon = 'assets/icons/facial.png';
 
   // Sizes
-  static const double logoWidth = 200.0;
+  static const double logoWidth = 250.0;
   static const double logoHeight = 150.0;
   static const double iconSizeLarge = 60.0;
   static const double iconSizeMedium = 48.0;

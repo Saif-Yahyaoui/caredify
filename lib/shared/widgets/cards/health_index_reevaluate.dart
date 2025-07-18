@@ -102,144 +102,132 @@ class _HealthIndexReevaluateScreenState
         ),
         backgroundColor: theme.scaffoldBackgroundColor,
         body: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Reevaluate your health rating by updating your personal information.',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: isDark ? Colors.white70 : Colors.black87,
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+
+            child: _PremiumCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'REEVALUATE',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                _PremiumCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  const SizedBox(height: 12),
+                  // Illustration placeholder
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Center(
+                      child: Icon(
+                        Icons.event_available_outlined,
+                        size: 120,
+                        color: indexGold.withAlpha((0.2 * 255).round()),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Age
+                  Text(
+                    'Your Age',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  CustomTextField(
+                    controller: _ageController,
+                    keyboardType: TextInputType.number,
+                    hint: 'Age',
+                  ),
+                  const SizedBox(height: 16),
+                  // Sex
+                  Text(
+                    'Sex',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
                     children: [
+                      Checkbox(
+                        value: _sex == 'Female',
+                        onChanged: (val) {
+                          setState(() => _sex = 'Female');
+                        },
+                        activeColor: indexGold,
+                      ),
                       Text(
-                        'REEVALUATE',
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.onSurface,
-                        ),
-                        textAlign: TextAlign.center,
+                        AppLocalizations.of(context)!.genderFemale,
+                        style: theme.textTheme.bodyMedium,
                       ),
-                      const SizedBox(height: 12),
-                      // Illustration placeholder
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Center(
-                          child: Icon(
-                            Icons.event_available_outlined,
-                            size: 120,
-                            color: indexGold.withAlpha((0.2 * 255).round()),
-                          ),
-                        ),
+                      const SizedBox(width: 16),
+                      Checkbox(
+                        value: _sex == 'Male',
+                        onChanged: (val) {
+                          setState(() => _sex = 'Male');
+                        },
+                        activeColor: indexGold,
                       ),
-                      const SizedBox(height: 16),
-                      // Age
                       Text(
-                        'Your Age',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      CustomTextField(
-                        controller: _ageController,
-                        keyboardType: TextInputType.number,
-                        hint: 'Age',
-                      ),
-                      const SizedBox(height: 16),
-                      // Sex
-                      Text(
-                        'Sex',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: _sex == 'Female',
-                            onChanged: (val) {
-                              setState(() => _sex = 'Female');
-                            },
-                            activeColor: indexGold,
-                          ),
-                          Text(
-                            AppLocalizations.of(context)!.genderFemale,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          const SizedBox(width: 16),
-                          Checkbox(
-                            value: _sex == 'Male',
-                            onChanged: (val) {
-                              setState(() => _sex = 'Male');
-                            },
-                            activeColor: indexGold,
-                          ),
-                          Text(
-                            AppLocalizations.of(context)!.genderMale,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      // Height
-                      Text(
-                        'Your Height',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      CustomTextField(
-                        controller: _heightController,
-                        keyboardType: TextInputType.text,
-                        hint: 'Height',
-                      ),
-                      const SizedBox(height: 16),
-                      // Weight
-                      Text(
-                        'Your Weight',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      CustomTextField(
-                        controller: _weightController,
-                        keyboardType: TextInputType.text,
-                        hint: 'Weight',
-                      ),
-                      const SizedBox(height: 24),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: indexGold,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            textStyle: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Save Changes'),
-                        ),
+                        AppLocalizations.of(context)!.genderMale,
+                        style: theme.textTheme.bodyMedium,
                       ),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  // Height
+                  Text(
+                    'Your Height',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  CustomTextField(
+                    controller: _heightController,
+                    keyboardType: TextInputType.text,
+                    hint: 'Height',
+                  ),
+                  const SizedBox(height: 16),
+                  // Weight
+                  Text(
+                    'Your Weight',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  CustomTextField(
+                    controller: _weightController,
+                    keyboardType: TextInputType.text,
+                    hint: 'Weight',
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: indexGold,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        textStyle: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {},
+                      child: const Text('Save Changes'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

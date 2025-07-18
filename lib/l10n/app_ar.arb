@@ -75,7 +75,7 @@
     "description": "Register button text"
   },
   
-  "alreadyHaveAccount": "لديك حساب بالفعل؟  ",
+  "alreadyHaveAccount": " لديك حساب بالفعل؟  ",
   "@alreadyHaveAccount": {
     "description": "Link to login from register screen"
   },
