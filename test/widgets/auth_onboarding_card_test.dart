@@ -7,9 +7,9 @@ void main() {
   group('AuthOnboardingCard Widget Tests', () {
     testWidgets('renders with image asset', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthOnboardingCard(
-            data: const OnboardingCardData(
+            data: OnboardingCardData(
               imageAsset: 'assets/images/logo.png',
               title: 'Welcome',
               subtitle: 'Your health space',
@@ -28,9 +28,9 @@ void main() {
 
     testWidgets('renders with icon and features', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthOnboardingCard(
-            data: const OnboardingCardData(
+            data: OnboardingCardData(
               icon: Icons.star,
               iconColor: Colors.amber,
               title: 'Features',
@@ -51,9 +51,9 @@ void main() {
 
     testWidgets('renders with bottom text', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthOnboardingCard(
-            data: const OnboardingCardData(
+            data: OnboardingCardData(
               title: 'Bottom',
               subtitle: 'Subtitle',
               bottomText: 'Bottom text',

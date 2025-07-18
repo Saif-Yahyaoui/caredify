@@ -6,7 +6,7 @@ void main() {
   group('AuthSectionTitle Widget Tests', () {
     testWidgets('renders icon and title', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthSectionTitle(icon: Icons.lock, title: 'Section Title'),
         ),
       );

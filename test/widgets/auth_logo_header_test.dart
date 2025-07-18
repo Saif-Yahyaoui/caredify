@@ -8,7 +8,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
-          home: AuthLogoHeader(isDark: false),
+          home: const AuthLogoHeader(isDark: false),
         ),
       );
       expect(find.byType(Image), findsOneWidget);
@@ -18,7 +18,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.dark(),
-          home: AuthLogoHeader(isDark: true),
+          home: const AuthLogoHeader(isDark: true),
         ),
       );
       expect(find.byType(Image), findsOneWidget);
@@ -26,7 +26,7 @@ void main() {
 
     testWidgets('renders title and subtitle', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthLogoHeader(
             isDark: false,
             title: 'Test Title',

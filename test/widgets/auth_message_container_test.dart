@@ -6,7 +6,7 @@ void main() {
   group('AuthMessageContainer Widget Tests', () {
     testWidgets('renders error message with icon', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(home: AuthMessageContainer(message: 'Error occurred')),
+        const MaterialApp(home: AuthMessageContainer(message: 'Error occurred')),
       );
       expect(find.text('Error occurred'), findsOneWidget);
       expect(find.byIcon(Icons.error_outline), findsOneWidget);
@@ -14,7 +14,7 @@ void main() {
 
     testWidgets('renders success message with icon', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthMessageContainer(message: 'Success!', isError: false),
         ),
       );
@@ -24,10 +24,10 @@ void main() {
 
     testWidgets('applies custom margin', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthMessageContainer(
             message: 'With margin',
-            margin: const EdgeInsets.all(32),
+            margin: EdgeInsets.all(32),
           ),
         ),
       );

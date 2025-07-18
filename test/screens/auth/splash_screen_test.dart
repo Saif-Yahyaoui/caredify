@@ -64,7 +64,7 @@ void main() {
   });
 
   testWidgets('SplashScreen shows logo, loading, and welcome', (tester) async {
-    final fakeAuth = AuthState(isLoggedIn: false, userType: UserType.none);
+    const fakeAuth = AuthState(isLoggedIn: false, userType: UserType.none);
     await tester.pumpWidget(
       testableWidgetWithRouter(
         child: const SplashScreen(disableNavigation: true),
@@ -87,7 +87,7 @@ void main() {
 
   testWidgets('Navigates to /main/dashboard for premium user', (tester) async {
     SharedPreferences.setMockInitialValues({'onboarding_complete': true});
-    final premiumAuth = AuthState(isLoggedIn: true, userType: UserType.premium);
+    const premiumAuth = AuthState(isLoggedIn: true, userType: UserType.premium);
     await tester.pumpWidget(
       testableWidgetWithRouter(
         child: const SplashScreen(),
@@ -101,7 +101,7 @@ void main() {
 
   testWidgets('Navigates to /main/home for basic user', (tester) async {
     SharedPreferences.setMockInitialValues({'onboarding_complete': true});
-    final basicAuth = AuthState(isLoggedIn: true, userType: UserType.basic);
+    const basicAuth = AuthState(isLoggedIn: true, userType: UserType.basic);
     await tester.pumpWidget(
       testableWidgetWithRouter(
         child: const SplashScreen(),
@@ -117,7 +117,7 @@ void main() {
     'Navigates to /main/home if onboarding complete and not logged in',
     (tester) async {
       SharedPreferences.setMockInitialValues({'onboarding_complete': true});
-      final notLoggedIn = AuthState(isLoggedIn: false, userType: UserType.none);
+      const notLoggedIn = AuthState(isLoggedIn: false, userType: UserType.none);
       await tester.pumpWidget(
         testableWidgetWithRouter(
           child: const SplashScreen(),
@@ -134,7 +134,7 @@ void main() {
     'Navigates to /onboarding if onboarding not complete and not logged in',
     (tester) async {
       SharedPreferences.setMockInitialValues({'onboarding_complete': false});
-      final notLoggedIn = AuthState(isLoggedIn: false, userType: UserType.none);
+      const notLoggedIn = AuthState(isLoggedIn: false, userType: UserType.none);
       await tester.pumpWidget(
         testableWidgetWithRouter(
           child: const SplashScreen(),

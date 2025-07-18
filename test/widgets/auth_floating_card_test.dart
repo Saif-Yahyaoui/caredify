@@ -6,14 +6,14 @@ void main() {
   group('AuthFloatingCard Widget Tests', () {
     testWidgets('renders child widget', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(home: AuthFloatingCard(child: Text('Test Child'))),
+        const MaterialApp(home: AuthFloatingCard(child: Text('Test Child'))),
       );
       expect(find.text('Test Child'), findsOneWidget);
     });
 
     testWidgets('applies primary style', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthFloatingCard(child: Text('Primary'), isPrimary: true),
         ),
       );
@@ -22,7 +22,7 @@ void main() {
 
     testWidgets('applies form card style', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthFloatingCard(child: Text('Form'), isFormCard: true),
         ),
       );
@@ -31,11 +31,11 @@ void main() {
 
     testWidgets('applies custom padding and margin', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AuthFloatingCard(
             child: Text('Custom'),
-            padding: const EdgeInsets.all(32),
-            margin: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(32),
+            margin: EdgeInsets.all(16),
           ),
         ),
       );

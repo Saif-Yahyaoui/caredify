@@ -89,7 +89,7 @@ class AccessibilityControls extends ConsumerWidget {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: selectedLang['name'],
-                    icon: Icon(Icons.arrow_drop_down, color: activeColor),
+                    icon: const Icon(Icons.arrow_drop_down, color: activeColor),
                     isExpanded: true,
                     dropdownColor: fieldColor,
                     onChanged: (value) {
@@ -110,7 +110,7 @@ class AccessibilityControls extends ConsumerWidget {
                             value: lang['name']!,
                             child: Row(
                               children: [
-                                Icon(Icons.language, color: activeColor),
+                                const Icon(Icons.language, color: activeColor),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(
@@ -135,7 +135,7 @@ class AccessibilityControls extends ConsumerWidget {
                       return languages.map((lang) {
                         return Row(
                           children: [
-                            Icon(Icons.language, color: activeColor),
+                            const Icon(Icons.language, color: activeColor),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
@@ -186,7 +186,7 @@ class AccessibilityControls extends ConsumerWidget {
                             fontSize == FontSizeNotifier.normalSize
                                 ? Colors.white
                                 : activeColor,
-                        side: BorderSide(color: activeColor),
+                        side: const BorderSide(color: activeColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -217,7 +217,7 @@ class AccessibilityControls extends ConsumerWidget {
                             fontSize == FontSizeNotifier.largeSize
                                 ? Colors.white
                                 : activeColor,
-                        side: BorderSide(color: activeColor),
+                        side: const BorderSide(color: activeColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -249,7 +249,7 @@ class AccessibilityControls extends ConsumerWidget {
                 builder: (context, constraints) {
                   const buttonCount = 3;
                   const spacing = 5.0;
-                  final totalSpacing = spacing * (buttonCount - 1);
+                  const totalSpacing = spacing * (buttonCount - 1);
                   final buttonWidth =
                       (constraints.maxWidth - totalSpacing) / buttonCount;
                   return Row(
