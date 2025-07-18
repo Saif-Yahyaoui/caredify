@@ -41,61 +41,11 @@ class AccessibilitySettingsScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Premium floating card containing accessibility controls
-                _PremiumCard(child: AccessibilityControls()),
+                AccessibilityControls(),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _PremiumCard extends StatelessWidget {
-  final Widget child;
-  const _PremiumCard({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors:
-              isDark
-                  ? [
-                    const Color(0xFF1E293B).withAlpha((0.8 * 255).toInt()),
-                    const Color(0xFF334155).withAlpha((0.6 * 255).toInt()),
-                  ]
-                  : [Colors.white, const Color(0xFFF8FAFC)],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color:
-              isDark
-                  ? const Color(0xFF475569).withAlpha((0.3 * 255).toInt())
-                  : const Color(0xFFCBD5E1).withAlpha((0.5 * 255).toInt()),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color:
-                isDark
-                    ? Colors.black.withAlpha((0.2 * 255).toInt())
-                    : const Color(0xFF64748B).withAlpha((0.1 * 255).toInt()),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(padding: const EdgeInsets.all(20), child: child),
       ),
     );
   }
