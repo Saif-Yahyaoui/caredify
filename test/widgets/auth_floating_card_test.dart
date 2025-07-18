@@ -14,7 +14,7 @@ void main() {
     testWidgets('applies primary style', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: AuthFloatingCard(child: Text('Primary'), isPrimary: true),
+          home: AuthFloatingCard(isPrimary: true, child: Text('Primary')),
         ),
       );
       expect(find.text('Primary'), findsOneWidget);
@@ -23,7 +23,7 @@ void main() {
     testWidgets('applies form card style', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: AuthFloatingCard(child: Text('Form'), isFormCard: true),
+          home: AuthFloatingCard(isFormCard: true, child: Text('Form')),
         ),
       );
       expect(find.text('Form'), findsOneWidget);
@@ -33,9 +33,9 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: AuthFloatingCard(
-            child: Text('Custom'),
             padding: EdgeInsets.all(32),
             margin: EdgeInsets.all(16),
+            child: Text('Custom'),
           ),
         ),
       );

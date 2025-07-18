@@ -75,7 +75,7 @@ void main() {
               .widgetList<Text>(find.byType(Text))
               .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
               .toList();
-      print('All error texts: $allTexts');
+      debugPrint('All error texts: $allTexts');
       expect(
         allTexts.any(
           (text) => text.toLowerCase().contains(t.emailInvalid.toLowerCase()),
@@ -120,8 +120,8 @@ void main() {
     });
 
     testWidgets('navigates back to login on Back to login tap', (tester) async {
-      tester.binding.window.physicalSizeTestValue = const Size(800, 1600);
-      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1.0;
 
       final router = GoRouter(
         initialLocation: '/login',
@@ -167,8 +167,8 @@ void main() {
       expect(find.text('Login Screen'), findsOneWidget);
 
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
   });

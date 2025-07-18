@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -12,7 +11,6 @@ class AccessibilityControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final t = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final locale = Localizations.localeOf(context);
@@ -55,8 +53,10 @@ class AccessibilityControls extends ConsumerWidget {
               BoxShadow(
                 color:
                     isDark
-                        ? Colors.black.withOpacity(0.10)
-                        : Colors.black.withOpacity(0.04),
+                        ? Colors.black.withAlpha(
+                                  (0.1 * 255).toInt())
+                        : Colors.black.withAlpha(
+                                  (0.04 * 255).toInt()),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),

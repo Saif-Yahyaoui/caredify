@@ -1,10 +1,10 @@
+import 'package:caredify/features/auth/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:caredify/features/auth/screens/onboarding_screen.dart';
 
 Widget testableWidgetWithRouter({required Widget child}) {
   final router = GoRouter(

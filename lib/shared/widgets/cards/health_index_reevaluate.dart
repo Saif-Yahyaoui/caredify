@@ -73,7 +73,6 @@ class _HealthIndexReevaluateScreenState
     final theme = Theme.of(context);
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
-    final isDark = theme.brightness == Brightness.dark;
     const indexGold = Color(0xFFFFC94D);
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,

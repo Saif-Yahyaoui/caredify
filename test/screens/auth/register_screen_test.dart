@@ -31,11 +31,11 @@ void main() {
   testWidgets('RegisterScreen renders all form fields and buttons', (
     tester,
   ) async {
-    tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(1200, 2000);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      tester.binding.window.clearPhysicalSizeTestValue();
-      tester.binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
     await tester.pumpWidget(testableWidgetWithRouter(const RegisterScreen()));
     await tester.pumpAndSettle();
@@ -48,11 +48,11 @@ void main() {
   testWidgets('RegisterScreen shows error when submitting empty form', (
     tester,
   ) async {
-    tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(1200, 2000);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      tester.binding.window.clearPhysicalSizeTestValue();
-      tester.binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
     await tester.pumpWidget(testableWidgetWithRouter(const RegisterScreen()));
     await tester.pumpAndSettle();
@@ -65,7 +65,7 @@ void main() {
             .widgetList<Text>(find.byType(Text))
             .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
             .toList();
-    print('All error texts: $allTexts');
+    debugPrint('All error texts: $allTexts');
     expect(
       allTexts.any(
         (text) =>
@@ -81,11 +81,11 @@ void main() {
   testWidgets('RegisterScreen shows error when passwords do not match', (
     tester,
   ) async {
-    tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(1200, 2000);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      tester.binding.window.clearPhysicalSizeTestValue();
-      tester.binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
     await tester.pumpWidget(testableWidgetWithRouter(const RegisterScreen()));
     await tester.pumpAndSettle();
@@ -103,7 +103,7 @@ void main() {
             .widgetList<Text>(find.byType(Text))
             .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
             .toList();
-    print('All error texts: $allTexts');
+    debugPrint('All error texts: $allTexts');
     expect(
       allTexts.any((text) => text.contains(t.passwordsDoNotMatch)),
       isTrue,
@@ -113,11 +113,11 @@ void main() {
   testWidgets('RegisterScreen navigates to LoginScreen on valid registration', (
     tester,
   ) async {
-    tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(1200, 2000);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      tester.binding.window.clearPhysicalSizeTestValue();
-      tester.binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
     await tester.pumpWidget(testableWidgetWithRouter(const RegisterScreen()));
     await tester.pumpAndSettle();
@@ -138,7 +138,7 @@ void main() {
             .widgetList<Text>(find.byType(Text))
             .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
             .toList();
-    print('All texts after navigation: $allTexts');
+    debugPrint('All texts after navigation: $allTexts');
     // Pass if any key login screen text is present
     expect(
       allTexts.any(

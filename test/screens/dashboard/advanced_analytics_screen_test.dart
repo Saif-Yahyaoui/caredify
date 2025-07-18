@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:caredify/features/dashboard/screens/advanced_analytics_screen.dart';
 import 'package:caredify/shared/providers/auth_provider.dart';
 import 'package:caredify/shared/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:caredify/shared/widgets/navigation/premium_tabbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 class FakeAuthService implements IAuthService {
   @override
@@ -50,7 +50,7 @@ void printAllTexts(WidgetTester tester) {
   final texts = find.byType(Text);
   for (final t in texts.evaluate()) {
     final widget = t.widget as Text;
-    print('VISIBLE TEXT: "${widget.data}"');
+    debugPrint('VISIBLE TEXT: "${widget.data}"');
   }
 }
 
@@ -58,9 +58,9 @@ Finder findTabWithLabel(WidgetTester tester, String label) {
   final tabBar = find.byType(PremiumTabBar);
   final tab = find.descendant(of: tabBar, matching: find.text(label));
   if (tester.widgetList(tab).isEmpty) {
-    print('DEBUG: No tab found for "$label". TabBar children:');
+    debugPrint('DEBUG: No tab found for "$label". TabBar children:');
     for (final t in tabBar.evaluate()) {
-      print('TABBAR WIDGET: \\${t.widget}');
+      debugPrint('TABBAR WIDGET: \\${t.widget}');
     }
   }
   return tab;

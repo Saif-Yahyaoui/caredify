@@ -56,8 +56,8 @@ Widget testableWidget(Widget child) {
 void main() {
   group('HealthScoreScreen Widget Tests', () {
     testWidgets('renders and displays all tabs', (tester) async {
-      tester.binding.window.physicalSizeTestValue = const Size(800, 1600);
-      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1.0;
 
       await tester.pumpWidget(testableWidget(const HealthScoreScreen()));
       await tester.pumpAndSettle();
@@ -71,14 +71,14 @@ void main() {
       expect(find.text('Trends'), findsOneWidget);
 
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
 
     testWidgets('switches between tabs and displays content', (tester) async {
-      tester.binding.window.physicalSizeTestValue = const Size(800, 1600);
-      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1.0;
 
       await tester.pumpWidget(testableWidget(const HealthScoreScreen()));
       await tester.pumpAndSettle();
@@ -92,8 +92,8 @@ void main() {
       expect(find.text('Trends'), findsOneWidget);
 
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
   });

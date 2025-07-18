@@ -1,7 +1,7 @@
 import 'package:caredify/features/dashboard/screens/ecg_analysis_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 Widget testableWidget(Widget child) {
   return ProviderScope(child: MaterialApp(home: child));

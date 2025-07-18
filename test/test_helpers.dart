@@ -1,10 +1,10 @@
 import 'package:caredify/core/theme/app_theme.dart';
 import 'package:caredify/router/router.dart';
 import 'package:caredify/shared/providers/auth_provider.dart';
-import 'package:caredify/shared/providers/voice_feedback_provider.dart';
-import 'package:caredify/shared/providers/health_metrics_provider.dart';
 import 'package:caredify/shared/providers/habits_provider.dart';
+import 'package:caredify/shared/providers/health_metrics_provider.dart';
 import 'package:caredify/shared/providers/user_profile_provider.dart';
+import 'package:caredify/shared/providers/voice_feedback_provider.dart';
 import 'package:caredify/shared/services/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +16,6 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'mocks/auth_service_mock.dart';
-import 'package:caredify/shared/models/habit.dart';
-import 'package:caredify/shared/models/user_profile.dart';
-import 'package:caredify/shared/models/health_metrics.dart';
 
 // Generate mocks - will be created by build_runner
 // @GenerateMocks([IAuthService])

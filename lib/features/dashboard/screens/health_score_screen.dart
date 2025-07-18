@@ -454,7 +454,7 @@ class _HealthScoreScreenState extends ConsumerState<HealthScoreScreen>
           priorityColor: Colors.orange,
           actionText: 'Start Activity Tracker',
           onAction: () {
-            // TODO: Implement action
+           
           },
         ),
         PremiumRecommendationCard(
@@ -465,7 +465,6 @@ class _HealthScoreScreenState extends ConsumerState<HealthScoreScreen>
           priorityColor: Colors.blue,
           actionText: 'View Sleep Tips',
           onAction: () {
-            // TODO: Implement action
           },
         ),
         PremiumRecommendationCard(
@@ -476,7 +475,6 @@ class _HealthScoreScreenState extends ConsumerState<HealthScoreScreen>
           priorityColor: Colors.green,
           actionText: 'Start Meditation',
           onAction: () {
-            // TODO: Implement action
           },
         ),
       ],

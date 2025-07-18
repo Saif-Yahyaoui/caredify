@@ -1,9 +1,9 @@
 import 'package:caredify/features/health_tracking/screens/blood_pressure_graph_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 Widget testableWidget(Widget child) {
@@ -43,8 +43,8 @@ void main() {
     });
 
     testWidgets('displays blood pressure values', (tester) async {
-      tester.binding.window.physicalSizeTestValue = const Size(800, 1600);
-      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1.0;
 
       await tester.pumpWidget(testableWidget(const BloodPressureGraphScreen()));
       await tester.pumpAndSettle();
@@ -54,7 +54,7 @@ void main() {
               .widgetList<Text>(find.byType(Text))
               .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
               .toList();
-      print('All Texts: $allTexts');
+      debugPrint('All Texts: $allTexts');
       expect(
         allTexts.any((text) => text.contains('117')),
         isTrue,
@@ -67,8 +67,8 @@ void main() {
       );
 
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
 

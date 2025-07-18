@@ -1,15 +1,15 @@
 import 'package:caredify/features/dashboard/screens/dashboard_screen.dart';
-import 'package:caredify/shared/widgets/cards/unified_vital_cards.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:caredify/shared/providers/auth_provider.dart'
     show authStateProvider, AuthState, AuthStateNotifier;
 import 'package:caredify/shared/services/auth_service.dart'
     show UserType, IAuthService;
+import 'package:caredify/shared/widgets/cards/unified_vital_cards.dart';
 import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 class FakeAuthService implements IAuthService {
