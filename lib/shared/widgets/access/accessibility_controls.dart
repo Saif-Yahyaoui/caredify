@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -13,10 +14,11 @@ class AccessibilityControls extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final t = AppLocalizations.of(context)!;
     final locale = Localizations.localeOf(context);
     final isRtl = intl.Bidi.isRtlLanguage(locale.languageCode);
     final cardColor =
-        isDark ? const Color(0xFF232B33) : const Color(0xFFF1F8FA);
+        isDark ? const Color(0xFF232B33) : const Color(0xFFFFFFFF);
     final borderColor = isDark ? Colors.grey[800]! : Colors.grey.shade300;
     const activeColor = Color(0xFF2140D2);
     final inactiveColor = isDark ? Colors.grey[500]! : Colors.grey[400]!;
@@ -29,9 +31,45 @@ class AccessibilityControls extends ConsumerWidget {
     final isVoiceEnabled = ref.watch(voiceFeedbackProvider);
 
     final languages = [
-      {'name': 'Français', 'flag': '🇫🇷', 'code': 'fr', 'country': 'FR'},
-      {'name': 'Arabe', 'flag': '🇸🇦', 'code': 'ar', 'country': 'TU'},
-      {'name': 'English', 'flag': '🇬🇧', 'code': 'en', 'country': 'GB'},
+      {
+        'name':
+            t.language == 'Langue'
+                ? 'Français'
+                : t.language == 'Language'
+                ? 'French'
+                : t.language == 'اللغة'
+                ? 'الفرنسية'
+                : 'Français',
+        'flag': '🇫🇷',
+        'code': 'fr',
+        'country': 'FR',
+      },
+      {
+        'name':
+            t.language == 'Langue'
+                ? 'Arabe'
+                : t.language == 'Language'
+                ? 'Arabic'
+                : t.language == 'اللغة'
+                ? 'العربية'
+                : 'Arabic',
+        'flag': '🇹🇳',
+        'code': 'ar',
+        'country': 'TU',
+      },
+      {
+        'name':
+            t.language == 'Langue'
+                ? 'Anglais'
+                : t.language == 'Language'
+                ? 'English'
+                : t.language == 'اللغة'
+                ? 'الإنجليزية'
+                : 'English',
+        'flag': '🇺🇸',
+        'code': 'en',
+        'country': 'US',
+      },
     ];
     final selectedLang = languages.firstWhere(
       (l) => l['code'] == currentLocale.languageCode,
@@ -53,10 +91,8 @@ class AccessibilityControls extends ConsumerWidget {
               BoxShadow(
                 color:
                     isDark
-                        ? Colors.black.withAlpha(
-                                  (0.1 * 255).toInt())
-                        : Colors.black.withAlpha(
-                                  (0.04 * 255).toInt()),
+                        ? Colors.black.withAlpha((0.1 * 255).toInt())
+                        : Colors.black.withAlpha((0.04 * 255).toInt()),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -67,7 +103,7 @@ class AccessibilityControls extends ConsumerWidget {
             children: [
               // Title
               Text(
-                'Configuration initiale',
+                t.accessibilitySettings,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
@@ -161,7 +197,7 @@ class AccessibilityControls extends ConsumerWidget {
               const SizedBox(height: 20),
               // Font Size
               Text(
-                'Taille du texte',
+                t.fontSize,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -183,20 +219,28 @@ class AccessibilityControls extends ConsumerWidget {
                                 ? activeColor
                                 : fieldColor,
                         foregroundColor:
-                            fontSize == FontSizeNotifier.normalSize
+                            isDark
                                 ? Colors.white
-                                : activeColor,
+                                : (fontSize == FontSizeNotifier.normalSize
+                                    ? Colors.white
+                                    : Colors.black),
                         side: const BorderSide(color: activeColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         elevation: 0,
                       ),
-                      child: const Text(
-                        'Normal',
+                      child: Text(
+                        t.normal,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
+                          color:
+                              isDark
+                                  ? Colors.white
+                                  : (fontSize == FontSizeNotifier.normalSize
+                                      ? Colors.white
+                                      : Colors.black),
                         ),
                       ),
                     ),
@@ -214,20 +258,28 @@ class AccessibilityControls extends ConsumerWidget {
                                 ? activeColor
                                 : fieldColor,
                         foregroundColor:
-                            fontSize == FontSizeNotifier.largeSize
+                            isDark
                                 ? Colors.white
-                                : activeColor,
+                                : (fontSize == FontSizeNotifier.largeSize
+                                    ? Colors.white
+                                    : Colors.black),
                         side: const BorderSide(color: activeColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         elevation: 0,
                       ),
-                      child: const Text(
-                        'Grande',
+                      child: Text(
+                        t.large,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
+                          color:
+                              isDark
+                                  ? Colors.white
+                                  : (fontSize == FontSizeNotifier.largeSize
+                                      ? Colors.white
+                                      : Colors.black),
                         ),
                       ),
                     ),
@@ -237,7 +289,7 @@ class AccessibilityControls extends ConsumerWidget {
               const SizedBox(height: 20),
               // Theme
               Text(
-                'Thème',
+                t.theme,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -275,7 +327,7 @@ class AccessibilityControls extends ConsumerWidget {
               const SizedBox(height: 20),
               // Voice feedback
               Text(
-                'Retour vocal',
+                t.voiceFeedback,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -299,14 +351,22 @@ class AccessibilityControls extends ConsumerWidget {
                   children: [
                     Icon(
                       isVoiceEnabled ? Icons.volume_up : Icons.volume_off,
-                      color: isVoiceEnabled ? activeColor : inactiveColor,
+                      color:
+                          isVoiceEnabled
+                              ? (isDark ? Colors.white : Colors.black)
+                              : inactiveColor,
                       size: 22,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      isVoiceEnabled ? 'Activé' : 'Désactivé',
+                      isVoiceEnabled
+                          ? t.voiceFeedbackEnabled
+                          : t.voiceFeedbackDisabled,
                       style: TextStyle(
-                        color: isVoiceEnabled ? activeColor : inactiveColor,
+                        color:
+                            isVoiceEnabled
+                                ? (isDark ? Colors.white : Colors.black)
+                                : inactiveColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 17,
                       ),
@@ -339,17 +399,20 @@ Widget _buildThemeButton(
   Color activeColor,
   Color fieldColor,
 ) {
-  final labels = ['Clair', 'Sombre', 'Système'];
+  final t = AppLocalizations.of(context)!;
+  final labels = [t.light, t.dark, t.system];
   final modes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
   final isSelected = currentTheme == modes[index];
   final isSystem = index == 2;
+  final isDark = Theme.of(context).brightness == Brightness.dark;
 
   return ElevatedButton(
     onPressed:
         () => ref.read(themeModeProvider.notifier).setThemeMode(modes[index]),
     style: ElevatedButton.styleFrom(
       backgroundColor: isSelected ? activeColor : fieldColor,
-      foregroundColor: isSelected ? Colors.white : activeColor,
+      foregroundColor:
+          isDark ? Colors.white : (isSelected ? Colors.white : Colors.black),
       side: BorderSide(color: activeColor),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 0,
@@ -364,30 +427,41 @@ Widget _buildThemeButton(
             Icon(
               Icons.nightlight_round,
               size: 18,
-              color: isSelected ? Colors.white : activeColor,
+              color:
+                  isDark
+                      ? Colors.white
+                      : (isSelected ? Colors.white : Colors.black),
             ),
           if (index == 0) const SizedBox(width: 6),
           Text(
             labels[index],
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color:
+                  isDark
+                      ? Colors.white
+                      : (isSelected ? Colors.white : Colors.black),
+            ),
           ),
           if (isSystem) ...[
             const SizedBox(width: 4),
             GestureDetector(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'S’adapte automatiquement au thème clair ou sombre de votre téléphone.',
-                    ),
-                    duration: Duration(seconds: 4),
+                  SnackBar(
+                    content: Text(t.systemThemeHint),
+                    duration: const Duration(seconds: 4),
                   ),
                 );
               },
               child: Icon(
                 Icons.info_outline,
                 size: 16,
-                color: isSelected ? Colors.white : activeColor,
+                color:
+                    isDark
+                        ? Colors.white
+                        : (isSelected ? Colors.white : Colors.black),
               ),
             ),
           ],

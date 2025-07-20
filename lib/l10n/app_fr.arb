@@ -589,11 +589,11 @@
   "@accessibilitySettings": {
     "description": "Title for the accessibility settings card"
   },
-  "voiceFeedbackEnabled": "Retour vocal activé",
+  "voiceFeedbackEnabled": "Activé",
   "@voiceFeedbackEnabled": {
     "description": "Indicates that voice feedback is enabled"
   },
-  "voiceFeedbackDisabled": "Retour vocal désactivé",
+  "voiceFeedbackDisabled": "Désactivé",
   "@voiceFeedbackDisabled": {
     "description": "Indicates that voice feedback is disabled"
   },
@@ -708,5 +708,13 @@
   "termsUpdateNotice": "Ces conditions peuvent être mises à jour de temps à autre. L'utilisation continue de l'application constitue l'acceptation de tout changement.",
   "@termsUpdateNotice": {
     "description": "Description for terms update notice"
+  },
+  "systemThemeHint": "S’adapte automatiquement au thème clair ou sombre de votre téléphone.",
+  "@systemThemeHint": {
+    "description": "Astuce pour l'option thème système dans les paramètres d'accessibilité"
+  },
+  "forgotPasswordHint": "Entrez votre email ou téléphone",
+  "@forgotPasswordHint": {
+    "description": "Astuce pour le champ email ou téléphone dans l'écran mot de passe oublié"
   }
 } 

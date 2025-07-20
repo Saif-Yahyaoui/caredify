@@ -589,11 +589,11 @@
   "@accessibilitySettings": {
     "description": "Title for the accessibility settings card"
   },
-  "voiceFeedbackEnabled": "Voice feedback enabled",
+  "voiceFeedbackEnabled": "Enabled",
   "@voiceFeedbackEnabled": {
     "description": "Indicates that voice feedback is enabled"
   },
-  "voiceFeedbackDisabled": "Voice feedback disabled",
+  "voiceFeedbackDisabled": "Disabled",
   "@voiceFeedbackDisabled": {
     "description": "Indicates that voice feedback is disabled"
   },
@@ -708,5 +708,13 @@
   "termsUpdateNotice": "These terms may be updated from time to time. Continued use of the app constitutes acceptance of any changes.",
   "@termsUpdateNotice": {
     "description": "Description for terms update notice"
+  },
+  "systemThemeHint": "Automatically adapts to your phone's light or dark theme.",
+  "@systemThemeHint": {
+    "description": "Hint for system theme option in accessibility settings"
+  },
+  "forgotPasswordHint": "Enter your email or phone",
+  "@forgotPasswordHint": {
+    "description": "Hint for the email or phone input in the forgot password screen"
   }
 } 

@@ -13,6 +13,12 @@ class AuthLogoHeader extends StatelessWidget {
   /// This determines which logo asset to display and text colors to use.
   final bool isDark;
 
+  /// Optional custom width for the logo
+  final double? width;
+
+  /// Optional custom height for the logo
+  final double? height;
+
   /// Creates an AuthLogoHeader widget.
   ///
   /// The [isDark] parameter is required and determines the theme-appropriate
@@ -22,6 +28,8 @@ class AuthLogoHeader extends StatelessWidget {
     this.title,
     this.subtitle,
     required this.isDark,
+    this.width,
+    this.height,
   });
 
   @override
@@ -30,9 +38,9 @@ class AuthLogoHeader extends StatelessWidget {
       children: [
         Image.asset(
           isDark ? AuthConstants.logoDarkAsset : AuthConstants.logoAsset,
-          width: AuthConstants.logoWidth,
-          height: AuthConstants.logoHeight,
-          fit: BoxFit.cover,
+          width: width ?? AuthConstants.logoWidth,
+          height: height ?? AuthConstants.logoHeight,
+          fit: BoxFit.fitWidth,
         ),
         if (title != null) ...[
           Text(
@@ -55,7 +63,7 @@ class AuthLogoHeader extends StatelessWidget {
                   isDark
                       ? AuthConstants.darkSubtitleColor
                       : AuthConstants.lightSubtitleColor,
-              fontSize: 22,
+              fontSize: 20,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,

@@ -131,7 +131,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               // Logo image
-              AuthLogoHeader(isDark: isDark, subtitle: message),
+              AuthLogoHeader(
+                isDark: isDark,
+                subtitle: message,
+                width: 170,
+                height: 120,
+              ),
             ],
           ),
         );
