@@ -150,6 +150,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen>
                       AuthSectionTitle(
                         icon: Icons.email_outlined,
                         title: t.resetPassword,
+                        iconColor: AppColors.primaryBlue,
                       ),
                       const SizedBox(height: AuthConstants.spacingLarge),
                       buildErrorMessage(_errorMessage),
@@ -157,6 +158,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen>
                       CustomTextField(
                         label: t.emailOrPhone,
                         controller: _emailOrPhoneController,
+                        hint: t.forgotPasswordHint,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return t.fieldRequired;
@@ -169,21 +171,22 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen>
                         },
                       ),
                       const SizedBox(height: AuthConstants.spacingLarge),
-                      CustomButton(
-                        text: t.send,
-                        onPressed: _isLoading ? null : _handleSubmit,
-                        isLoading: _isLoading,
-                        icon: Icons.send,
-                      ),
-                      const SizedBox(height: AuthConstants.spacingLarge),
-                      CustomButton.secondary(
-                        text: t.backToLogin,
-                        onPressed: () => context.pop(),
-                        icon: Icons.arrow_back,
-                      ),
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: AuthConstants.spacingLarge),
+              CustomButton(
+                text: t.send,
+                onPressed: _isLoading ? null : _handleSubmit,
+                isLoading: _isLoading,
+                icon: Icons.send,
+              ),
+              const SizedBox(height: AuthConstants.spacingLarge),
+              CustomButton.secondary(
+                text: t.backToLogin,
+                onPressed: () => context.pop(),
+                icon: Icons.arrow_back,
               ),
               const SizedBox(height: AuthConstants.spacingLarge),
             ],

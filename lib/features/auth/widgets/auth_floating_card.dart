@@ -3,19 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/auth_constants.dart';
 import '../../../core/theme/app_colors.dart';
 
-/// A reusable floating card widget with gradient background and shadow effects.
-///
-/// This widget creates a visually appealing card with customizable styling,
-/// commonly used in authentication screens to group related content. It supports
-/// different visual styles based on theisPrimary] and [isFormCard] parameters.
-///
-/// Example usage:
-/// ```dart
-/// AuthFloatingCard(
-///   isPrimary: true,
-///   child: Text('Card content),
-/// )
-/// ```
 class AuthFloatingCard extends StatelessWidget {
   /// The content to display inside the card.
   final Widget child;
@@ -65,7 +52,7 @@ class AuthFloatingCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: padding ?? AuthConstants.floatingCardPadding,
+      padding: padding ?? AuthConstants.paddingAll16,
       margin: margin,
       decoration: BoxDecoration(
         gradient: LinearGradient(

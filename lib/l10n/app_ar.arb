@@ -589,11 +589,11 @@
   "@accessibilitySettings": {
     "description": "Title for the accessibility settings card"
   },
-  "voiceFeedbackEnabled": "التعليقات الصوتية مفعلة",
+  "voiceFeedbackEnabled": "مفعلة",
   "@voiceFeedbackEnabled": {
     "description": "Indicates that voice feedback is enabled"
   },
-  "voiceFeedbackDisabled": "التعليقات الصوتية معطلة",
+  "voiceFeedbackDisabled": "معطلة",
   "@voiceFeedbackDisabled": {
     "description": "Indicates that voice feedback is disabled"
   },
@@ -708,5 +708,13 @@
   "termsUpdateNotice": "قد يتم تحديث هذه الشروط من وقت لآخر. الاستخدام المستمر للتطبيق يشكل قبولاً لأي تغييرات.",
   "@termsUpdateNotice": {
     "description": "Description for terms update notice"
+  },
+  "systemThemeHint": "يتكيف تلقائيًا مع الوضع الفاتح أو الداكن في هاتفك.",
+  "@systemThemeHint": {
+    "description": "تلميح لخيار مظهر النظام في إعدادات إمكانية الوصول"
+  },
+  "forgotPasswordHint": "أدخل بريدك الإلكتروني أو رقم هاتفك",
+  "@forgotPasswordHint": {
+    "description": "تلميح لحقل البريد الإلكتروني أو الهاتف في شاشة نسيت كلمة المرور"
   }
 } 

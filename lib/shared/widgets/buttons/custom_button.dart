@@ -153,7 +153,7 @@ class CustomButton extends StatelessWidget {
           elevation: 0,
           padding:
               padding ??
-              const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(12),
           ),
@@ -221,6 +221,7 @@ class CustomButton extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           color: contentColor,
                           fontWeight: FontWeight.w600,
+                          fontSize: 20,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -239,6 +240,7 @@ class CustomButton extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           color: contentColor,
                           fontWeight: FontWeight.w600,
+                          fontSize: 20,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -258,6 +260,7 @@ class CustomButton extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
             color: contentColor,
             fontWeight: FontWeight.w600,
+            fontSize: 20,
           ),
           textAlign: TextAlign.center,
           maxLines: 2,

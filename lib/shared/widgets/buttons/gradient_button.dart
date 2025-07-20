@@ -184,7 +184,7 @@ class SecondaryGradientButton extends StatelessWidget {
                                 style: const TextStyle(
                                   color: Color(0xFF0092DF),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: 20,
                                   letterSpacing: 0.2,
                                 ),
                                 textAlign: TextAlign.center,
