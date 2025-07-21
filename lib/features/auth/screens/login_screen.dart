@@ -122,12 +122,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: AuthConstants.paddingAll16,
+          padding: AuthConstants.paddingAll24,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AuthLogoHeader(isDark: isDark, subtitle: t.welcomeMessage),
-              const SizedBox(height: AuthConstants.spacingLarge),
+              const SizedBox(height: AuthConstants.spacingSmall),
               AuthFloatingCard(
                 isFormCard: true,
                 child: Form(
@@ -136,6 +136,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       buildErrorMessage(_authState.errorMessage),
+                      const SizedBox(height: AuthConstants.buttonSpacing),
+
                       CustomTextField.phone(
                         label: t.phoneNumber,
                         hint: t.phoneNumberHint,
@@ -162,7 +164,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                               _formData = _formData.copyWith(password: value);
                             }),
                       ),
-                      const SizedBox(height: AuthConstants.spacingSmall),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
@@ -189,7 +190,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
               // Action buttons outside the card
               Column(
                 children: [
-                  CustomButton(
+                  CustomButton.primary(
                     text: t.login,
                     onPressed: _authState.isLoading ? null : _handleLogin,
                     isLoading: _authState.isLoading,
