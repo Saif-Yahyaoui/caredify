@@ -1,5 +1,5 @@
 name: caredify
-description: "A new Flutter project."
+description: A medical ECG monitoring application
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -55,7 +55,13 @@ dependencies:
   
   # ECG Analysis and AI Integration
   tflite_flutter: ^0.10.4
+  flutter_reactive_ble: ^5.2.0  # For BLE communication with Movesense
+  permission_handler: ^11.0.1   # For handling BLE permissions
  
+  share_plus: ^7.2.1
+  path_provider: ^2.1.2
+  pdf: ^3.11.3
+  printing: ^5.14.2
 
 dev_dependencies:
   flutter_test:

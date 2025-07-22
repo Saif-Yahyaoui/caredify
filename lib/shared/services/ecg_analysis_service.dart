@@ -33,7 +33,11 @@ class EcgAnalysisService {
   }
 
   /// Analyze ECG signal data
-  Future<EcgAnalysisResult> analyzeEcgSignal(List<double> ecgData) async {
+  Future<EcgAnalysisResult> analyzeEcgSignal(
+    List<double> ecgData, {
+    DateTime? startTime,
+    DateTime? endTime,
+  }) async {
     if (!_isInitialized) {
       await initialize();
     }
@@ -43,7 +47,11 @@ class EcgAnalysisService {
       final processedData = _preprocessEcgSignal(ecgData);
 
       // Use mock analysis for now
-      return _mockAnalysis(processedData);
+      return _mockAnalysis(
+        processedData,
+        startTime: startTime,
+        endTime: endTime,
+      );
     } catch (e) {
       if (kDebugMode) {
         debugPrint('Error analyzing ECG signal: $e');
@@ -115,7 +123,11 @@ class EcgAnalysisService {
   }
 
   /// Mock analysis for development/testing
-  EcgAnalysisResult _mockAnalysis(List<double> processedData) {
+  EcgAnalysisResult _mockAnalysis(
+    List<double> processedData, {
+    DateTime? startTime,
+    DateTime? endTime,
+  }) {
     // Simulate model analysis with realistic probabilities
     final random = Random();
     final normalProb = 0.7 + random.nextDouble() * 0.25; // 70-95% normal
@@ -123,6 +135,13 @@ class EcgAnalysisService {
 
     final classification = normalProb > abnormalProb ? 'Normal' : 'Abnormal';
     final confidence = max(normalProb, abnormalProb);
+
+    // Mock heart rate and duration
+    final heartRate = 60 + random.nextInt(41); // 60-100 BPM
+    final durationSeconds =
+        (startTime != null && endTime != null)
+            ? endTime.difference(startTime).inSeconds
+            : processedData.length ~/ 125; // fallback
 
     return EcgAnalysisResult(
       classification: classification,
@@ -133,6 +152,8 @@ class EcgAnalysisService {
         'abnormal_probability': abnormalProb,
         'signal_quality': _calculateSignalQuality(processedData),
         'mock_analysis': true,
+        'heart_rate': heartRate,
+        'duration': durationSeconds,
       },
       timestamp: DateTime.now(),
       modelVersion: 'mock-1.0',
