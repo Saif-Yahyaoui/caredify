@@ -50,10 +50,18 @@ class EcgAnalysisNotifier
   }
 
   /// Analyze ECG signal
-  Future<void> analyzeEcgSignal(List<double> ecgData) async {
+  Future<void> analyzeEcgSignal(
+    List<double> ecgData, {
+    DateTime? startTime,
+    DateTime? endTime,
+  }) async {
     state = const AsyncValue.loading();
     try {
-      final result = await _service.analyzeEcgSignal(ecgData);
+      final result = await _service.analyzeEcgSignal(
+        ecgData,
+        startTime: startTime,
+        endTime: endTime,
+      );
       state = AsyncValue.data(result);
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../providers/ecg_analysis_provider.dart';
 import '../../services/auth_service.dart';
 import '../access/role_based_access.dart';
 
@@ -27,7 +28,7 @@ class UnifiedVitalCards extends ConsumerWidget {
     return Column(
       children: [
         // ECG Card - Enhanced for Premium, Basic for others
-        _buildEcgCard(context, theme, isDark),
+        _buildEcgCard(context, theme, isDark, ref),
         const SizedBox(height: 12),
 
         // SpO2 Card
@@ -44,7 +45,12 @@ class UnifiedVitalCards extends ConsumerWidget {
     );
   }
 
-  Widget _buildEcgCard(BuildContext context, ThemeData theme, bool isDark) {
+  Widget _buildEcgCard(
+    BuildContext context,
+    ThemeData theme,
+    bool isDark,
+    WidgetRef ref,
+  ) {
     return RoleBasedAccess(
       allowedUserTypes: const [UserType.premium],
       fallbackWidget: _buildBasicEcgCard(context, theme, isDark),
@@ -53,6 +59,7 @@ class UnifiedVitalCards extends ConsumerWidget {
         theme,
         isDark,
         onTap: () => context.go('/main/dashboard/ecg-analysis'),
+        ref: ref,
       ),
     );
   }
@@ -60,9 +67,49 @@ class UnifiedVitalCards extends ConsumerWidget {
   Widget _buildEnhancedEcgCard(
     BuildContext context,
     ThemeData theme,
-    bool isDark,
-    {VoidCallback? onTap}
-  ) {
+    bool isDark, {
+    VoidCallback? onTap,
+    required WidgetRef ref,
+  }) {
+    final analysisHistory = ref.watch(ecgAnalysisHistoryProvider);
+    final analysisResult =
+        analysisHistory.isNotEmpty ? analysisHistory.first : null;
+    final metrics = analysisResult?.additionalMetrics;
+    final heartRate =
+        metrics?['heart_rate'] != null
+            ? '${metrics!['heart_rate'].toStringAsFixed(1)} BPM'
+            : '—';
+    final lastUpdated =
+        analysisResult != null
+            ? '${analysisResult.timestamp.hour.toString().padLeft(2, '0')}:${analysisResult.timestamp.minute.toString().padLeft(2, '0')}'
+            : '--:--';
+    final prevResult = analysisHistory.length > 1 ? analysisHistory[1] : null;
+    final double? currentHR =
+        metrics?['heart_rate'] != null
+            ? (metrics!['heart_rate'] as num).toDouble()
+            : null;
+    final double? prevHR =
+        prevResult?.additionalMetrics?['heart_rate'] != null
+            ? (prevResult!.additionalMetrics!['heart_rate'] as num).toDouble()
+            : null;
+
+    String trend;
+    Color trendColor;
+    if (currentHR != null && prevHR != null) {
+      if ((currentHR - prevHR).abs() < 1) {
+        trend = 'Stable (↔)';
+        trendColor = Colors.blue;
+      } else if (currentHR > prevHR) {
+        trend = 'Increasing (↑)';
+        trendColor = Colors.orange;
+      } else {
+        trend = 'Decreasing (↓)';
+        trendColor = Colors.green;
+      }
+    } else {
+      trend = '—';
+      trendColor = Colors.grey;
+    }
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -115,10 +162,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                         gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          colors: [
-                            Color(0xFFEF4444),
-                            Color(0xFFDC2626),
-                          ],
+                          colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
                         ),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
@@ -214,7 +258,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                         theme,
                         isDark,
                         'Current',
-                        '72 BPM',
+                        heartRate,
                         const Color(0xFFEF4444),
                       ),
                     ),
@@ -225,12 +269,22 @@ class UnifiedVitalCards extends ConsumerWidget {
                         theme,
                         isDark,
                         'Trend',
-                        'Stable (↔)',
-                        const Color(0xFF10B981),
+                        trend,
+                        trendColor,
                       ),
                     ),
                   ],
                 ),
+                if (currentHR != null && prevHR != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, left: 4),
+                    child: Text(
+                      'Δ ${(currentHR - prevHR).toStringAsFixed(1)} BPM',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: trendColor,
+                      ),
+                    ),
+                  ),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -261,7 +315,9 @@ class UnifiedVitalCards extends ConsumerWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'Your heart rate is within normal range. No abnormalities detected.',
+                          analysisResult != null
+                              ? 'Last updated: $lastUpdated'
+                              : 'No recent ECG analysis. Tap to record.',
                           style: theme.textTheme.bodySmall?.copyWith(
                             color:
                                 isDark
@@ -337,10 +393,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFFEF4444),
-                        Color(0xFFDC2626),
-                      ],
+                      colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -459,10 +512,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF10B981),
-                        Color(0xFF059669),
-                      ],
+                      colors: [Color(0xFF10B981), Color(0xFF059669)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -585,10 +635,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF8B5CF6),
-                        Color(0xFF7C3AED),
-                      ],
+                      colors: [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -711,10 +758,7 @@ class UnifiedVitalCards extends ConsumerWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF10B981),
-                        Color(0xFF059669),
-                      ],
+                      colors: [Color(0xFF10B981), Color(0xFF059669)],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
